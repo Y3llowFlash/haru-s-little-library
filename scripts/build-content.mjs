@@ -9,74 +9,151 @@ const ids = [1, 4, 6, 7, 9];
 
 const plans = {
   post00001: [
-    section("flow", range(4, 10)),
-    section("chapter", range(12, 15)),
+    // Opening — establish the time-versus-learning misconception before naming it.
+    section("flow", range(4, 6)),
+    section("spotlight", [7]),
+    section("flow", range(8, 10)),
+
+    // Method and equation — move from the vehicle analogy to the governing idea.
+    section("chapter", range(12, 14)),
+    section("flow", [15]),
     section("spotlight", [16, 17]),
     section("flow", range(18, 20)),
-    section("chapter", range(21, 28)),
-    section("chapter", range(29, 32)),
+
+    // Deep Work — explain focus first, then leave the reader with a usable ritual.
+    section("chapter", range(21, 24)),
+    section("flow", range(25, 27)),
+    section("flow", [28]),
+
+    // Mind Map — analogy, definition, then a full image plate.
+    section("chapter", range(29, 30)),
+    section("flow", range(31, 32)),
     section("image", [33]),
-    section("chapter", range(34, 38)),
+
+    // Sleep — close the final method with its warning on a deliberate pause.
+    section("chapter", range(34, 36)),
+    section("spotlight", range(37, 38)),
     section("ending", range(40, 42)),
   ],
   post00004: [
+    // Opening — ask why we study, then let the personal story answer.
     section("flow", range(5, 8)),
-    section("story", range(10, 14)),
+    section("story", range(10, 11)),
+    section("story", range(12, 14)),
     section("image", [15]),
-    section("spotlight", [16, 17]),
+
+    // Discovery — isolate the question that leads into Meta Learning.
+    section("spotlight", range(16, 17)),
     section("flow", [18, 20]),
-    section("chapter", range(21, 25)),
+
+    // Definition — introduce Meta Learning, then give its five-part map room.
+    section("chapter", range(21, 22)),
+    section("flow", range(23, 25)),
     section("image", [26]),
-    section("story", range(28, 32)),
+
+    // Consequence — show what changed, then what the reclaimed time made possible.
+    section("story", range(28, 30)),
+    section("story", range(31, 32)),
+
+    // Coda — identify the reader and point forward to the series.
     section("chapter", range(34, 35)),
     section("ending", range(37, 38)),
   ],
   post00006: [
+    // Opening experiment — let the 500-kyat question create the reader's doubt.
     section("flow", range(4, 6)),
+
+    // Problem and illusion — first the familiar habit, then the hidden failure.
     section("chapter", range(8, 12)),
     section("image", [13]),
     section("chapter", range(15, 17)),
     section("spotlight", [18]),
+
+    // Why the brain shortcuts — explain the mechanism, then pause on its example.
     section("chapter", range(20, 23)),
-    section("chapter", range(25, 28)),
+    section("chapter", range(25, 27)),
+    section("spotlight", [28]),
     section("image", [29]),
+
+    // Consequence and correction — signal importance by retrieving, not rereading.
     section("chapter", range(31, 33)),
-    section("chapter", range(35, 39)),
+    section("chapter", range(35, 38)),
+    section("spotlight", [39]),
+
+    // Evidence and handoff — give the research result its own page before Book 007.
     section("flow", range(40, 42)),
     section("spotlight", [43]),
     section("ending", range(45, 48)),
   ],
   post00007: [
-    section("chapter", range(3, 9)),
-    section("chapter", range(10, 13)),
-    section("spotlight", [14]),
+    // Part I — diagnose why studying can feel productive without creating recall.
+    section("chapter", range(3, 6)),
+    section("flow", range(7, 9)),
+    section("chapter", range(10, 11)),
+    section("image", [12]),
+    section("spotlight", range(13, 14)),
     section("flow", [15]),
-    section("chapter", range(16, 19)),
-    section("chapter", range(20, 29)),
-    section("chapter", range(30, 37)),
+
+    // Part II — define Active Recall, then give the reader the five-step map.
+    section("chapter", range(16, 17)),
+    section("flow", range(18, 19)),
+
+    // Step 1 — learn for understanding; each prompt stays with its introduction.
+    section("chapter", range(20, 23)),
+    section("story", range(24, 25)),
+    section("story", range(26, 27)),
+    section("flow", range(28, 29)),
+
+    // Step 2 — turn material into questions, then pause for a flashcard plate.
+    section("chapter", range(30, 33)),
+    section("story", range(34, 35)),
+    section("flow", range(36, 37)),
     section("image", [38]),
+
+    // Steps 3–5 — attempt, inspect memory, compare answers, and practise.
     section("chapter", range(39, 43)),
-    section("chapter", range(44, 47)),
-    section("chapter", range(48, 52)),
-    section("ending", range(54, 55)),
+    section("chapter", range(44, 45)),
+    section("story", range(46, 47)),
+    section("chapter", range(48, 51)),
+    section("image", [52]),
+
+    // Coda — close Active Recall and leave the next problem deliberately open.
+    section("ending", [54]),
+    section("ending", [55]),
   ],
   post00009: [
+    // Opening — overturn the belief that more hours always create better marks.
     section("flow", range(4, 6)),
+
+    // Method 1 — define ROI, compare choices, then stop on the visual example.
     section("chapter", range(8, 11)),
     section("image", [12]),
-    section("chapter", range(13, 16)),
+
+    // Method 2 — ask what can be automated, show it, then leave a concrete prompt.
+    section("chapter", range(13, 15)),
+    section("image", [16]),
     section("spotlight", [17]),
-    section("chapter", range(18, 21)),
+
+    // Method 3 — diagnose broken focus, then make the two-hour experiment memorable.
+    section("chapter", range(18, 20)),
+    section("image", [21]),
     section("spotlight", [22]),
+
+    // Method 4 — introduce 80/20, unpack the exam, and preserve the video handoff.
     section("chapter", range(23, 24)),
     section("image", [25]),
     section("flow", range(26, 29)),
     section("spotlight", [30]),
-    section("flow", [31]),
-    section("chapter", range(34, 37)),
+    section("flow", range(31, 32)),
+
+    // Method 5 — find the reader's fit, with the visual-learning idea and plate apart.
+    section("chapter", range(34, 36)),
+    section("spotlight", [37]),
     section("image", [38]),
     section("flow", range(39, 40)),
-    section("ending", [42, 45]),
+
+    // Coda — keep the invitation to share, its link, and the author's sign-off.
+    section("ending", range(42, 45)),
   ],
 };
 
