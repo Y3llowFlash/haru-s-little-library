@@ -47,18 +47,40 @@ const plans = {
     section("ending", range(45, 48)),
   ],
   post00007: [
-    section("chapter", range(3, 9)),
-    section("chapter", range(10, 13)),
-    section("spotlight", [14]),
+    // Part I — diagnose why studying can feel productive without creating recall.
+    section("chapter", range(3, 6)),
+    section("flow", range(7, 9)),
+    section("chapter", range(10, 11)),
+    section("image", [12]),
+    section("spotlight", range(13, 14)),
     section("flow", [15]),
-    section("chapter", range(16, 19)),
-    section("chapter", range(20, 29)),
-    section("chapter", range(30, 37)),
+
+    // Part II — define Active Recall, then give the reader the five-step map.
+    section("chapter", range(16, 17)),
+    section("flow", range(18, 19)),
+
+    // Step 1 — learn for understanding; each prompt stays with its introduction.
+    section("chapter", range(20, 23)),
+    section("story", range(24, 25)),
+    section("story", range(26, 27)),
+    section("flow", range(28, 29)),
+
+    // Step 2 — turn material into questions, then pause for a flashcard plate.
+    section("chapter", range(30, 33)),
+    section("story", range(34, 35)),
+    section("flow", range(36, 37)),
     section("image", [38]),
+
+    // Steps 3–5 — attempt, inspect memory, compare answers, and practise.
     section("chapter", range(39, 43)),
-    section("chapter", range(44, 47)),
-    section("chapter", range(48, 52)),
-    section("ending", range(54, 55)),
+    section("chapter", range(44, 45)),
+    section("story", range(46, 47)),
+    section("chapter", range(48, 51)),
+    section("image", [52]),
+
+    // Coda — close Active Recall and leave the next problem deliberately open.
+    section("ending", [54]),
+    section("ending", [55]),
   ],
   post00009: [
     section("flow", range(4, 6)),
