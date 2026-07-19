@@ -205,6 +205,7 @@ function Reader({ book, onClose }: { book: Book; onClose: () => void }) {
   const [loadError, setLoadError] = useState(false);
   const flipBookRef = useRef<FlipBookHandle | null>(null);
   const openedOnce = useRef(false);
+  const [desktopPageSize, setDesktopPageSize] = useState({ width: 460, height: 650 });
 
   useEffect(() => {
     let cancelled = false;
@@ -250,6 +251,23 @@ function Reader({ book, onClose }: { book: Book; onClose: () => void }) {
   }, [book, payload]);
 
   useEffect(() => {
+    const updateDesktopPageSize = () => {
+      if (window.innerWidth < 760) {
+        setDesktopPageSize({ width: 460, height: 650 });
+        return;
+      }
+
+      // Keep the full open book, controls, and header inside shorter desktop windows.
+      const height = Math.max(420, Math.min(650, window.innerHeight - 158));
+      setDesktopPageSize({ width: Math.round((height * 460) / 650), height: Math.round(height) });
+    };
+
+    updateDesktopPageSize();
+    window.addEventListener("resize", updateDesktopPageSize);
+    return () => window.removeEventListener("resize", updateDesktopPageSize);
+  }, []);
+
+  useEffect(() => {
     const handleKey = (event: KeyboardEvent) => {
       if (event.key === "Escape") onClose();
       if (event.key === "ArrowRight") flipBookRef.current?.pageFlip()?.flipNext();
@@ -291,12 +309,12 @@ function Reader({ book, onClose }: { book: Book; onClose: () => void }) {
             ref={flipBookRef}
             className="flipbook"
             style={{}}
-            width={460}
-            height={650}
+            width={desktopPageSize.width}
+            height={desktopPageSize.height}
             minWidth={280}
-            maxWidth={580}
+            maxWidth={desktopPageSize.width}
             minHeight={420}
-            maxHeight={820}
+            maxHeight={desktopPageSize.height}
             size="stretch"
             startPage={0}
             drawShadow
