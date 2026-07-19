@@ -132,7 +132,7 @@ export default function LittleLibrary() {
       </header>
 
       <section className="library-hero" id="top">
-        <p className="eyebrow">စာလုပ်နည်းနှင့် ဘဝအတွေးအခေါ်များကို မျှဝေရာနေရာ</p>
+        <p className="eyebrow">စာကျက်နည်းနှင့် ဘဝအတွေးအခေါ်များကို မျှဝေရာနေရာ</p>
         <h1>Haru&apos;s Little Library</h1>
         <br></br>
         {/* <p className="hero-note">
