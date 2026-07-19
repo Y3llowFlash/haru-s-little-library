@@ -132,18 +132,19 @@ export default function LittleLibrary() {
       </header>
 
       <section className="library-hero" id="top">
-        <p className="eyebrow">A SMALL HOME FOR BIG THOUGHTS</p>
+        <p className="eyebrow">စာလုပ်နည်းနှင့် ဘဝအတွေးအခေါ်များကို မျှဝေရာနေရာ</p>
         <h1>Haru&apos;s Little Library</h1>
-        <p className="hero-note">
+        <br></br>
+        {/* <p className="hero-note">
           စာအုပ်လေးတစ်အုပ်ကို ရွေးပါ။<br />
           တစ်မျက်နှာချင်း အေးအေးဆေးဆေး ဖတ်ကြမယ်။
-        </p>
+        </p> */}
       </section>
 
       <section className="shelf-scene" aria-labelledby="shelf-title">
         <h2 id="shelf-title" className="sr-only">Choose an article from the shelf</h2>
         <div className={`book-title-card ${hoveredBook ? "is-visible" : ""}`} aria-live="polite">
-          <strong>{hoveredBook?.number ?? "စာအုပ်ကို ဖိပြီး"}</strong>
+          <strong>{hoveredBook?.number ?? "စာအုပ်လေးကိုဖိပြီး"}</strong>
           <span>{hoveredBook?.title ?? "ရွေးကြည့်ပါ"}</span>
         </div>
 
