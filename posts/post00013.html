@@ -1,0 +1,511 @@
+<!doctype html>
+<html lang="my">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>ဘဝကို ဘယ်လိုဖြတ်သန်းနေလဲ?</title>
+  <meta name="description" content="အသက် ၁၈ ဆို G12 အောင်သင့်တယ်
+              အသက် ၂၄ လောက်ဆို ဘွဲ့ရပြီးတော့
+              အသက် ၃၀ ဝန်းကျင်ဆိုရင်
+              တစ်လ သိန်း ၂၀ ကျော်
+              ရှာနိုင်သင့်နေပြီ " />
+  <meta property="og:title" content="ဘဝကို ဘယ်လိုဖြတ်သန်းနေလဲ?" />
+  <meta property="og:description" content="အသက် ၁၈ ဆို G12 အောင်သင့်တယ်
+              အသက် ၂၄ လောက်ဆို ဘွဲ့ရပြီးတော့
+              အသက် ၃၀ ဝန်းကျင်ဆိုရင်
+              တစ်လ သိန်း ၂၀ ကျော်
+              ရှာနိုင်သင့်နေပြီ " />
+  <meta property="og:type" content="article" />
+  <meta property="og:image" content="/assets/images/post00013/cover.jpg" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="ဘဝကို ဘယ်လိုဖြတ်သန်းနေလဲ?" />
+  <meta name="twitter:description" content="အသက် ၁၈ ဆို G12 အောင်သင့်တယ်
+              အသက် ၂၄ လောက်ဆို ဘွဲ့ရပြီးတော့
+              အသက် ၃၀ ဝန်းကျင်ဆိုရင်
+              တစ်လ သိန်း ၂၀ ကျော်
+              ရှာနိုင်သင့်နေပြီ " />
+  <meta name="twitter:image" content="/assets/images/post00013/cover.jpg" />
+
+  <script data-goatcounter="https://post00013.goatcounter.com/count"
+          async src="//gc.zgo.at/count.js"></script>
+
+  <style>
+    @font-face {
+      font-family: "Yati";
+      src: url("/assets/fonts/YatiUni-Regular.ttf") format("truetype");
+      font-weight: 400;
+      font-style: normal;
+      font-display: swap;
+    }
+
+    :root{
+      --bg:#faf7ef;
+      --paper:#ffffff;
+      --text:#1f1f1f;
+      --muted:#6f6f6f;
+      --line:#e7e1d6;
+      --link:#8b5a3c;
+      --maxw:740px;
+      --accent:#d93636;
+    }
+
+    *{ box-sizing:border-box; }
+
+    body{
+      margin:0;
+      background:var(--bg);
+      color:var(--text);
+      font-family:"Yati", serif;
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      line-height:1.95;
+    }
+
+    .container{
+      max-width:var(--maxw);
+      margin:56px auto;
+      padding:0 18px;
+    }
+
+    .nav{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      margin-bottom:16px;
+      gap:12px;
+    }
+
+    .nav a{
+      color:var(--muted);
+      text-decoration:none;
+      font-size:0.95rem;
+    }
+    .nav a:hover{ color:var(--text); }
+
+    .card{
+      background:var(--paper);
+      border:1px solid var(--line);
+      border-radius:16px;
+      padding:26px;
+    }
+
+    .tag{
+      display:inline-block;
+      font-size:0.85rem;
+      color:var(--muted);
+      border:1px solid var(--line);
+      padding:6px 10px;
+      border-radius:999px;
+      margin-bottom:10px;
+    }
+
+    h1{
+      font-size:2.08rem;
+      line-height:1.25;
+      margin:10px 0 10px;
+      letter-spacing:0.2px;
+    }
+
+    .meta{
+      color:var(--muted);
+      font-size:0.95rem;
+      margin-bottom:18px;
+    }
+
+    p{
+      font-size:1.18rem;
+      margin:0 0 1.2em;
+    }
+
+    .figure{ margin:18px 0 22px; }
+    .figure img{
+      width:100%;
+      height:auto;
+      border-radius:14px;
+      border:1px solid var(--line);
+      display:block;
+      background:#fff;
+    }
+
+    .caption{
+      color:var(--muted);
+      font-size:0.95rem;
+      margin-top:8px;
+      text-align:center;
+      line-height:1.6;
+    }
+
+    .section-callout{
+      margin:26px 0 18px;
+      padding:14px 16px;
+      border-left:4px solid var(--accent);
+      border-radius:0 12px 12px 0;
+      background:#fff3da;
+      border-top:1px solid #f0dfb5;
+      border-right:1px solid #f0dfb5;
+      border-bottom:1px solid #f0dfb5;
+    }
+
+    .section-callout h2{
+      margin:0;
+      font-size:1.34rem;
+      line-height:1.45;
+      letter-spacing:0;
+    }
+
+    .quote{
+      border-left:4px solid var(--accent);
+      padding:8px 0 8px 16px;
+      margin:18px 0 20px;
+      color:#2a2a2a;
+    }
+
+    .divider{
+      margin:22px 0 18px;
+      border:none;
+      border-top:1px solid var(--line);
+    }
+
+    .links{
+      border-top:1px solid var(--line);
+      margin-top:22px;
+      padding-top:18px;
+    }
+
+    .small{
+      color:var(--muted);
+      font-size:0.98rem;
+      line-height:1.8;
+    }
+
+    a{ color:var(--link); text-decoration:none; }
+    a:hover{ text-decoration:underline; }
+
+    .comments-wrap{
+      margin-top: 10px;
+      padding: 18px;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      background: #fff;
+    }
+
+    #disqus_thread{ margin-top:12px; }
+
+    @media (max-width: 640px){
+      h1{ font-size:1.8rem; }
+      p{ font-size:1.08rem; }
+      .section-callout h2{ font-size:1.18rem; }
+      .card{ padding:20px; }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+
+    <div class="nav">
+      <a href="/">← Home</a>
+      <a href="/posts/post00012.html">Prev</a>
+    </div>
+
+    <article class="card">
+      <div class="tag">Life Philosophy · Post #00013</div>
+      <h1>ဘဝကို ဘယ်လိုဖြတ်သန်းနေလဲ?</h1>
+      <div class="meta">by Haru · 1% Better Every Day</div>
+
+      <div class="figure">
+        <img src="/assets/images/post00013/cover.jpg" alt="Life timeline pressure post cover" />
+        <div class="caption">အသက်အရွယ်နဲ့ ဘဝကို တိုင်းနေတဲ့ စံနှုန်းတွေ</div>
+      </div>
+
+      <p>
+        အသက် ၁၈ ဆို G12 အောင်သင့်တယ်<br>
+        အသက် ၂၄ လောက်ဆို ဘွဲ့ရပြီးတော့<br>
+        အသက် ၃၀ ဝန်းကျင်ဆိုရင်<br>
+        တစ်လ သိန်း ၂၀ ကျော်<br>
+        ရှာနိုင်သင့်နေပြီ
+      </p>
+
+      <p>
+        ဘယ်သူပြောတာလဲဆိုတော့<br>
+        ဘယ်သူမှ မပြောပါဘူး
+      </p>
+
+      <p>
+        ဒီစံနှုန်းတွေဟာ<br>
+        ကိုယ်နေနေတဲ့ ကိုယ့်ပတ်ဝန်းကျင်ကိုကြည့်ပြီး<br>
+        ကျနော်တို့ကိုယ်ကို ကျနော်တို့<br>
+        ချမှတ်ထားတဲ့ စံနှုန်းတွေပေါ့
+      </p>
+
+      <div class="section-callout">
+        <h2>ဘဝက တိုတိုလေး ဟုတ်တယ်ဟုတ်?</h2>
+      </div>
+
+      <p>
+        နေ့ရက်တိုင်း နေ့ရက်တိုင်းက အရေးပါတယ်<br>
+        “တစ်ရက်စာ” အချိန် ဖြုန်းလိုက်မယ်ဆိုရင်<br>
+        တစ်ရက် ကနေ တစ်လ၊ တစ်နှစ်ဖြစ်လာမယ်<br>
+        ဒါဆို အသက်တွေသာ ကြီးလာပြီး<br>
+        ဘယ်ခရီးမှ မရောက်တဲ့
+      </p>
+
+      <div class="quote">
+        <p style="margin:0;">
+          “ကြီးပေါ” ကြီးဖြစ်လာမယ်
+        </p>
+      </div>
+
+      <p>
+        ဒါက ကျနော်တို့ကိုယ်ကို<br>
+        ကျနော်တို့ ပြန်ပြောတဲ့စကားတွေ
+      </p>
+
+      <div class="section-callout">
+        <h2>အကယ်၍ ၂၄ မှ ဘွဲ့ရသင့်တာမဟုတ်ဘဲ</h2>
+      </div>
+
+      <p>
+        အသက် ၃၀ မှ ဘွဲ့ရသင့်တယ်လို့<br>
+        သတ်မှတ်ကြရင်ကော<br>
+        အဲ့လိုဆိုရင်လည်း<br>
+        အချိန်တွေ ပိုနေသေးတယ်ဆိုပြီး<br>
+        ဘဝကိုပေ့ါပေါ့ပါးပါး ဖြတ်သန်းနေမယ်
+      </p>
+
+      <p>
+        တကယ်တော့ ကျနော်တို့က<br>
+        ကျနော်တို့တစ်တွေရဲ့ ဘဝကို<br>
+        Timeline တစ်ခုသတ်မှတ်ပြီး<br>
+        ဘယ်အချိန်မှာ ဘာပြီးရမယ်ဆိုပြီး<br>
+        ဆွဲထားကြတာ
+      </p>
+
+      <div class="section-callout">
+        <h2>အဲ့ဒီလို ဆွဲဖို့အတွက်</h2>
+      </div>
+
+      <p>
+        ကိုယ့် အသက်အရွယ်မှာ<br>
+        ပတ်ဝန်းကျင်လူတွေက ဘာဖြစ်နေပြီလဲကြည့်ပြီး<br>
+        ဆုံးဖြတ်ကြတယ်
+      </p>
+
+      <p>
+        တကယ်တော့ အဲ့ဒါက Comparison<br>
+        ကိုယ့်ဘဝနဲ့ သူများဘဝကို နှိုင်းယှဉ်ခြင်း<br>
+        တစ်မျိုးပဲ ….
+      </p>
+
+      <div class="figure">
+        <img src="/assets/images/post00013/stop_comparing.jpg" alt="Everyone's path to a happy life is different" loading="lazy" />
+        <div class="caption">Everyone's path to a happy life is different</div>
+      </div>
+
+      <div class="section-callout">
+        <h2>မရဘူးလားဆိုတော့ ရတယ်</h2>
+      </div>
+
+      <p>
+        ပြဿနာက သူများဘဝနဲ့ ကိုယ့်ဘဝနဲ့က<br>
+        အမြဲတမ်း တစ်ထပ်တည်းကျ မနေတာပဲ<br>
+        ဘဝရဲ့ ခံယူချက်တွေမတူဘူး<br>
+        ဘဝရဲ့ ဖြတ်သန်းတာတွေချင်းမတူဘူး
+      </p>
+
+      <p>
+        ကျနော်တို့ရဲ့ ဘဝစာမျက်နှာတွေဟာ<br>
+        တစ်ဦးနဲ့ တစ်ဦး တူနိုင်မှာမဟုတ်ဘူး<br>
+        အဲ့ဒါကို Comparison တွေလုပ်ပြီး
+      </p>
+
+      <div class="section-callout">
+        <h2>Level up ဖြစ်လာရင်တော့</h2>
+      </div>
+
+      <p>
+        ပြဿနာ မရှိပေမယ့်<br>
+        Comparison ရဲ့ negative effects ဖြစ်တဲ့<br>
+        စိတ်အားငယ်တာတွေ<br>
+        သိမ်ငယ်တာတွေ<br>
+        ကြိုးစားချင်စိတ်မရှိတော့တာတွေကြောင့်
+      </p>
+
+      <p>
+        စိတ်ထွက်ပေါက်ရှာတဲ့ အနေနဲ့<br>
+        Doomscrolling လုပ်၊ အိပ်လိုက်စားလိုက်နဲ့<br>
+        ဘဝကို ရေသေ လို ဖြတ်သန်းတာမျိုးဆိုရင်တော့<br>
+        ပြဿနာ အနည်းငယ်ရှိလာပြီ
+      </p>
+
+      <div class="figure">
+        <img src="/assets/images/post00013/when_in_doubt_zoom_out.jpg" alt="When in doubt just zoom out" loading="lazy" />
+        <div class="caption">When in doubt, just zoom out</div>
+      </div>
+
+      <div class="section-callout">
+        <h2>ဘယ်အချိန်မှာ ဘာပြီးရမယ် ဆိုတဲ့ စံနှုန်းတွေမှ မရှိရင်</h2>
+      </div>
+
+      <p>
+        ဘဝက ဖြစ်ချင်တိုင်း ဖြစ်ပျက်နေမှာပေါ့<br>
+        ဘဝကို ဘယ်လိုဖြတ်သန်းရမှာလဲ? လို့<br>
+        မေးလာရင်<br>
+        စံနှုန်းသတ်မှတ်ချက်တစ်ခုကတော့<br>
+        ရှိသင့်တာပဲ
+      </p>
+
+      <p>
+        ဒါပေမယ့် အမြဲတမ်း<br>
+        တစ်ချိန်လုံး Compare လုပ်မနေဘဲနဲ့<br>
+        ကိုယ့်ဘဝကိုယ် ကိုယ့် ပေတံနဲ့ တိုင်းဖို့
+      </p>
+
+      <p>
+        အဲ့လို တိုင်းဖို့ အတွက်<br>
+        ကိုယ့်ဘာသာကိုယ်ပေတံ တစ်ခု လုပ်ရမယ်<br>
+        ဒါကို ဘဝရဲ့ အဓိပ္ပာယ် (Purpose) လို့ခေါ်တယ်
+      </p>
+
+      <div class="section-callout">
+        <h2>အဓိကကတော့ why ပေါ့လေ</h2>
+      </div>
+
+      <p>
+        ကိုယ့် အသက်ရှင်နေရတဲ့<br>
+        ရည်ရွယ်ချက်<br>
+        ကိုယ့်ရဲ့ ဘဝကြီး တစ်ခုလုံးကို<br>
+        ရေသေလို ရပ်မနေဘဲနဲ့<br>
+        မေးခွန်းထုတ်ခိုင်းတာ
+      </p>
+
+      <div class="quote">
+        <p style="margin:0;">
+          “မနက်ဖြန် သေရတော့မယ်ဆိုရင်<br>
+          ဒီနေ့ အထိနေခဲ့တဲ့ ကိုယ့်ဘဝကိုယ်<br>
+          ကျေနပ်ရဲ့လား?<br>
+          ဘာတွေကို ထပ်လုပ်ချင်လဲ?<br>
+          ဘာတွေထပ်ဖြစ်ချင်လဲ?”
+        </p>
+      </div>
+
+      <p>
+        အဲ့ဒီကနေ ဘဝရဲ့ အဓိပ္ပာယ်ကို<br>
+        ပြန်ရှာပြီး Goal တွေ ပြန်ချမှတ်တာ …
+      </p>
+
+      <p>
+        ဒီလိုမျိုး Purpose တွေကို ရှာဖို့အတွက်<br>
+        Ikigai နည်းလမ်းကို သုံးလို့ရတယ်<br>
+        Odyssey Plan ကို သုံးလို့ရတယ်<br>
+        (ဒီနည်းလမ်းတွေကို အသေးစိတ်သိချင်ရင်<br>
+        ကော့မန့် မန့်ခဲ့ပေးပါ သပ်သပ် ပြန်ရေးပေးပါမယ်)
+      </p>
+
+      <div class="section-callout">
+        <h2>Artist ဖြစ်ချင်တယ်၊ Engineer ဖြစ်ချင်တယ်၊ ဘာမှ မဖြစ်ချင်ဘူး</h2>
+      </div>
+
+      <p>
+        ဒီအတိုင်းပဲ<br>
+        Slow living နဲ့ နေသွားချင်တယ် ဆိုရင်လည်း
+      </p>
+
+      <p>
+        အဲ့ဒီလို နေနိုင်ဖို့အတွက် လုံလောက်တဲ့<br>
+        ငွေကြေးတစ်ခု<br>
+        ရှာနိုင်အောင် ဘယ်လိုလုပ်ရမလဲ<br>
+        ပြန်စဉ်းစားရတာပေါ့လေ
+      </p>
+
+      <p>
+        ဘဝတစ်ခုကို တည်ဆောက်တာက<br>
+        အိမ်တစ်လုံးဆောက်ရသလိုပဲ<br>
+        ပုံကြမ်း အရင်ဆွဲရတယ်<br>
+        ပြီးတော့ တစ်ဆင့်ချင်း<br>
+        အကောင်အထည်ဖော်ရတယ်
+      </p>
+
+      <div class="figure">
+        <img src="/assets/images/post00013/be_a_lamp.jpg" alt="Be a lamp illustration about purpose and kindness" loading="lazy" />
+        <div class="caption">ကိုယ့်ဘဝကို ကိုယ့်ဒီဇိုင်းနဲ့ ဆောက်ဖို့</div>
+      </div>
+
+      <div class="section-callout">
+        <h2>လူတော်တော်များများက တည်ဆောက်တဲ့ အဆင့်မှာပဲ အချိန်ကုန်ပြီးတော့</h2>
+      </div>
+
+      <p>
+        ပုံကြမ်းကြီး မှားနေတာ မသိရှာဘူး<br>
+        ပြီးတော့မှ<br>
+        ကိုယ်လိုချင်တဲ့ဘဝ ကိုယ်မရဘူးဆိုပြီး<br>
+        ဖြစ်ကြရော …
+      </p>
+
+      <p>
+        တကယ်က ကိုယ့်ဘဝကို ဒီဇိုင်းချတာ<br>
+        အကောင်အထည်ဖော်တာ<br>
+        ဒါတွေကလည်း အရေးကြီးပါတယ်
+      </p>
+
+      <p>
+        သူများ ဒီဇိုင်း ယူသုံးရင်တော့<br>
+        သူများ အိမ်အတိုင်းပဲ နေရမှာပါပဲ
+      </p>
+
+      <p style="margin-top:18px;">
+        Haru<br>
+        1% Better Every Day
+      </p>
+
+      <div class="links">
+        <p class="small"><strong>ဒါမျိုးထပ်ဖတ်ချင်သေးရင် ...</strong></p>
+        <ul>
+          <li style="margin:0.35em 0; font-size:1.14rem;">
+            <a href="/course/">စာလုပ်ရတာ အဆ ၃၀ သက်သာစေမယ့် စာလေ့လာနည်းသင်တန်း</a>
+          </li>
+
+          <li style="margin:0.35em 0; font-size:1.14rem;">
+            <a href="/posts/post00012.html">Overthink ဖြစ်တယ်ဆိုတာ အတွေးလွန်တဲ့ ပြဿနာမဟုတ်ဘူး</a>
+          </li>
+          <li style="margin:0.35em 0; font-size:1.14rem;">
+            <a href="/posts/post00010.html">ပုရွက်ဆိတ်က သူအပင်အပန်းခံ ကြိုးစားခဲ့တာကို နောင်တရပြီး ...</a>
+          </li>
+          <li style="margin:0.35em 0; font-size:1.14rem;">
+            <a href="/posts/post00005.html">မင်းက မင်းရည်မှန်းချက်ပြည့်တာကိုပဲ လိုချင်တာ ပြည့်အောင် ဖြည့်ချင်တာမဟုတ်ဘူးတဲ့</a>
+          </li>
+          <li style="margin:0.35em 0; font-size:1.14rem;">
+            <a href="/">Post တွေကို တစ်နေရာတည်းမှာ ဖတ်ချင်ရင် _ ကျနော့် Blog Page</a>
+          </li>
+        </ul>
+      </div>
+
+      <hr class="divider" />
+
+      <section class="comments-wrap">
+        <h2 class="section-title" style="margin-top:0;">Comments</h2>
+        <p class="small" style="margin-top:-6px;">Anonymous comments allowed. Be kind.</p>
+
+        <div id="disqus_thread"></div>
+
+        <script>
+          var disqus_config = function () {
+            this.page.url = window.location.href;
+            this.page.identifier = window.location.pathname;
+          };
+
+          (function() {
+            var d = document, s = d.createElement('script');
+            s.src = 'https://post0001.disqus.com/embed.js';
+            s.setAttribute('data-timestamp', +new Date());
+            (d.head || d.body).appendChild(s);
+          })();
+        </script>
+
+        <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+      </section>
+
+    </article>
+  </div>
+</body>
+</html>

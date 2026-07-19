@@ -1,0 +1,510 @@
+<!doctype html>
+<html lang="my">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>ပိုကြိုးစားတိုင်း စာပိုရလာမယ်လို့ထင်နေတုန်းပဲလား?</title>
+  <meta name="description" content=" ူ
+        တစ်နာရီ စာကျက်ရင် တစ်ပုဒ်ရတယ်
+        နှစ်နာရီကျက်ရင် စာနှစ်ပုဒ်ရမယ်  ဆိုပြီး
+        80% သော စာလေ့လာသူတို့တွေးတတ်ကြပါတယ်။
+        သင့်အလုပ်ကိစ္စတွေကြောင့်
+        အချိန်ကန့်သတ်ချက်တွေရှိလာတဲ့အခါ
+        ကျက်ရမဲ့ ကဗျာ ၂၀၀ အတွက်
+        ရက်ပေါင်း ၂၀၀ ဆိုပြီး စာကျက်နေလို့
+        မရတော့ပါဘူး။
+        
+        " />
+  <meta property="og:title" content="ပိုကြိုးစားတိုင်း စာပိုရလာမယ်လို့ထင်နေတုန်းပဲလား?" />
+  <meta property="og:description" content="တစ်နာရီ စာကျက်ရင် တစ်ပုဒ်ရတယ်
+        နှစ်နာရီကျက်ရင် စာနှစ်ပုဒ်ရမယ်  ဆိုပြီး
+        80% သော စာလေ့လာသူတို့တွေးတတ်ကြပါတယ်။
+        သင့်အလုပ်ကိစ္စတွေကြောင့်
+        အချိန်ကန့်သတ်ချက်တွေရှိလာတဲ့အခါ
+        ကျက်ရမဲ့ ကဗျာ ၂၀၀ အတွက်
+        ရက်ပေါင်း ၂၀၀ ဆိုပြီး စာကျက်နေလို့
+        မရတော့ပါဘူး။" />
+  <meta property="og:type" content="article" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="ပိုကြိုးစားတိုင်း စာပိုရလာမယ်လို့ထင်နေတုန်းပဲလား?" />
+  <meta name="twitter:description" content="တစ်နာရီ စာကျက်ရင် တစ်ပုဒ်ရတယ်
+        နှစ်နာရီကျက်ရင် စာနှစ်ပုဒ်ရမယ်  ဆိုပြီး
+        80% သော စာလေ့လာသူတို့တွေးတတ်ကြပါတယ်။
+        သင့်အလုပ်ကိစ္စတွေကြောင့်
+        အချိန်ကန့်သတ်ချက်တွေရှိလာတဲ့အခါ
+        ကျက်ရမဲ့ ကဗျာ ၂၀၀ အတွက်
+        ရက်ပေါင်း ၂၀၀ ဆိုပြီး စာကျက်နေလို့
+        မရတော့ပါဘူး။" />
+
+  <!-- ===== GoatCounter (Views) ===== -->
+  <script data-goatcounter="https://post00001.goatcounter.com/count"
+          async src="//gc.zgo.at/count.js"></script>
+
+  <style>
+    /* ===== Custom Burmese Font (local) ===== */
+    @font-face {
+      font-family: "Yati";
+      src: url("/assets/fonts/YatiUni-Regular.ttf") format("truetype");
+      font-weight: 400;
+      font-style: normal;
+    }
+
+    :root{
+      --bg:#faf7ef;
+      --paper:#ffffff;
+      --text:#1f1f1f;
+      --muted:#6f6f6f;
+      --line:#e7e1d6;
+      --link:#8b5a3c;
+      --maxw:740px;
+    }
+
+    *{ box-sizing:border-box; }
+    body{
+      margin:0;
+      background:var(--bg);
+      color:var(--text);
+      font-family:"Yati", serif;
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      line-height:1.95;
+    }
+
+    .container{
+      max-width:var(--maxw);
+      margin:56px auto;
+      padding:0 18px;
+    }
+
+    .nav{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      margin-bottom:16px;
+      gap:12px;
+    }
+
+    .nav a{
+      color:var(--muted);
+      text-decoration:none;
+      font-size:0.95rem;
+    }
+    .nav a:hover{ color:var(--text); }
+
+    .card{
+      background:var(--paper);
+      border:1px solid var(--line);
+      border-radius:16px;
+      padding:26px;
+    }
+
+    .tag{
+      display:inline-block;
+      font-size:0.85rem;
+      color:var(--muted);
+      border:1px solid var(--line);
+      padding:6px 10px;
+      border-radius:999px;
+      margin-bottom:10px;
+    }
+
+    h1{
+      font-size:2.15rem;
+      line-height:1.25;
+      margin:10px 0 10px;
+      letter-spacing:0.2px;
+    }
+
+    .meta{
+      color:var(--muted);
+      font-size:0.95rem;
+      margin-bottom:18px;
+    }
+
+    p{
+      font-size:1.18rem;
+      margin:0 0 1.2em;
+    }
+
+    .divider{
+      margin:22px 0 18px;
+      border:none;
+      border-top:1px solid var(--line);
+    }
+
+    .figure{ margin:18px 0 22px; }
+    .figure img{
+      width:100%;
+      height:auto;
+      border-radius:14px;
+      border:1px solid var(--line);
+      display:block;
+    }
+    .caption{
+      color:var(--muted);
+      font-size:0.95rem;
+      margin-top:8px;
+      text-align:center;
+      line-height:1.6;
+    }
+
+    .section-title{
+      font-size:1.45rem;
+      margin:1.4em 0 0.6em;
+      line-height:1.35;
+    }
+
+    .highlight{
+      background:#fff3da;
+      border:1px solid #f0dfb5;
+      padding:14px 14px;
+      border-radius:12px;
+      margin:16px 0 18px;
+    }
+
+    ul{ margin:0.2em 0 1.2em 1.2em; padding:0; }
+    li{ margin:0.35em 0; font-size:1.14rem; }
+
+    a{ color:var(--link); text-decoration:none; }
+    a:hover{ text-decoration:underline; }
+
+    .links{
+      border-top:1px solid var(--line);
+      margin-top:22px;
+      padding-top:18px;
+    }
+
+    .small{
+      color:var(--muted);
+      font-size:0.98rem;
+      line-height:1.8;
+    }
+
+    /* ===== Comments wrapper to make Disqus look clean ===== */
+    .comments-wrap{
+      margin-top: 10px;
+      padding: 18px;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      background: #fff;
+    }
+    #disqus_thread{
+      margin-top: 12px;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+
+    <div class="nav">
+      <a href="/">← Home</a>
+      <!-- <a href="../series/how-to-study-effectively.html">Series</a> -->
+    </div>
+
+    <article class="card">
+      <div class="tag">How to Study · Post #00001</div>
+      <h1>ပိုကြိုးစားတိုင်း စာပိုရလာမယ်လို့ထင်နေတုန်းပဲလား?</h1>
+      <div class="meta">by Haru</div>
+
+      <!-- Cover -->
+      <div class="figure">
+        <img src="/assets/images/post00001/cover.jpg" alt="Post cover about whether studying harder really improves learning" />
+        <div class="caption">ပိုကြိုးစားတိုင်းစာပိုရလာမယ်လို့ထင်နေတုန်းပဲလား</div>
+      </div>
+
+      <p>
+        " တစ်နာရီ စာကျက်ရင် တပုဒ်ရတယ်
+        နှစ်နာရီကျက်ရင် စာနှစ်ပုဒ်ရမယ် " ဆိုပြီး
+        80% သော စာလေ့လာသူတို့တွေးတတ်ကြပါတယ်။
+      </p>
+
+      <p>
+        မပုကြွယ်နှင့် ခရုငယ်ဆိုတာ
+        ပုံပြင်ထဲမှာပဲ နားထောင်လို့ကောင်းပါတယ်။
+        ကဗျာတပုဒ်ကို တရက်နှုန်း ဆိုပေမဲ့ —
+      </p>
+
+      <p>
+        သင့်အလုပ်ကိစ္စတွေကြောင့်
+        အချိန်ကန့်သတ်ချက်တွေရှိလာတဲ့အခါ
+        ကျက်ရမဲ့ ကဗျာ ၂၀၀ အတွက်
+        ရက်ပေါင်း ၂၀၀ ဆိုပြီး စာကျက်နေလို့
+        မရတော့ပါဘူး။
+        တနေ့ကိုလည်း စာလုပ်ချိန် ၁၈ နာရီအပြင် ပိုလုပ်လို့မပါဘူး။
+      </p>
+
+      <div class="highlight">
+        <p style="margin:0;">
+          <strong>စာလုပ်ချိန်များတိုင်း စာပိုရလာမယ်ဆိုတာက</strong><br/>
+          တော်တော်လေးလွဲမှားနေတဲ့ အယူအဆကြီး တခုဖြစ်ပါတယ် ‌‌‌‌‌‌‌‌‌‌‌‌‌‌🤦
+        </p>
+      </div>
+
+      <p>
+        ဒါကြောင့် ဒီ post လေးမှာတော့ —
+      </p>
+      <ul>
+        <li>🍎 စာလေ့လာသူ အများစုမှားတတ်ကြတဲ့ အမှားတချို့ကို ထောက်ပြရင်းနှင့်</li>
+        <li>🍎 အချိန်တိုအတွင်းမှာ စာအများကြီးရအောင် ဘယ်လိုလေ့လာရမလဲ ဆိုတာကို</li>
+      </ul>
+
+      <p>
+        ပြောပြပေးသွားမှာ ဖြစ်ပါတယ် 👀
+      </p>
+
+      <hr class="divider" />
+
+      <h2 class="section-title">💎 စာလုပ်ချိန် လျှော့လို့ရပါပြီ</h2>
+
+      <p>
+        ခရီးတခု သွားဖို့အတွက်
+        စက်ဘီးရယ်၊ ဆိုင်ကယ်ရယ်၊ ကား ဆိုတဲ့
+        ယာဉ် ၃ စီးထဲက တစီးကို ရွေးချယ်ရမယ်ဆို
+        သင် ဘာကို ရွေးမလဲ . . .
+      </p>
+
+      <p>
+        မပင်မပန်း၊ ခွန်အားအနည်းငယ်နှင့်
+        ခရီးဝေးပိုရောက်တဲ့ ကားပဲ သင်ရွေးမှာပါ။
+        ကားမဟုတ်ဘဲ
+        ဂျက်လေယာဉ်တို့ ၊ ဒုံးပျံတို့ ဆိုရင်တော့
+        ဘယ်လောက် ခရီးပေါက်မလဲ
+        သင် စဉ်းစားကြည့်ပါတော့။
+      </p>
+
+      <p>
+        ကိုယ်သွားချင်တဲ့ ပန်းတိုင်းဆီ
+        ရောက်ဖို့ကြိုးစားတဲ့အခါ
+        ဘယ်နနာရီ အချိန်ကုန်ခံပြီး
+        အရောက်သွားမလဲဆိုတဲ့ မေးခွန်းထက်
+        <strong>ငါဘာကိုသုံးပြီး သွားမလဲ</strong> ဆိုတာတဲ့
+        မေးခွန်းကပိုပြီး အရေးကြီးပါတယ်။
+      </p>
+
+      <h2 class="section-title">💎 စာလုပ်နည်း Equation</h2>
+
+      <div class="highlight">
+        <p style="margin:0; font-size:1.22rem;">
+          <strong>စာပြီးမြောက်မှု = စာလုပ်နည်း × စာလုပ်ချိန် × ပျော်ရွှင်မှု</strong>
+        </p>
+      </div>
+
+      <p>
+        W=Fs ဆိုတဲ့ Physics Equation နှင့် သဘောတရားတူတူပါပဲ။
+        ဒါကြောင့် အချိန်တိုတိုနှင့် စာများများ ရချင်ရင်တော့
+        မြှောက်ဖော်ကိန်း တွေဖြစ်တဲ့ —
+      </p>
+
+      <ul>
+        <li>⭕ စာလုပ်တဲ့ နည်းစနစ်</li>
+        <li>⭕ စာလေ့လာတဲ့ နေရာမှာ ပျော်ရွှင်မှု၊ စိတ်ပါမှု</li>
+      </ul>
+
+      <p>
+        ဆိုတဲ့ အချက် (၂) ချက်ကို ပိုကောင်းအောင် လုပ်ရပါမယ်။
+      </p>
+
+      <h2 class="section-title">💎 စာလုပ်နည်း(၁) — Deep Work</h2>
+
+      <p>
+        Sniper(စနိုက်ပါ) ပစ်တယ်ဆိုရင်
+        ပစ်မှတ်တနေရာထဲကိုပဲ မြင်အောင်ကြည့်…
+        စိတ်ငြိမ်ငြိမ်ထား…
+        တိတိကျကျချိန်ပြီးပစ်လိုက်ရင်…
+        ကွက်တိ ထိသလိုမျိုး…
+      </p>
+
+      <p>
+        အလုပ်လုပ်တဲ့ အခါမှာ
+        အထိရောက်ဆုံး ဖြစ်ချင်ရင်တော့
+        <strong>အလုပ်တခုတည်းကိုပဲ ၁၀၀% အာရုံစိုက်</strong> နေရပါမယ်။
+      </p>
+
+      <p>
+        ဝပ် ၁၀၀ အားရှိတဲ့ မီးသီးဟာ
+        အခန်းတခန်းလုံးကို လင်းစေနိုင်ပေမဲ့…
+        ဝပ် ၁၀၀ အားရှိတဲ့ လေဆာ ကတော့
+        စတီးကိုတောင် ဖြတ်တောက်နိုင်စွမ်းရှိပါတယ်။
+        စွမ်းအားချင်းတူပေမဲ့ ရလဒ်ချင်းကွာခြားသွားပါတယ်။
+      </p>
+
+      <p>
+        ဒါကြောင့် စာလုပ်တဲ့ အခါမှာ
+        သင့်အာရုံ (Focus) ဟာ
+        <strong>စာမှာ ၁၀၀% အပြည့်</strong> ရှိနေဖို့ အရေးကြီးပါတယ်။
+      </p>
+
+      <p>
+        စာလုပ်မယ်ဆိုရင်
+        ၂၅ မိနစ်စာ Timer လေး ပေးထားလိုက်ပြီး
+        အဲ့ဒီ 25 မိနစ်အတွင်းမှာ
+        ၁၀၀% အာရုံစိုက်ပါ။
+        စာကလွဲလို့ ကျန်တာခေါင်းထဲမထားပါနဲ့။
+      </p>
+
+      <p>
+        အလုပ်အကြောင်း၊ မိသားစုအကြောင်း မတွေးပါနှင့်။
+        လုပ်စရာ ခေါင်းထဲ ပေါ်လာရင်လဲ နောက်မှ လုပ်ဖို့
+        စာရွက်ပေါ် ရေးမှတ်ထားလိုက်ပါ။
+        <strong>ဖုန်းမကိုင်မိဖို့က တအားအရေးကြီးပါတယ်</strong> —
+        ဖုန်းကိုင်မိရင် Focus က 0% ကနေ ပြန်စရလို့ပါ။
+      </p>
+
+      <p>
+        Focus 100% ရတဲ့ အခါမှာ
+        သင့်ဦးနှောက်ရဲ့ စွမ်းဆောင်ရည်ဟာ အမြင့်ဆုံးမှာ ရှိနေပါလိ့မ်မယ်။
+        ၂၅ မိနစ်ကျော်လာရင်တော့
+        ဦးနှောက်ကို ၁၀ မိနစ်ပြန်အနားပေးပါ။
+        အနားမပေးရင်တော့ Focus 100% ရမှာ မဟုတ်ပါဘူး။
+      </p>
+
+      <h2 class="section-title">💎 စာလုပ်နည်း(၂) — Mind Map</h2>
+
+      <p>
+        ဝင်္ကပါတခုကို
+        မြေပုံကိုင်ပြီး ဖြတ်တဲ့သူနှင့်
+        မြေပုံမပါဘဲ ဖြတ်တဲ့သူနှင့်
+        ဘယ်သူက ပိုပြီး လွယ်ကူမယ်ထင်ပါသလဲ ?
+        မြေပုံပါတဲ့ လူက အများကြီး လွယ်ကူပါတယ် —
+        အကြောင်းကတော့ ကိုယ်လျောက်တဲ့ လမ်းကို
+        သိမြင်နေရလို့ပါ။
+      </p>
+
+      <p>
+        စာကို တခုနှင့် တခု
+        နားလည် ဆက်စပ်မှုမရှိဘဲ
+        ဒါဆိုဒါ အသေမှတ်ပြီး
+        စာကျက်တဲ့ လူဟာ မြေပုံမပါဘဲ
+        ဝင်္ကပါထဲ လမ်းလျောက်နေတဲ့ သူနှင့်တူပါတယ်။
+        ဒါကြောင့် Mind Map နှင့် စာလုပ်ဖို့ လိုအပ်တာပါ။
+      </p>
+
+      <p>
+        Mind Map ဆိုတာက မြေပုံတခုလိုမျိုး
+        ကိုယ်ကျက်မှတ်ထားတဲ့ အကြောင်းအရာတွေကို
+        တခုနှင့် တခုချိတ်စပ်ပြီး
+        မျက်စိထဲ ကွက်ကွက်ကွင်းကွင်းမြင်အောင်မှတ်တဲ့
+        စာလုပ်နည်းဖြစ်ပါတယ်။
+      </p>
+
+      <!-- Mindmap image -->
+      <div class="figure">
+        <img src="/assets/images/post00001/mindmap.jpg" alt="Mind map example" />
+        <div class="caption">Mind Map နမူနာ</div>
+      </div>
+
+      <h2 class="section-title">💎 စာလုပ်နည်း(၃) — အိပ်ပါ။</h2>
+
+      <p>
+        အိပ်ရေး ဝဝ အိပ်ပါ။
+        သင်ဦးနှောက်က စက်ရဲ့ engine အင်ဂျင် တလုံးနှင့်တူပါတယ်။
+        အနားပေးသင့်ရင် အနားပေးရပါမယ်။
+        စက်ဘယ်လောက် လန်ပြန်နေပါစေ
+        အင်ဂျင်ကြီး ဂျုံးဂျုံးကျနေရင်တော့
+        ခရီးမပေါက်ပါဘူး။
+      </p>
+
+      <p>
+        စာလုပ်တယ်ဆိုတာ ဦးနှောက်ကို ခိုင်းစေပြီး
+        အလုပ်လုပ်တာ ဖြစ်တဲ့ အတွက်
+        ဦးနှောက်က Energy အပြည့်ဖြစ်နေဖို့လိုအပ်ပါတယ်။
+        ဒါမှ ၁၀၀% Focus နိုင်မှာပါ။
+      </p>
+
+      <p>
+        ဦးနှောက်က ပင်ပန်းနေတာကို အနားမပေးဘဲ
+        ဆက်ပြီး စာလေ့လာနေရင်တော့
+        သဲထဲ ရေသွန်တဲ့ လုပ်ရပ်မျိုး လုပ်နေပြီလို့
+        သတိပေးပါရစေ။
+      </p>
+
+      <div class="highlight">
+        <p style="margin:0;">
+          <strong>ဦးနှောက် energy ကုန်နေတုန်း ဘယ်တော့မှ စာလုပ်မိပါစေနှင့် ❌</strong><br/>
+          စာလုပ်ချိန်များတိုင်း စာများများ မရဘူးဆိုတာ စိတ်ထဲမှာစွဲမြဲနေပါစေ။
+        </p>
+      </div>
+
+      <hr class="divider" />
+
+      <p>
+        စာလုပ်နည်း Equation + စာလုပ်တဲ့ နည်း (၃) နည်းနှင့်ဆိုရင်တော့
+        သင်ရဲ့ လေ့လာနိုင်စွမ်းတွေ အများကြီး တိုးတတ်လာပါလိမ့်မယ်။
+      </p>
+
+      <p>
+        ဒီထပ်ပိုကောင်းတဲ့ နည်းလမ်းတွေလည်း ထပ်တင်ပေးသွားဖို့ရှိပါတယ်။
+      </p>
+
+      <p>
+        ဒီ စာလေ့လာနည်းကိုလည်း သူငယ်ချင်းတွေ သိသွားအောင် share သွားလိုက်ပါ 💎<br/>
+        <strong>Sharing is caring</strong>
+      </p>
+
+      <div class="links">
+        <p class="small"><strong>Related Facebook Posts (vpn ချိတ်ပြီး ကျနော့် FB page မှာ ဆက်ဖတ်လို့ရပါတယ် 🥳):</strong></p>
+        <ul>
+          <li style="margin:0.35em 0; font-size:1.14rem;">
+            <a href="/course/">စာလုပ်ရတာ အဆ ၃၀ သက်သာစေမယ့် စာလေ့လာနည်းသင်တန်း</a>
+          </li>
+
+          <li>
+            <a target="_blank" href="/posts/post00007.html">
+              Active Recall : စာကျက်ပြီး စာမရတာမျိုး မဖြစ်စေမယ့် စာလုပ်နည်း
+            </a>
+          </li>
+
+          <li>
+            <a target="_blank" href="https://m.facebook.com/story.php?story_fbid=pfbid02HYQbz5qjdYC464CcLRN7udjXRLtfojAzTU3J4cqvp2aTCMV7MSPhJ6mtdKp9wwQvl&id=100089247064454&mibextid=Nif5oz">
+              Motivation မလိုတဲ့ စာလုပ်နည်း (စာလုပ်ရတာ ပျော်ချင်ရင် ဒီလိုလုပ်ပါ)
+            </a>
+          </li>
+          <li>
+            <a target="_blank" href="https://m.facebook.com/story.php?story_fbid=239530435698524&id=100089247064454&mibextid=Nif5oz">
+              စာမမေ့အောင် ဘယ်လိုလုပ်မလဲ
+            </a>
+          </li>
+          <li>
+            <a target="_blank" href="https://m.facebook.com/story.php?story_fbid=254880070830227&id=100089247064454&mibextid=Nif5oz">
+              စာလေ့လာတဲ့နှုန်း 10 ဆ မြန်ချင်ရင်
+            </a>
+          </li>
+          <li>
+            <a target="_blank" href="https://m.facebook.com/story.php?story_fbid=255941847390716&id=100089247064454&mibextid=Nif5oz">
+              Stress ကြားထဲမှာ စာလုပ်နည်း
+            </a>
+          </li>
+        </ul>
+      </div>
+
+      <hr class="divider" />
+
+      <!-- ===== COMMENTS (clean wrapper) ===== -->
+      <section class="comments-wrap">
+        <h2 class="section-title" style="margin-top:0;">💬 Comments</h2>
+        <p class="small" style="margin-top:-6px;">Anonymous comments allowed. Be kind. ❤️</p>
+
+        <div id="disqus_thread"></div>
+
+        <script>
+          var disqus_config = function () {
+            this.page.url = window.location.href;
+            this.page.identifier = window.location.pathname;
+          };
+
+          (function() {
+            var d = document, s = d.createElement('script');
+            s.src = 'https://post0001.disqus.com/embed.js';
+            s.setAttribute('data-timestamp', +new Date());
+            (d.head || d.body).appendChild(s);
+          })();
+        </script>
+
+        <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+      </section>
+
+    </article>
+  </div>
+</body>
+</html>

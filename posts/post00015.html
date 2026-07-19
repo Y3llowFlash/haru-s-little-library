@@ -1,0 +1,434 @@
+<!doctype html>
+<html lang="my">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>စာမေးပွဲမှာ မလျှမ်းအောင် ဘယ်လိုဖြေမလဲ?</title>
+  <meta name="description" content="လျှမ်းတာက ကိုယ်ညံ့လို့ဖြစ်တာမဟုတ်ပါဘူး။ စာမေးပွဲဖိအားအောက်မှာ ဦးနှောက်က ပုံမှန်အတိုင်းမလုပ်နိုင်တာဖြစ်ပါတယ် ဒါကို ဘယ်လိုဖြေရှင်းရမလဲဆိုတာကို ဒီ post မှာ ပြောပြထားပါတယ်" />
+  <meta property="og:title" content="စာမေးပွဲမှာ မလျှမ်းအောင် ဘယ်လိုဖြေရမလဲ?" />
+  <meta property="og:description" content="လျှမ်းတာက ကိုယ်ညံ့လို့ဖြစ်တာမဟုတ်ပါဘူး။ စာမေးပွဲဖိအားအောက်မှာ ဦးနှောက်က ပုံမှန်အတိုင်းမလုပ်နိုင်တာဖြစ်ပါတယ် ဒါကို ဘယ်လိုဖြေရှင်းရမလဲဆိုတာကို ဒီ post မှာ ပြောပြထားပါတယ်" />
+  <meta property="og:type" content="article" />
+  <meta property="og:image" content="/assets/images/post00015/cover.jpg" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="စာမေးပွဲမှာ မလျှမ်းအောင် ဘယ်လိုဖြေရမလဲ?" />
+  <meta name="twitter:description" content="လျှမ်းတာက ကိုယ်ညံ့လို့ဖြစ်တာမဟုတ်ပါဘူး။ စာမေးပွဲဖိအားအောက်မှာ ဦးနှောက်က ပုံမှန်အတိုင်းမလုပ်နိုင်တာဖြစ်ပါတယ် ဒါကို ဘယ်လိုဖြေရှင်းရမလဲဆိုတာကို ဒီ post မှာ ပြောပြထားပါတယ်" />
+  <meta name="twitter:image" content="/assets/images/post00015/cover.jpg" />
+
+  <script data-goatcounter="https://post00015.goatcounter.com/count"
+          async src="//gc.zgo.at/count.js"></script>
+
+  <style>
+    @font-face {
+      font-family: "Yati";
+      src: url("/assets/fonts/YatiUni-Regular.ttf") format("truetype");
+      font-weight: 400;
+      font-style: normal;
+      font-display: swap;
+    }
+
+    :root{
+      --bg:#faf7ef;
+      --paper:#ffffff;
+      --text:#1f1f1f;
+      --muted:#6f6f6f;
+      --line:#e7e1d6;
+      --link:#8b5a3c;
+      --maxw:740px;
+      --accent:#d93636;
+    }
+
+    *{ box-sizing:border-box; }
+
+    body{
+      margin:0;
+      background:var(--bg);
+      color:var(--text);
+      font-family:"Yati", serif;
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      line-height:1.95;
+    }
+
+    .container{
+      max-width:var(--maxw);
+      margin:56px auto;
+      padding:0 18px;
+    }
+
+    .nav{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      margin-bottom:16px;
+      gap:12px;
+    }
+
+    .nav a{
+      color:var(--muted);
+      text-decoration:none;
+      font-size:0.95rem;
+    }
+    .nav a:hover{ color:var(--text); }
+
+    .card{
+      background:var(--paper);
+      border:1px solid var(--line);
+      border-radius:16px;
+      padding:26px;
+    }
+
+    .tag{
+      display:inline-block;
+      font-size:0.85rem;
+      color:var(--muted);
+      border:1px solid var(--line);
+      padding:6px 10px;
+      border-radius:999px;
+      margin-bottom:10px;
+    }
+
+    h1{
+      font-size:2.08rem;
+      line-height:1.25;
+      margin:10px 0 10px;
+      letter-spacing:0.2px;
+    }
+
+    .meta{
+      color:var(--muted);
+      font-size:0.95rem;
+      margin-bottom:18px;
+    }
+
+    p{
+      font-size:1.18rem;
+      margin:0 0 1.2em;
+    }
+
+    .figure{ margin:18px 0 22px; }
+    .figure img{
+      width:100%;
+      height:auto;
+      border-radius:14px;
+      border:1px solid var(--line);
+      display:block;
+      background:#fff;
+    }
+
+    .caption{
+      color:var(--muted);
+      font-size:0.95rem;
+      margin-top:8px;
+      text-align:center;
+      line-height:1.6;
+    }
+
+    .section-callout{
+      margin:26px 0 18px;
+      padding:14px 16px;
+      border-left:4px solid var(--accent);
+      border-radius:0 12px 12px 0;
+      background:#fff3da;
+      border-top:1px solid #f0dfb5;
+      border-right:1px solid #f0dfb5;
+      border-bottom:1px solid #f0dfb5;
+    }
+
+    .section-callout h2{
+      margin:0;
+      font-size:1.34rem;
+      line-height:1.45;
+      letter-spacing:0;
+    }
+
+    .quote{
+      border-left:4px solid var(--accent);
+      padding:8px 0 8px 16px;
+      margin:18px 0 20px;
+      color:#2a2a2a;
+    }
+
+    .highlight{
+      background:#fff3da;
+      border:1px solid #f0dfb5;
+      padding:14px 14px;
+      border-radius:12px;
+      margin:16px 0 18px;
+    }
+    
+    .dot{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      margin:18px 0 16px;
+      color:var(--muted);
+      font-size:1.05rem;
+    }
+    .dot::before{
+      content:"⬛️";
+      display:inline-block;
+      transform: translateY(-1px);
+    }
+
+    .divider{
+      margin:22px 0 18px;
+      border:none;
+      border-top:1px solid var(--line);
+    }
+
+    .links{
+      border-top:1px solid var(--line);
+      margin-top:22px;
+      padding-top:18px;
+    }
+
+    .small{
+      color:var(--muted);
+      font-size:0.98rem;
+      line-height:1.8;
+    }
+
+    a{ color:var(--link); text-decoration:none; }
+    a:hover{ text-decoration:underline; }
+
+    ul{ margin:0.2em 0 1.2em 1.2em; padding:0; }
+    li{ margin:0.35em 0; font-size:1.14rem; }
+
+    .comments-wrap{
+      margin-top: 10px;
+      padding: 18px;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      background: #fff;
+    }
+
+    #disqus_thread{ margin-top:12px; }
+
+    @media (max-width: 640px){
+      h1{ font-size:1.8rem; }
+      p{ font-size:1.08rem; }
+      .section-callout h2{ font-size:1.18rem; }
+      .card{ padding:20px; }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+
+    <div class="nav">
+      <a href="/">← Home</a>
+      <a href="/posts/post00014.html">Prev</a>
+    </div>
+
+    <article class="card">
+      <div class="tag">Exam Tips · Post #00015</div>
+      <h1>စာမေးပွဲမှာ မလျှမ်းအောင် ဘယ်လိုဖြေမလဲ?</h1>
+      <div class="meta">by Haru · 1% Better Every Day</div>
+
+      <div class="figure">
+        <img src="/assets/images/post00015/cover.jpg" alt="Student frustrated with exam paper" />
+        <div class="caption">မသိလို့ မှားတာထက် သိရက်သားနဲ့ မှားတာက ပိုနာကျင်ရတယ်</div>
+      </div>
+
+      <p>
+        စာမေးပွဲခန်းထဲက ထွက်လာတယ်။<br>
+        သူငယ်ချင်းတွေနဲ့ အဖြေတိုက်ကြည့်တော့မှ...<br>
+        "ဟာ... သွားပြီ၊ ငါဒါ သိရက်သားနဲ့ မှားခဲ့တာပဲ" ဆိုပြီး<br>
+        ကိုယ့်ခေါင်းကိုယ် ပြန်ထုချင်စိတ် ပေါက်ဖူးလား?
+      </p>
+
+      <p>
+        စာမရလို့ မှားတာဆိုရင်တောင် ခံသာသေးတယ်။<br>
+        ရရဲ့သားနဲ့ ရှမ်းပြီး (Careless mistakes) မှားတာက<br>
+        တကယ်ကို ဒေါသထွက်စရာကောင်းပါတယ်။
+      </p>
+
+      <p>
+        သင်္ချာမှာ အပေါင်းအနှုတ် လက္ခဏာလွဲသွားတာ၊<br>
+        အင်္ဂလိပ်စာမှာ 'NOT' ကို မမြင်လိုက်တာ၊<br>
+        မေးခွန်းက "ဘာလဲ" လို့မေးတာကို<br>
+        ကိုယ့်ဘာသာ "ဘယ်လိုလဲ" ဆိုပြီး ဆက်ရေးပစ်တာမျိုးတွေပေါ့။
+      </p>
+
+      <div class="highlight">
+        <p style="margin:0;">
+          ဒါဟာ သင် ဉာဏ်မကောင်းလို့၊ စာမရလို့ မဟုတ်ပါဘူး။<br>
+          <strong>သင့်ဦးနှောက်ရဲ့ "System Error" တစ်ခုပါပဲ။</strong>
+        </p>
+      </div>
+
+      <div class="figure">
+        <img src="/assets/images/post00015/system_error.jpg" alt="Warm study desk with a visual metaphor for autopilot focus mistakes" loading="lazy" />
+        <div class="caption">အမြန်ဆုံးဖြတ်တဲ့ ဦးနှောက်စနစ်က တစ်ခါတလေ သိထားတဲ့အရာတွေကိုတောင် လွဲစေတတ်တယ်</div>
+      </div>
+
+      <div class="section-callout">
+        <h2>(၁) ဘာလို့ Careless Mistakes တွေ လုပ်မိတာလဲ?</h2>
+      </div>
+
+      <p>
+        နိုဘယ်လ်ဆုရှင် စိတ်ပညာရှင် <strong>Daniel Kahneman</strong> က<br>
+        ကျနော်တို့ ဦးနှောက်မှာ စဉ်းစားတွေးခေါ်တဲ့ စနစ် (၂) ခု ရှိတယ်လို့ ဆိုပါတယ်။
+      </p>
+
+      <ul>
+        <li><strong>System 1 (Auto-pilot):</strong> မြန်တယ်၊ လောတယ်၊ အတွေ့အကြုံအရ အလိုအလျောက် တုံ့ပြန်တယ်။ (ဥပမာ - ၂ အမြှောက် ၄ လို့ မြင်တာနဲ့ ၈ လို့ ချက်ချင်းသိတာ)</li>
+        <li><strong>System 2 (Manual):</strong> နှေးတယ်၊ သေချာစဉ်းစားရတယ်၊ အာရုံစိုက်ရတယ်။ (ဥပမာ - ၁၇ အမြှောက် ၂၄ ကို စဉ်းစားတာ)</li>
+      </ul>
+
+      <p>
+        စာမေးပွဲခန်းထဲရောက်ပြီ၊ အချိန်ကန့်သတ်ချက်ရှိပြီ၊ စိတ်ဖိစီးလာပြီဆိုတာနဲ့<br>
+        ဦးနှောက်က Energy သက်သာအောင် <strong>System 1</strong> ကို အလိုလို ပြောင်းသုံးလိုက်ပါတယ်။
+      </p>
+
+      <p>
+        အဲ့ဒီအခါ မေးခွန်းကို အစအဆုံး သေချာမဖတ်တော့ဘူး။<br>
+        စကားလုံး နှစ်လုံးလောက်မြင်တာနဲ့ "ဪ ဒါမေးတာပဲ" ဆိုပြီး<br>
+        System 1 က ဖြတ်လမ်းကနေ ကောက်ချက်ချလိုက်ရော။<br>
+        အဲ့ဒီမှာ စာတွေကျန်၊ အဖြေတွေလွဲပြီး Careless Mistakes တွေ ဖြစ်ကုန်တာပါပဲ။
+      </p>
+
+      <div class="section-callout">
+        <h2>(၂) ဒီပြဿနာကို ဘယ်လိုဖြေရှင်းမလဲ?</h2>
+      </div>
+
+      <p>
+        အဖြေကတော့ ရှင်းပါတယ်။<br>
+        လောနေတဲ့ System 1 ကို ပိတ်ပြီး၊ သေချာစဉ်းစားတဲ့ System 2 ကို ပြန်နှိုးရပါမယ်။<br>
+        ဒါကို လက်တွေ့အသုံးချဖို့ အချက် (၃) ချက် လုပ်ကြည့်ပါ။
+      </p>
+
+      <div class="dot"></div>
+      <p><strong>နည်းလမ်း ၁ - ဂျပန်ရထားမောင်းသူများ၏ လျှို့ဝှက်ချက် (Shisa Kanko)</strong></p>
+
+      <p>
+        ဂျပန်နိုင်ငံက ရထားမောင်းတဲ့သူတွေဟာ အချက်ပြမီးကို မြင်ရင် ဒီအတိုင်း မကြည့်ပါဘူး။<br>
+        လက်ညှိုးနဲ့ သေချာထောက်ပြီး "မီးစိမ်းတယ်" လို့ အသံထွက်ပြောပါတယ်။<br>
+        ဒီလို လက်ညှိုးထောက်ပြီး ပြောတဲ့နည်းစနစ်ကို <strong>"Shisa Kanko" (Pointing and Calling)</strong> လို့ ခေါ်ပါတယ်။
+      </p>
+
+      <div class="figure">
+        <img src="/assets/images/post00015/pointing_calling.jpg" alt="Japanese train conductor pointing carefully on a railway platform" loading="lazy" />
+        <div class="caption">ကြည့်ရုံမဟုတ်ဘဲ လက်နဲ့ထောက်ပြီး အသံထွက်ပြောတာက အာရုံကို ပြန်ခေါ်ပေးတဲ့နည်းလမ်းတစ်ခုပါ</div>
+      </div>
+
+      <div class="quote">
+        <p style="margin:0;">
+          ဒီနည်းလမ်းက ဦးနှောက်ရဲ့ System 2 ကို အတင်းနှိုးပေးလိုက်တာဖြစ်လို့<br>
+          အမှားလုပ်မိနိုင်ချေကို <strong>၈၅%</strong> အထိ လျှော့ချပေးတယ်လို့ သုတေသနတွေက ဆိုပါတယ်။
+        </p>
+      </div>
+
+      <p>
+        စာမေးပွဲမှာ ဒါကို ဘယ်လိုသုံးမလဲ?<br>
+        မဲမဲမြင်တိုင်း ရမ်းမဖတ်ပါနဲ့။<br>
+        မေးခွန်းတစ်ခုဖတ်တိုင်း လက်ညှိုးလေး (သို့) ဘောပင်လေးထောက်ပြီး<br>
+        <strong>တစ်လုံးချင်းစီကို သေချာဖတ်ပါ။</strong><br>
+        အရေးကြီးတဲ့ ကီးဝေါဒ်တွေ၊ (NOT, EXCEPT, FALSE) လို စကားလုံးတွေကို ဘောပင်နဲ့ ဝိုင်းထားပါ။
+      </p>
+
+      <div class="dot"></div>
+      <p><strong>နည်းလမ်း ၂ - စာမေးပွဲဖြေနေတယ်လို့ သဘောမထားပါနဲ့</strong></p>
+
+      <p>
+        ရှမ်းသွားတယ်ဆိုတာ စိတ်ထဲမှာ "ငါ အချိန်မီပါ့မလား၊ မှားသွားရင် ဒုက္ခပဲ" ဆိုတဲ့<br>
+        ဝန်ထုပ်ဝန်ပိုးတွေ များနေလို့ပါ။
+      </p>
+
+      <p>
+        <strong>အိမ်စာလုပ်နေတယ်လို့ သဘောထားပြီး ပေါ့ပေါ့ပါးပါးပဲ ဖြေပါ။</strong><br>
+        စိတ်ဖိစီးမှုနည်းလေလေ၊ ဦးနှောက်က ကြည်လင်ပြီး System 2 အလုပ်လုပ်နိုင်လေလေပါပဲ။
+      </p>
+
+      <div class="dot"></div>
+      <p><strong>နည်းလမ်း ၃ - The Reverse Double-Check (ပြောင်းပြန်စစ်ဆေးခြင်း)</strong></p>
+
+      <p>
+        စာမေးပွဲခန်းထဲက ဖိအားများနေတဲ့ သင့်ဦးနှောက်ကို အရမ်းမယုံပါနဲ့။<br>
+        ကိုယ့်အဖြေကို ကိုယ်ပြန်ဖတ်ရုံနဲ့ အမှားကို မြင်ဖို့ခဲယဉ်းပါတယ်။
+      </p>
+
+      <p>
+        သင်္ချာတွက်ရင် တွက်ထားတဲ့ အဆင့်တွေကို အပေါ်ကနေ အောက် ပြန်မစစ်ပါနဲ့။<br>
+        <strong>အောက်ကနေ အပေါ်ကို ပြောင်းပြန် ပြန်တက်ကြည့်ပါ။</strong><br>
+        ဒါမှမဟုတ် ကိုယ်ရလာတဲ့ အဖြေကို မေးခွန်းထဲ အစားပြန်သွင်းကြည့်ပါ။
+      </p>
+
+      <div class="figure">
+        <img src="/assets/images/post00015/double_check.jpg" alt="Student carefully checking exam answers with a pencil" loading="lazy" />
+        <div class="caption">အဖြေကို ပြန်စစ်တဲ့အချိန်မှာ ဦးနှောက်ကို လမ်းကြောင်းအသစ်တစ်ခုကနေ ပြန်ကြည့်ခိုင်းပါ</div>
+      </div>
+
+      <div class="divider"></div>
+
+      <p>
+        <strong>အနှစ်ချုပ်ရရင် —</strong>
+      </p>
+
+      <p>
+        မြန်မြန်လုပ်ပြီး ၅ ပုဒ်မှားမယ့်အစား၊<br>
+        ဖြည်းဖြည်းချင်း သေချာလုပ်ပြီး ၃ ပုဒ်အပိုင်မှန်အောင် အရင်လေ့ကျင့်ကြည့်ပါ။
+      </p>
+
+      <p>
+        Careless mistakes ဆိုတာ သင်ညံ့လို့ ဖြစ်တာမဟုတ်ပါဘူး။<br>
+        အာရုံစူးစိုက်မှုကို စနစ်တကျ မထိန်းချုပ်နိုင်လို့ပါ။<br>
+        ဒါဟာ ကျင့်ယူလို့ရတဲ့ အလေ့အကျင့်တစ်ခုသာ ဖြစ်ပါတယ်။
+      </p>
+
+      <p style="margin-top:18px;">
+        Haru<br>
+        1% Better Every Day
+      </p>
+
+      <div class="links">
+        <p class="small"><strong>ဒါမျိုးထပ်ဖတ်ချင်သေးရင် ...</strong></p>
+        <ul>
+          <li style="margin:0.35em 0; font-size:1.14rem;">
+            <a href="/course/">စာလုပ်ရတာ အဆ ၃၀ သက်သာစေမယ့် စာလေ့လာနည်းသင်တန်း</a>
+          </li>
+          <li style="margin:0.35em 0; font-size:1.14rem;">
+            <a href="/posts/post00008.html">ခဲလေသမျှ သဲရေကျ မဖြစ်ရလေတဲ့ စာမေးပွဲဖြေဆိုနည်း</a>
+          </li>
+          <li style="margin:0.35em 0; font-size:1.14rem;">
+            <a href="/posts/post00009.html">စာလုပ်ချိန်နည်းနည်းနဲ့ အမှတ်များများရစေမယ့် စာလုပ်နည်း ၅ ခု</a>
+          </li>
+          <li style="margin:0.35em 0; font-size:1.14rem;">
+            <a href="/posts/post00014.html">စာလုပ်ချင်စိတ်နဲ့ အာရုံစူးစိုက်မှုကို ပြန်ထိန်းချုပ်ဖို့</a>
+          </li>
+          <li style="margin:0.35em 0; font-size:1.14rem;">
+            <a href="/posts/post00007.html">ကျက်ထားတဲ့ စာတွေ မေ့မသွားချင်ရင် Active Recall စာကျက်နည်းကို သုံးကြည့်ပါ</a>
+          </li>
+        </ul>
+      </div>
+
+      <hr class="divider" />
+
+      <section class="comments-wrap">
+        <h2 class="section-title" style="margin-top:0;">Comments</h2>
+        <p class="small" style="margin-top:-6px;">Anonymous comments allowed. Be kind. ❤️</p>
+
+        <div id="disqus_thread"></div>
+
+        <script>
+          var disqus_config = function () {
+            this.page.url = window.location.href;
+            this.page.identifier = window.location.pathname;
+          };
+
+          (function() {
+            var d = document, s = d.createElement('script');
+            s.src = 'https://post0001.disqus.com/embed.js';
+            s.setAttribute('data-timestamp', +new Date());
+            (d.head || d.body).appendChild(s);
+          })();
+        </script>
+
+        <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+      </section>
+
+    </article>
+  </div>
+</body>
+</html>

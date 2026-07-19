@@ -1,0 +1,342 @@
+<!doctype html>
+<html lang="my">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>လွယ်လွယ်အဖြေရတဲ့ ခေတ်မှာ ပျောက်ဆုံးသွားတဲ့ ခေါင်းကုတ်ရတဲ့ အခိုက်အတန့်များ</title>
+  <meta name="description" content="Calculator, Guidebook, AI… ကြောင့် ကျွန်တော်တို့ ခေတ်သစ်စနစ်သစ်ဟာပိုမိုလွယ်ကူလာတာတော့ဟုတ်ပါတယ် ဒါပေမယ့် ကျောင်းသား၊ ကျောင်းသူ၊ လေ့လာသူတွေ သတိမထားမိတာကတော့ အဲ့ဒီအရာတွေကပဲ သူတို့ ဦးနှောက်ကို တုံးသထက် တုံးအောင်လုပ်နေတယ်ဆိုတာပါပဲ ...." />
+  <meta property="og:title" content="လွယ်လွယ်အဖြေရတဲ့ ခေတ်မှာ ပျောက်ဆုံးသွားတဲ့ ခေါင်းကုတ်ရတဲ့ အခိုက်အတန့်များ" />
+  <meta property="og:description" content="Calculator, Guidebook, AI… ကြောင့် ကျွန်တော်တို့ ခေတ်သစ်စနစ်သစ်ဟာပိုမိုလွယ်ကူလာတာတော့ဟုတ်ပါတယ် ဒါပေမယ့် ကျောင်းသား၊ ကျောင်းသူ၊ လေ့လာသူတွေ သတိမထားမိတာကတော့ အဲ့ဒီအရာတွေကပဲ သူတို့ ဦးနှောက်ကို တုံးသထက် တုံးအောင်လုပ်နေတယ်ဆိုတာပါပဲ ...." />
+  <meta property="og:type" content="article" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="လွယ်လွယ်အဖြေရတဲ့ ခေတ်မှာ ပျောက်ဆုံးသွားတဲ့ ခေါင်းကုတ်ရတဲ့ အခိုက်အတန့်များ" />
+  <meta name="twitter:description" content="Calculator, Guidebook, AI… ကြောင့် ကျွန်တော်တို့ ခေတ်သစ်စနစ်သစ်ဟာပိုမိုလွယ်ကူလာတာတော့ဟုတ်ပါတယ် ဒါပေမယ့် ကျောင်းသား၊ ကျောင်းသူ၊ လေ့လာသူတွေ သတိမထားမိတာကတော့ အဲ့ဒီအရာတွေကပဲ သူတို့ ဦးနှောက်ကို တုံးသထက် တုံးအောင်လုပ်နေတယ်ဆိုတာပါပဲ ...." />
+
+  <!-- ===== GoatCounter (Views) =====
+       Pro tip: you usually only need ONE GoatCounter site for the whole blog.
+       But I'm keeping your per-post ID as you requested. -->
+  <script data-goatcounter="https://post00002.goatcounter.com/count"
+          async src="//gc.zgo.at/count.js"></script>
+
+  <style>
+    /* ===== Custom Burmese Font (local) ===== */
+    @font-face {
+      font-family: "Yati";
+      src: url("/assets/fonts/YatiUni-Regular.ttf") format("truetype");
+      font-weight: 400;
+      font-style: normal;
+    }
+
+    :root{
+      --bg:#faf7ef;
+      --paper:#ffffff;
+      --text:#1f1f1f;
+      --muted:#6f6f6f;
+      --line:#e7e1d6;
+      --link:#8b5a3c;
+      --maxw:740px;
+    }
+
+    *{ box-sizing:border-box; }
+    body{
+      margin:0;
+      background:var(--bg);
+      color:var(--text);
+      font-family:"Yati", serif;
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      line-height:1.95;
+    }
+
+    .container{
+      max-width:var(--maxw);
+      margin:56px auto;
+      padding:0 18px;
+    }
+
+    .nav{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      margin-bottom:16px;
+      gap:12px;
+    }
+
+    .nav a{
+      color:var(--muted);
+      text-decoration:none;
+      font-size:0.95rem;
+    }
+    .nav a:hover{ color:var(--text); }
+
+    .card{
+      background:var(--paper);
+      border:1px solid var(--line);
+      border-radius:16px;
+      padding:26px;
+    }
+
+    .tag{
+      display:inline-block;
+      font-size:0.85rem;
+      color:var(--muted);
+      border:1px solid var(--line);
+      padding:6px 10px;
+      border-radius:999px;
+      margin-bottom:10px;
+    }
+
+    h1{
+      font-size:2.05rem;
+      line-height:1.25;
+      margin:10px 0 10px;
+      letter-spacing:0.2px;
+    }
+
+    .meta{
+      color:var(--muted);
+      font-size:0.95rem;
+      margin-bottom:18px;
+    }
+
+    p{
+      font-size:1.18rem;
+      margin:0 0 1.2em;
+    }
+
+    .divider{
+      margin:22px 0 18px;
+      border:none;
+      border-top:1px solid var(--line);
+    }
+
+    .figure{ margin:18px 0 22px; }
+    .figure img{
+      width:100%;
+      height:auto;
+      border-radius:14px;
+      border:1px solid var(--line);
+      display:block;
+    }
+    .caption{
+      color:var(--muted);
+      font-size:0.95rem;
+      margin-top:8px;
+      text-align:center;
+      line-height:1.6;
+    }
+
+    .section-title{
+      font-size:1.45rem;
+      margin:1.4em 0 0.6em;
+      line-height:1.35;
+    }
+
+    .highlight{
+      background:#fff3da;
+      border:1px solid #f0dfb5;
+      padding:14px 14px;
+      border-radius:12px;
+      margin:16px 0 18px;
+    }
+
+    ul{ margin:0.2em 0 1.2em 1.2em; padding:0; }
+    li{ margin:0.35em 0; font-size:1.14rem; }
+
+    a{ color:var(--link); text-decoration:none; }
+    a:hover{ text-decoration:underline; }
+
+    /* ===== Comments wrapper to make Disqus look clean ===== */
+    .comments-wrap{
+      margin-top: 10px;
+      padding: 18px;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      background: #fff;
+    }
+    #disqus_thread{ margin-top: 12px; }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+
+    <div class="nav">
+      <a href="/">← Home</a>
+    </div>
+
+    <article class="card">
+      <div class="tag">Thinking · Post #00002</div>
+      <h1>အဖြေလွယ်လွယ်ရတဲ့ ခေတ်မှာ ပျောက်ဆုံးသွားတဲ့ “ခေါင်းကုတ်ရတဲ့ အခိုက်အတန့်”</h1>
+      <div class="meta">by Haru</div>
+
+      <!-- Cover (1.jpg) -->
+      <div class="figure">
+        <img src="/assets/images/post00002/1.jpg" alt="Post cover about losing deep thinking in the age of easy answers" />
+        <div class="caption">ခေါင်းကုတ်ရတဲ့ အခိုက်အတန့် — (Cover)</div>
+      </div>
+
+      <p>
+        ကျွန်တော်တို့ ခေတ်ကြီးက အရမ်းသက်သာလွန်းနေပြီလားလို့ တွေးမိတယ်။
+        ဂဏန်းတွက်မလား Calculator ရှိတယ်။ အလွတ်ကျက်စရာလိုသေးလား ဖုန်းတစ်လုံးရှိရင် အချက်အလက်တွေအကုန်ရှာလို့ရတယ်။
+        ကျောင်းစာတွေအတွက်လား အထူးထုတ် (Guidebook) တွေရှိတယ်။
+        အခုဆိုရင် AI တွေပါ ပေါ်လာတော့ စာအုပ် ၄-၅ အုပ်လောက်ကို လှန်လှောပြီး ခေါင်းတိုးအဖြေရှာရမယ့်
+        ကိစ္စတွေက စက္ကန့်ပိုင်းနဲ့ ပြီးသွားတယ်။
+      </p>
+
+      <div class="highlight">
+        <p style="margin:0;">
+          နည်းပညာတွေ များလာတာ <strong>ကောင်းတော့ကောင်း</strong>ပါတယ်။ ဒါပေမဲ့… <br/>
+          ကျွန်တော်တို့ မသိမသာဆုံးရှုံးလိုက်ရတဲ့အရာတစ်ခု ရှိတယ်။
+          အဲ့ဒါကတော့ <strong>“စဉ်းစားတွေးခေါ်ဖို့ ရုန်းကန်ရတဲ့ ဒုက္ခ (The struggle to figure things out)”</strong> ပါပဲ။
+        </p>
+      </div>
+
+      <p>
+        အဖြေမှန်ရဖို့လောက်ပဲ ကြိုးစားကြတဲ့ အခုခေတ် ကျောင်းသားတွေ၊ လူငယ်တွေရဲ့ pattern က ဒီလို၊
+        AI သို့မဟုတ် အထူးထုတ်ကပေးတဲ့ Step-by-step အဖြေကို ကြည့်မယ်။
+        ပြီးရင် အဲ့ဒီအဖြေကို နားလည်အောင်လုပ်မယ် (တချို့ဆို နားမလည်ဘဲ အလွတ်ကျက်မယ်)။
+        ပြီးရင် စာမေးပွဲမှာ အမှတ် ၁၀၀ ဖိုးမေးရင် ၁၀၀ ရဖို့ ဖြေမယ်။
+      </p>
+
+      <!-- Photo (2.jpg) -->
+      <div class="figure">
+        <img src="/assets/images/post00002/2.jpg" alt="Study desk representing tools that make learning easier" />
+        <div class="caption">“ခေါင်းကုတ်ပြီး ရှာဖွေတဲ့ အချိန်” ကပဲ skill ကိုတည်ဆောက်ပေးတယ်</div>
+      </div>
+
+      <p>
+        ဒီလို စာလုပ်ကြတဲ့ Process တစ်ခုလုံးမှာ “ငါ ဘယ်လိုစဉ်းစားရမလဲ”၊ “ဒီပြဿနာကို ဘယ်လို ရှင်းရမလဲ” ဆိုပြီး
+        ခေါင်းခြောက်ခံ၊ ခေါင်းကုတ်ပြီး စဉ်းစားရတဲ့ အပိုင်း ပျောက်ဆုံးနေပါပြီ။
+      </p>
+
+      <p>
+        အဖြေကို AI က ရှာပေးတယ်။ စဉ်းစားပေးတယ်။ Reference တွေ ထုတ်ပေးတယ်။
+        ကိုယ်က ဘာလုပ်ရသလဲဆိုတော့ ရလာတဲ့အဖြေကို ကူးချပြီး ကိုယ်ပိုင်အမှတ်ယူလိုက်ရုံပါပဲ။
+        ဒါက ပညာရေးလား၊ ဒါမှမဟုတ် “ကြက်တူရွေး နှုတ်တိုက်”ကို အဆင့်မြှင့်ထားတဲ့ Version လားဆိုတာ
+        မေးခွန်းထုတ်စရာ ဖြစ်လာပါတယ်။
+      </p>
+
+      <h2 class="section-title">ဘာကြောင့် သင်္ချာနဲ့ သိပ္ပံကို သင်နေရတာလဲ</h2>
+
+      <p>
+        ကျွန်တော်တို့ ကျောင်းမှာ သင်္ချာ၊ Physics၊ Chemistry၊ Biology သင်နေရတာဟာ ဖော်မြူလာတွေ အလွတ်ကျက်ဖို့ သက်သက် မဟုတ်ပါဘူး။
+        ဒါတွေက လူသားတွေ ကြုံတွေ့နေရတဲ့ပြဿနာကို ဖြေရှင်းနိုင်တဲ့အစွမ်း (Problem Solving Skill) ကို လေ့ကျင့်ပေးနေတာပါ။
+      </p>
+
+      <ul>
+        <li>Biology ကို နားလည်မှ ဆေးပညာဘက်မှာ လူ့အသက်တွေကို ကယ်နိုင်မယ်။</li>
+        <li>Physics ကို သဘောပေါက်မှ အင်ဂျင်နီယာပိုင်းဆိုင်ရာ တည်ဆောက်ရေးတွေ လုပ်နိုင်မယ်။</li>
+        <li>Mathematics ဆိုတာ ဦးနှောက်ကို Logic ကျကျ တွေးတတ်အောင် လေ့ကျင့်ပေးတာ။</li>
+      </ul>
+
+      <p>
+        ဒီလို skill အရင်းအမြစ်တွေကို ကိုယ်တိုင် အားစိုက်မထုတ်ဘဲ (Effort မထည့်ဘဲ) ဖြတ်လမ်းကနေ ကျော်ခွသွားမယ်ဆိုရင်
+        ကျွန်တော်တို့ ဦးနှောက်ထဲမှာ ဘာကျန်ခဲ့မှာလဲ။ ဘာမှ မကျန်ပါဘူး။
+        Creativity (ဖန်တီးနိုင်စွမ်း) တွေ သေဆုံးသွားမယ်။ ကိုယ်တိုင် ပြဿနာဖြေရှင်းနိုင်စွမ်းတွေ ပျောက်ဆုံးသွားမယ်။
+      </p>
+
+      <!-- Photo (3.jpg) -->
+      <div class="figure">
+        <img src="/assets/images/post00002/3.jpg" alt="Student struggling to think through a difficult problem" />
+        <div class="caption">“အလွယ်ကူဆုံးလမ်း” က အမြဲတမ်း “တိုးတက်မှု” မဟုတ်ဘူး</div>
+      </div>
+
+      <h2 class="section-title">ဦးနှောက်သေနေသော Civilization ဆီသို့ ?</h2>
+
+      <p>
+        အရင်က စာတစ်ပုဒ်ကို နားလည်ဖို့ Reading Comprehension လုပ်ရတယ်။
+        အခုခေတ်က စာဖတ်ပြီး နားလည်ဖို့နေနေသာသာ စာရှည်ရင်မဖတ်ချင်တော့ဘူး။
+        ဘာလို့လဲဆိုတော့ အဲ့ဒီလို “လိုချင်တာရဖို့ အားထုတ်သင့်တယ်ဆိုတဲ့ အလေ့အကျင့်” ကို 
+        နည်းပညာက ဖျက်ဆီးလိုက်လို့ပါပဲ။
+      </p>
+
+      <p>
+        လူသားဆိုတာ စဉ်းစားတွေးခေါ်မှု (Thinking) အပေါ်မှာ အခြေခံပြီး ယဉ်ကျေးမှု (Civilization) ကို တည်ဆောက်ခဲ့တာပါ။
+        အခုတော့ စဉ်းစားတာကို AI နဲ့ စက်တွေကို ပုံအပ်လိုက်ပြီး လူတွေက မတွေးတော့ဘူးဆိုရင်…
+        ရှေ့ဆက်မယ့် အနာဂတ်က ကြောက်စရာ ကောင်းနေပါလိမ့်မယ်။
+      </p>
+
+      <div class="highlight">
+        <p style="margin:0;">
+          ပညာရေးဆိုတာ အဖြေမှန်ရဖို့ သက်သက် မဟုတ်ပါဘူး။ <br/>
+          သင့်ဦးနှောက်ကို တန်ဖိုးတတ်လာဖို့ဆိုရင်
+          AI ခေါက် အဖြေမှန်ရဖို့ထက် <strong>စဉ်းစားလိုက်ရတဲ့ လုပ်ငန်းစဉ် (Process)</strong> က လိုကိုလိုအပ်ပါတယ်။
+        </p>
+      </div>
+
+      <p>
+        ဒါကြောင့်… လွယ်လွယ်ရတဲ့ အဖြေတွေကြားမှာ သင့်ရဲ့ “စဉ်းစားတွေးခေါ်နိုင်စွမ်း” ကိုတော့ အပျောက်မခံလိုက်ပါနဲ့။
+      </p>
+
+      <hr class="divider" />
+
+      <div class="links">
+        <p class="small"><strong>Related Facebook Posts (vpn ချိတ်ပြီး ကျနော့် FB page မှာ ဆက်ဖတ်လို့ရပါတယ် 🥳):</strong></p>
+        <ul>
+          <li style="margin:0.35em 0; font-size:1.14rem;">
+            <a href="/course/">စာလုပ်ရတာ အဆ ၃၀ သက်သာစေမယ့် စာလေ့လာနည်းသင်တန်း</a>
+          </li>
+
+          <li>
+            <a target="_blank" href="/posts/post00001.html">
+              ပိုကြိုးစားတိုင်း စာပိုရလာမယ်လို့ထင်နေတုန်းပဲလား?
+            </a>
+          </li>
+          <li>
+            <a target="_blank" href="https://m.facebook.com/story.php?story_fbid=pfbid02HYQbz5qjdYC464CcLRN7udjXRLtfojAzTU3J4cqvp2aTCMV7MSPhJ6mtdKp9wwQvl&id=100089247064454&mibextid=Nif5oz">
+              Motivation မလိုတဲ့ စာလုပ်နည်း (စာလုပ်ရတာ ပျော်ချင်ရင် ဒီလိုလုပ်ပါ)
+            </a>
+          </li>
+          <li>
+            <a target="_blank" href="https://m.facebook.com/story.php?story_fbid=239530435698524&id=100089247064454&mibextid=Nif5oz">
+              စာမမေ့အောင် ဘယ်လိုလုပ်မလဲ
+            </a>
+          </li>
+          <li>
+            <a target="_blank" href="https://m.facebook.com/story.php?story_fbid=254880070830227&id=100089247064454&mibextid=Nif5oz">
+              စာလေ့လာတဲ့နှုန်း 10 ဆ မြန်ချင်ရင်
+            </a>
+          </li>
+          <li>
+            <a target="_blank" href="https://m.facebook.com/story.php?story_fbid=255941847390716&id=100089247064454&mibextid=Nif5oz">
+              Stress ကြားထဲမှာ စာလုပ်နည်း
+            </a>
+          </li>
+        </ul>
+      </div>
+
+      <!-- ===== COMMENTS (clean wrapper) ===== -->
+      <section class="comments-wrap">
+        <h2 class="section-title" style="margin-top:0;">💬 Comments</h2>
+        <p class="small" style="margin-top:-6px; color:var(--muted);">
+          Disqus “Guest” comments (name/email) can be enabled in your Disqus settings.
+          True “zero-step anonymous” comments aren’t really possible (spam).
+        </p>
+
+        <div id="disqus_thread"></div>
+
+        <script>
+          // IMPORTANT: Disqus will NOT load on file:// pages.
+          // Test using your GitHub Pages URL (/...)
+          var disqus_config = function () {
+            this.page.url = window.location.href;
+            this.page.identifier = window.location.pathname;
+          };
+
+          (function() {
+            var d = document, s = d.createElement('script');
+            // Use ONE Disqus shortname for the whole blog (same as post00001)
+            s.src = 'https://post0001.disqus.com/embed.js';
+            s.setAttribute('data-timestamp', +new Date());
+            (d.head || d.body).appendChild(s);
+          })();
+        </script>
+
+        <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+      </section>
+
+    </article>
+  </div>
+</body>
+</html>

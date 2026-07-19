@@ -1,0 +1,624 @@
+<!doctype html>
+<html lang="my">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Active Recall စာလုပ်နည်း — စာကျက်ပြီး စာမရတာမျိုး မဖြစ်စေမယ့် စာကျက်နည်း</title>
+<meta name="description" content="စာလုပ်တဲ့နေရာမှာ passive learning နှင့်
+              Active Learning ဆိုပြီး
+              နှစ်မျိုးရှိပါတယ်
+              စာသင်တာ ကိုနားထောင်တာ
+              စာတွေကို ကျက်တူရွေးနှုတ်တိုက်ကျက်တာတွေဟာ 
+              passive learning ဖြစ်ပါတယ်
+              ဒီဟာထက် ၅၀% ကျော် ပိုမှတ်မိနိုင်တဲ့
+              Active Recall စာလုပ်နည်းနဲ့
+              စာဘယ်လိုလုပ်ရမလဲဆိုတာကို
+              အဆင့် ၅ ဆင့်နဲ့ ရှင်းပြထားပါတယ်။">
+<meta property="og:title" content="Active Recall စာလုပ်နည်း — စာကျက်ပြီး စာမရတာမျိုး မဖြစ်စေမယ့် စာကျက်နည်း">
+<meta property="og:description" content="စာလုပ်တဲ့နေရာမှာ passive learning နှင့်
+              Active Learning ဆိုပြီး
+              နှစ်မျိုးရှိပါတယ်
+              စာသင်တာ ကိုနားထောင်တာ
+              စာတွေကို ကျက်တူရွေးနှုတ်တိုက်ကျက်တာတွေဟာ 
+              passive learning ဖြစ်ပါတယ်
+              ဒီဟာထက် ၅၀% ကျော် ပိုမှတ်မိနိုင်တဲ့
+              Active Recall စာလုပ်နည်းနဲ့
+              စာဘယ်လိုလုပ်ရမလဲဆိုတာကို
+              အဆင့် ၅ ဆင့်နဲ့ ရှင်းပြထားပါတယ်။">
+<meta property="og:type" content="article">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Active Recall စာလုပ်နည်း — စာကျက်ပြီး စာမရတာမျိုး မဖြစ်စေမယ့် စာကျက်နည်း">
+<meta name="twitter:description" content="စာလုပ်တဲ့နေရာမှာ passive learning နှင့်
+              Active Learning ဆိုပြီး
+              နှစ်မျိုးရှိပါတယ်
+              စာသင်တာ ကိုနားထောင်တာ
+              စာတွေကို ကျက်တူရွေးနှုတ်တိုက်ကျက်တာတွေဟာ 
+              passive learning ဖြစ်ပါတယ်
+              ဒီဟာထက် ၅၀% ကျော် ပိုမှတ်မိနိုင်တဲ့
+              Active Recall စာလုပ်နည်းနဲ့
+              စာဘယ်လိုလုပ်ရမလဲဆိုတာကို
+              အဆင့် ၅ ဆင့်နဲ့ ရှင်းပြထားပါတယ်။">
+
+<script data-goatcounter="https://post00007.goatcounter.com/count"
+        async src="//gc.zgo.at/count.js"></script>
+
+<style>
+@font-face {
+  font-family: "Yati";
+  src: url("/assets/fonts/YatiUni-Regular.ttf") format("truetype");
+}
+
+body{
+  margin:0;
+  background:#faf7ef;
+  color:#1f1f1f;
+  font-family:"Yati", serif;
+  line-height:1.9;
+}
+
+.container{
+  max-width:740px;
+  margin:60px auto;
+  padding:0 18px;
+}
+
+.card{
+  background:white;
+  border:1px solid #e7e1d6;
+  border-radius:16px;
+  padding:28px;
+}
+
+h1{
+  font-size:2rem;
+  line-height:1.35;
+  margin-bottom:12px;
+}
+
+h2{
+  font-size:1.4rem;
+  margin-top:28px;
+}
+
+p{
+  font-size:1.15rem;
+  margin:0 0 1.25em;
+}
+
+ol{
+  font-size:1.15rem;
+  margin:0 0 1.25em 1.4em;
+  padding:0;
+}
+
+li{
+  margin:0.35em 0;
+}
+
+.tag{
+  font-size:0.9rem;
+  color:#6f6f6f;
+  border:1px solid #e7e1d6;
+  display:inline-block;
+  padding:6px 12px;
+  border-radius:999px;
+  margin-bottom:10px;
+}
+
+.highlight{
+  background:#fff3da;
+  border:1px solid #f0dfb5;
+  padding:14px;
+  border-radius:12px;
+  margin:18px 0;
+}
+
+.quote{
+  border-left:4px solid #c9493a;
+  padding-left:14px;
+  margin:18px 0;
+}
+
+.divider{
+  border:none;
+  border-top:1px solid #e7e1d6;
+  margin:30px 0;
+}
+
+.small{
+  color:#6f6f6f;
+  font-size:0.95rem;
+}
+
+.nav{
+  margin-bottom:18px;
+}
+
+.figure{
+  margin:20px 0 24px;
+}
+.figure img{
+  width:100%;
+  height:auto;
+  display:block;
+  border-radius:14px;
+  border:1px solid #e7e1d6;
+  background:#fff;
+}
+.caption{
+  color:#6f6f6f;
+  font-size:0.95rem;
+  margin-top:8px;
+  text-align:center;
+}
+
+a{
+  color:#8b5a3c;
+  text-decoration:none;
+}
+
+.comments-wrap{
+  margin-top: 10px;
+  padding: 18px;
+  border: 1px solid #e7e1d6;
+  border-radius: 14px;
+  background: #fff;
+}
+#disqus_thread{ margin-top:12px; }
+
+@media (max-width: 640px){
+  h1{ font-size:1.75rem; }
+  p, ol{ font-size:1.08rem; }
+  .card{ padding:20px; }
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<div class="nav">
+<a href="/">← Home</a>
+</div>
+
+<article class="card">
+
+<div class="tag">Meta Learning · Post #00007</div>
+
+<h1>Active Recall : စာကျက်ပြီး စာမရတာမျိုး မဖြစ်စေမယ့် စာလုပ်နည်း</h1>
+
+<div class="figure">
+  <img src="/assets/images/post00007/cover_books_and_a_girl.jpg" alt="Student with books representing Active Recall study methods">
+  <div class="caption">စာတွေကို စနစ်တကျ မှတ်နိုင်ဖို့</div>
+</div>
+
+<h2>(1) စာလုပ်ပေမယ့်စာမရ ရတဲ့အကြောင်း</h2>
+
+<p>
+စာလုပ်တဲ့နေရာမှာ passive learning နှင့်<br>
+Active Learning ဆိုပြီး<br>
+နှစ်မျိုးရှိပါတယ်
+</p>
+
+<p>
+သူများ စာသင်တာ ကိုနားထောင်တာ<br>
+စာအုပ်ကို ဖတ်တာ<br>
+Video Tutorial တွေကြည့်တာတွေကို<br>
+Passive leaning လို့ခေါ်ပါတယ်
+</p>
+
+<p>
+ဒါဟာဘာနဲ့တူသလဲဆိုတော့<br><b>
+ရေကူးနည်းကို<br>
+YouTube Video ကြည့်တာနဲ့တူပါတယ်</b>
+</p>
+
+<p>
+နားတော့နားလည်မယ်<br>
+လက်တွေ့မှာ ရနေမှာမဟုတ်ပါဘူး
+<br>active (ကိုယ်ကိုယ်တိုင်
+လိုက်လုပ်ခြင်း )ရှိမနေလို့ပါ
+</p>
+
+<p>
+ဒါကြောင့်စာလုပ်ပြီဆိုရင်<br> <b>
+Passive ဖြစ်နေပြီလား<br>
+Active ဖြစ်နေပြီလား</b> ကွဲဖို့လိုပါတယ်
+</p>
+
+<p>
+မဟုတ်ရင်တော့ စာလုပ်ပြီး<br>
+စာသေချာမရတာမျိုး ဖြစ်မှာပါ
+</p>
+
+<h2>(2) passive learning</h2>
+
+<p>
+စာတွေကိုထပ်ထပ်ခါခါ<br>
+အော်ကျက်အော်မှတ်<br>
+Note တွေပဲ ထပ်တလဲလဲထိုင်ကြည့်နေတယ်<br>
+ဆိုရင်တော့ ဒါဟာ<br>
+Passive learning ပဲနေမှာလိမ့်မယ်
+</p>
+
+<div class="figure">
+  <img src="/assets/images/post00007/books_with_highlights_for_passive_learning.jpg" alt="Highlighted books showing passive learning habits">
+  <div class="caption">Highlight တွေအများကြီးလုပ်ထားတာက စာရတယ်လို့ ခံစားရစေပေမယ့် တကယ်လက်တွေ့မှာတော့ ... </div>
+</div>
+
+<p>
+ဒီနည်းလမ်းက Active Learning ထက်စာရင်<br>
+တော်တော်မထိရောက်တဲ့နည်းလမ်းပါ
+</p>
+
+<div class="highlight">
+<p>
+2011 ခုနှစ်မှာ<br>
+Cognitive psychologist<br>
+Henry Roediger နဲ့<br>
+Jeffrey Karpicke တို့ရဲ့<br>
+လေ့လာမှုတစ်ခုအရ
+</p>
+
+<p>
+စာကို ပြန်ဖတ်တဲ့နည်းလမ်းထက်<br>
+Active Recall နည်းလမ်းသုံးတဲ့<br>
+ကျောင်းသားတွေဟာ စာကို<br>
+<strong>၅၀% ကျော် ပိုမှတ်မိနိုင်ခဲ့ပါတယ်တဲ့</strong>
+</p>
+</div>
+
+<p>
+ဒါကြောင့်<br>
+ဒီနေ့မှာတော့ active recall စာလုပ်နည်း<br>
+ပြောသွားမှာဖြစ်ပါတယ်
+</p>
+
+<h2>(3) Active Recall</h2>
+
+<p>
+Active ကတော့ Active Learning ကို<br>
+ပြောတာဖြစ်ပြီး<br>
+Recall ဆိုတာကတော့ ကိုယ်မှတ်လိုက်တဲ့စာ<br>
+ပြန်မှတ်မိ မမှတ်မိ ကို မှတ်ဉာဏ်ထဲက<br>
+ပြန်ခေါ်တာဖြစ်ပါတယ်
+</p>
+
+<p> <b>
+ဒီနည်းလမ်းကို ကျင့်သုံးဖို့ဆို<br>
+ကျနော်တို့<br>
+အဆင့် 5 ဆင့်ကို လုပ်ရပါမယ် </b>
+</p>
+
+<ol>
+  <li>ပထမတစ်ခေါက် သင်ယူခြင်း</li>
+  <li>သင်ယူခြင်းကို မေးခွန်းထုတ်ခြင်း</li>
+  <li>စာအုပ်ပိတ်ခြင်း</li>
+  <li>မှတ်ဉာဏ်ကို ပြန်ဆန်းစစ်ခြင်း</li>
+  <li>အဖြေတိုက်ခြင်း</li>
+</ol>
+
+<h2>(1) ပထမ တစ်ခေါက် သင်ယူခြင်း</h2>
+
+<p>
+စာကို အရင်ဆုံးနားလည်အောင်<br>
+လုပ်ရပါမယ်
+</p>
+
+<p>
+YouTube Video ကြည့်ရင်းနဲ့ဖြစ်စေ<br>
+ဆရာရှင်းပြတာနားထောင်သည်ဖြစ်စေ<br>
+စာအုပ်ဖတ်သည်ဖြစ်
+</p>
+
+<p>
+တတ်နိုင်သမျှ နားမလည်တာ<br>
+မရှိအောင်လုပ်ပါ
+</p>
+
+<p>
+နားမလည်ဘူးဆိုရင်<br>
+AI တွေပေါတာမို့<br>
+AI တွေကို
+</p>
+
+<div class="highlight">
+<p>
+“ကျနော်ကို [သင်နားမလည်သည့်အကြောင်းအရာ]ကို<br>
+၁၀နှစ်သား ကလေးတစ်ယောက်လို ရှင်းပြပါ”
+</p>
+</div>
+
+<p>
+ဆိုတဲ့ Prompt ကို သုံးပြီး မေးလို့ရပါတယ် <br>
+အကယ်၍ သင်က<br>
+အဆင့်မြင့်ဘာသာရပ်တွေကို<br>
+သင်နေရတဲ့ သူဆိုရင်
+</p>
+
+<div class="highlight">
+<p>
+“Give me an analogy for [topic]”
+</p>
+</div>
+
+<p>
+အဲ့လိုလေး မေးလို့ရပါတယ်<br>
+ဒီအတိုင်း Explain me လို့ မေးလိုက်တာထက်<br>
+ဒါက အများကြီးနားလည်လွယ်ပါတယ်
+</p>
+
+<p class="small">
+[AI သုံးပြီး စာလေ့လာနည်းတွေကို post
+သက်သက်ထပ်တင်ပေးသွားပါမယ်]
+</p>
+
+<h2>(2) သင်ယူခြင်းကို မေးခွန်းထုတ်ခြင်း</h2>
+
+<p>
+စာကို ရှိသမျှအကုန်တစ်ခါတည်း<br>
+သိမ်းကျုံးမှတ်ဖို့လုပ်တာထက်<br>
+အကြောင်းအရာတွေက်ို<br>
+ခွဲထုတ်ပစ်လိုက်ဖို့ လိုပါတယ်
+</p>
+
+<p>
+တစ်ပိုဒ်ချင်းပဲဖြစ်ဖြစ်<br>
+၂ကြောင်းချင်းချင်းပဲ<br>
+အရင်ဆုံးခွဲထုတ်လိုက်ပြီး
+</p>
+
+<p>
+မေးခွန်းလေးတွေ ချရေးထားပါ
+</p>
+
+<p>
+ဥပမာ အနော်ရထာအကြောင်း<br>
+စာတစ်ပိုဒ်ကျက်တယ်ဆိုရင်
+</p>
+
+<div class="quote">
+<p>
+အနော်ရထားက <br>ပုဂံမင်းဆက် ဘယ်နဆက်မြောက်လဲ<br>
+ခမည်းတော်အမည်က ဘာလဲ<br>
+ဘယ်နခုနှစ်မှာ နန်းတက်သလဲ
+</p>
+</div>
+
+<p>
+စသည်ဖြင့် ကျက်ရမယ်ဟာတိုင်းကို<br>
+မေးခွန်းတွေအဖြစ်ပြောင်းပါ
+</p>
+
+<p>
+Exam format အတိုင်းပြောင်းနိုင်လေလေ<br>
+ပိုကောင်းလေပါ
+</p>
+
+<div class="figure">
+  <img src="/assets/images/post00007/flashcards.jpg" alt="Flashcards used for Active Recall practice">
+  <div class="caption">အကြောင်းအရာကို မေးခွန်းအဖြစ်ပြောင်းပြီး စာလုပ်ကြည့်ပါ</div>
+</div>
+
+<h2>(၃) စာအုပ်ကိုပိတ်လိုက်ပါ</h2>
+
+<p>
+Videoနဲ့ သင်နေတယ်ဆိုရင်လည်း video ကို pause ပါ
+</p>
+
+<p>
+ပြီးရင်အစောက ရေးထားတဲ့ မေးခွန်းတွေကို<br>
+ဖြေကြည့်ပါ
+</p>
+
+<p>
+ဒီလိုလုပ်ထားတာ<br>
+အကြောင်းအရာတွေကို တကယ်မှတ်မိသလား<br>
+တကယ်သင်ယူတတ်မြောက်သလား<br>
+တစ်ခါတည်း စစ်ဆေးရာရောက်ပါတယ်
+</p>
+
+<p>
+ဒီအဆင့်ဟာ <br>ရေကူးနည်းကို Videoကို
+ကြည့်ပြီးတဲ့နောက်မှာ <b>တကယ်လိုက်ကူးနေတာနဲ့တူပါတယ်</b>
+</p>
+
+<h2>(၄) မှတ်ဉာဏ်ကို ပြန်ဆန်းစစ်ခြင်း</h2>
+
+
+<p>
+အခုလိုဖြေကြည့်တဲ့လိုက်အခါမှာ<br>
+မှန်တာတွေရှိတယ် မှားတာတွေရှိမယ်<br>
+ဒါကို သေချာ စစ်ဆေးဖို့လိုပါတယ်
+</p>
+
+<div class="highlight">
+<p>
+ကျနော် ဆယ်တန်းတုန်းက<br>
+Bio ကို ကျက်ပြီးရင် မင်အပြာနဲ့<br>
+ချရေးလေ့ရှိပါတယ်
+</p>
+
+<p>
+ပြီးရင် ချရေးထားတာကို<br>
+မင်နီနဲ့ ဝိုင်းပြီးပြန်စစ်ပါတယ်
+</p>
+
+<p>
+နောက်တစ်ခေါက်စာကျက်ရင်<br>
+အနီနဲ့ ဝိုင်းထားတဲ့စာကိုပြန်ကျက်ပါတယ်
+</p>
+</div>
+
+<p>
+ပြီးရင် အပြာနဲ့ပြန်ရေး<br>
+အနီနဲ့ ပြန်စစ်
+အဲ့လိုပြန်ကျော့ပါတယ်
+</p>
+
+<h2>(၅) အဖြေတိုက်ခြင်း</h2>
+
+<p>
+အခုလို မင်ပြာတစ်လှည့် မင်နီစစ်တာဟာ<br>
+ကိုယ်ဘယ်နားမှာ မှားနေသလဲ<br>
+ဘာတွေကို ပြင်ဖို့လိုအပ်သလဲကို<br>
+အထင်းသားမြင်စေပါတယ်
+</p>
+
+<p>
+နောက်တစ်ခုတွက်ပုစ္ဆာတွေဆိုရင်လည်း<br>
+မျက်စိနဲ့ကြည့်ပြီးနားလည်နေတာထက်<br>
+ချတွက်တာဟာ
+</p>
+
+<p>
+Exam မှာ တကယ်ဖြေတဲ့အခါ<br>
+အချိန်လောက်မလောက်တွေပါ<br>
+လေ့ကျင့်ပြီးသားဖြစ်ပါတယ်
+</p>
+
+<div class="figure">
+  <img src="/assets/images/post00007/study_active_learning.jpg" alt="Student practicing active learning and recall while studying">
+  <div class="caption">Whiteboard ပေါ်မှာလည်း စာတွေချရေးပြီး ကျက်ကြည့်ပါ</div>
+</div>
+
+<div class="divider"></div>
+
+<p><b>
+ဒါဟာ Active Recall စာလုပ်နည်းပါပဲ
+</b>
+</p>
+
+<p>
+ဒါပေမယ့် ပြဿနာ တစ်ခုကျန်ပါသေးတယ်<br>
+အခုစာလုပ်နည်းဟာ<br>
+ကျက်တူရွေးနှုတ်တိုက်ကျက်နည်းတွေထက်<br>
+စာပိုရပေမယ့်
+<br><b>
+စာမေ့တတ်တဲ့ ပြဿနာက
+ကျန်ရှိနေပါသေးတယ်
+</b>
+
+<p>
+<br>
+လေး ငါးပုဒ် အတွက်အဆင်ပြေမယ့်
+အပုဒ်တွေများလာရင်<br>
+စာတွေရောပြီးမေ့တတ်ပါတယ်
+<br>
+အဲ့ဒီအတွက်
+<strong>Spaced Repetition</strong>
+ဆိုတာရှိပါသေးတယ်
+<br>
+အဲ့ဒါကိုတော့ နောက်အပတ်တွေမှာ
+တင်ပေးသွားပါမယ်
+</p>
+</p>
+<p>
+<div class="highlight">
+ဒါလေးက ကိုယ့်အတွက်
+အထောက်အကူပြုတယ်ဆိုရင်
+<br>
+သင့်သူငယ်ချင်းတွေဆိုရင်လည်း
+အများကြီး အကူအညီဖြစ်မှာ
+အသေအချာပါပဲ
+<br>
+</p>
+</div>
+
+<p>
+သူတို့ကို Share ပေးချင်တယ်ဆိုရင် <br>
+<b>အောက်က ဒီလင့်လေး လက်ကလေးနဲ့ ဖိ Copy
+ကူးပြီး<br></b>
+
+ဒီ blog လေးကို ပြန်ရှယ်လို့ရပါတယ်
+</p>
+<div class="quote">
+    <a href="/posts/post00007.html">
+Active Recall : စာကျက်ပြီး စာမရတာမျိုး မဖြစ်စေမယ့် စာလုပ်နည်း
+/posts/post00007.html
+</a>
+</div>
+
+
+
+
+<p><strong>Sharing is caring</strong></p>
+
+<hr class="divider" />
+
+<div class="links">
+  <p class="small"><strong>ဒါမျိုးထပ်ဖတ်ချင်သေးရင် ...</strong></p>
+  <ul>
+    <li style="margin:0.35em 0; font-size:1.14rem;">
+      <a href="/course/">စာလုပ်ရတာ အဆ ၃၀ သက်သာစေမယ့် စာလေ့လာနည်းသင်တန်း</a>
+    </li>
+
+    <li style="margin:0.35em 0; font-size:1.14rem;">
+      <a href="/posts/post00001.html">ပိုကြိုးစားတိုင်း စာပိုရလာမယ်လို့ထင်နေတုန်းပဲလား?</a>
+    </li>
+    <li style="margin:0.35em 0; font-size:1.14rem;">
+      <a href="/posts/post00002.html">အဖြေလွယ်လွယ်ရတဲ့ ခေတ်မှာ ပျောက်ဆုံးသွားတဲ့ “ခေါင်းကုတ်ရတဲ့ အခိုက်အတန့်”</a>
+    </li>
+    <li style="margin:0.35em 0; font-size:1.14rem;">
+      <a href="/">Post တွေကို တစ်နေရာတည်းမှာ ဖတ်ချင်ရင် _ ကျနော့် Blog Page</a>
+    </li>
+  </ul>
+</div>
+
+<div class="links">
+  <p class="small"><strong>VPN ချိတ်ပြီး ကျနော့် FB page မှာလည်း ထပ်ဖတ်လို့ရပါတယ် 🥳</strong></p>
+  <ul>
+    <li>
+      <a target="_blank" href="https://m.facebook.com/story.php?story_fbid=pfbid02HYQbz5qjdYC464CcLRN7udjXRLtfojAzTU3J4cqvp2aTCMV7MSPhJ6mtdKp9wwQvl&id=100089247064454&mibextid=Nif5oz">
+        Motivation မလိုတဲ့ စာလုပ်နည်း (စာလုပ်ရတာ ပျော်ချင်ရင် ဒီလိုလုပ်ပါ)
+      </a>
+    </li>
+    <li>
+      <a target="_blank" href="https://m.facebook.com/story.php?story_fbid=239530435698524&id=100089247064454&mibextid=Nif5oz">
+        စာမမေ့အောင် ဘယ်လိုလုပ်မလဲ
+      </a>
+    </li>
+    <li>
+      <a target="_blank" href="https://m.facebook.com/story.php?story_fbid=254880070830227&id=100089247064454&mibextid=Nif5oz">
+        စာလေ့လာတဲ့နှုန်း 10 ဆ မြန်ချင်ရင်
+      </a>
+    </li>
+    <li>
+      <a target="_blank" href="https://m.facebook.com/story.php?story_fbid=255941847390716&id=100089247064454&mibextid=Nif5oz">
+        Stress ကြားထဲမှာ စာလုပ်နည်း
+      </a>
+    </li>
+  </ul>
+</div>
+
+<hr class="divider" />
+
+<section class="comments-wrap">
+  <h2 style="margin-top:0;">💬 Comments</h2>
+  <p class="small" style="margin-top:-6px;">Anonymous comments allowed. Be kind. ❤️</p>
+
+  <div id="disqus_thread"></div>
+
+  <script>
+    var disqus_config = function () {
+      this.page.url = window.location.href;
+      this.page.identifier = window.location.pathname;
+    };
+
+    (function() {
+      var d = document, s = d.createElement('script');
+      s.src = 'https://post0001.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', +new Date());
+      (d.head || d.body).appendChild(s);
+    })();
+  </script>
+
+  <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+</section>
+
+</article>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,612 @@
+<!doctype html>
+<html lang="my">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>ပုရွက်ဆိတ်က သူအပင်အပန်းခံ ကြိုးစားခဲ့တာကို နောင်တရပြီး ...နှံကောင်ကတော့ ဘဝကို ပျော်ပျော်ကြီးနေသွားတယ်</title>
+  <meta name="description" content="
+              ကျနော် မကြာသေးခင်က
+              ပုရွက်ဆိတ်နဲ့ နှံကောင်ပုံပြင်ကို
+              ပြောင်းပြန်ရေးထားတဲ့
+              Version ကိုဖတ်လိုက်ရတယ်။
+
+              ပုရွက်ဆိတ်က
+              သူအပင်အပန်းခံ ကြိုးစားခဲ့တာကို
+              နောင်တရပြီး
+              နှံကောင်ကြတော့ ဘဝကို
+              ပျော်ပျော်ကြီးနေသွားတယ်တဲ့ " />
+  <meta property="og:title" content="ပုရွက်ဆိတ်က သူအပင်အပန်းခံ ကြိုးစားခဲ့တာကို နောင်တရပြီး ...နှံကောင်ကတော့ ဘဝကို ပျော်ပျော်ကြီးနေသွားတယ်" />
+  <meta property="og:description" content="ကျနော် မကြာသေးခင်က
+              ပုရွက်ဆိတ်နဲ့ နှံကောင်ပုံပြင်ကို
+              ပြောင်းပြန်ရေးထားတဲ့
+              Version ကိုဖတ်လိုက်ရတယ်။
+
+              ပုရွက်ဆိတ်က
+              သူအပင်အပန်းခံ ကြိုးစားခဲ့တာကို
+              နောင်တရပြီး
+              နှံကောင်ကြတော့ ဘဝကို
+              ပျော်ပျော်ကြီးနေသွားတယ်တဲ့ " />
+  <meta property="og:type" content="article" />
+  <meta property="og:image" content="/assets/images/post00010/cover.jpg" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="ပုရွက်ဆိတ်က သူအပင်အပန်းခံ ကြိုးစားခဲ့တာကို နောင်တရပြီး ...နှံကောင်ကတော့ ဘဝကို ပျော်ပျော်ကြီးနေသွားတယ်" />
+  <meta name="twitter:description" content="ကျနော် မကြာသေးခင်က
+              ပုရွက်ဆိတ်နဲ့ နှံကောင်ပုံပြင်ကို
+              ပြောင်းပြန်ရေးထားတဲ့
+              Version ကိုဖတ်လိုက်ရတယ်။
+
+              ပုရွက်ဆိတ်က
+              သူအပင်အပန်းခံ ကြိုးစားခဲ့တာကို
+              နောင်တရပြီး
+              နှံကောင်ကြတော့ ဘဝကို
+              ပျော်ပျော်ကြီးနေသွားတယ်တဲ့ " />
+  <meta name="twitter:image" content="/assets/images/post00010/cover.jpg" />
+
+  <script data-goatcounter="https://post00010.goatcounter.com/count"
+          async src="//gc.zgo.at/count.js"></script>
+
+  <style>
+    @font-face {
+      font-family: "Yati";
+      src: url("/assets/fonts/YatiUni-Regular.ttf") format("truetype");
+      font-weight: 400;
+      font-style: normal;
+    }
+
+    :root{
+      --bg:#faf7ef;
+      --paper:#ffffff;
+      --text:#1f1f1f;
+      --muted:#6f6f6f;
+      --line:#e7e1d6;
+      --link:#8b5a3c;
+      --maxw:740px;
+      --accent:#c9493a;
+    }
+
+    *{ box-sizing:border-box; }
+    body{
+      margin:0;
+      background:var(--bg);
+      color:var(--text);
+      font-family:"Yati", serif;
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      line-height:1.95;
+    }
+
+    .container{
+      max-width:var(--maxw);
+      margin:56px auto;
+      padding:0 18px;
+    }
+
+    .nav{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      margin-bottom:16px;
+      gap:12px;
+    }
+
+    .nav a{
+      color:var(--muted);
+      text-decoration:none;
+      font-size:0.95rem;
+    }
+    .nav a:hover{ color:var(--text); }
+
+    .card{
+      background:var(--paper);
+      border:1px solid var(--line);
+      border-radius:16px;
+      padding:26px;
+    }
+
+    .tag{
+      display:inline-block;
+      font-size:0.85rem;
+      color:var(--muted);
+      border:1px solid var(--line);
+      padding:6px 10px;
+      border-radius:999px;
+      margin-bottom:10px;
+    }
+
+    h1{
+      font-size:2.08rem;
+      line-height:1.25;
+      margin:10px 0 10px;
+      letter-spacing:0.2px;
+    }
+
+    .meta{
+      color:var(--muted);
+      font-size:0.95rem;
+      margin-bottom:18px;
+    }
+
+    p{
+      font-size:1.18rem;
+      margin:0 0 1.2em;
+    }
+
+    .figure{ margin:18px 0 22px; }
+    .figure img{
+      width:100%;
+      height:auto;
+      border-radius:14px;
+      border:1px solid var(--line);
+      display:block;
+      background:#fff;
+    }
+    .caption{
+      color:var(--muted);
+      font-size:0.95rem;
+      margin-top:8px;
+      text-align:center;
+      line-height:1.6;
+    }
+
+    .highlight{
+      background:#fff3da;
+      border:1px solid #f0dfb5;
+      padding:14px 14px;
+      border-radius:12px;
+      margin:16px 0 18px;
+    }
+
+    .quote{
+      border-left:4px solid var(--accent);
+      padding:8px 0 8px 16px;
+      margin:18px 0 20px;
+      color:#2a2a2a;
+    }
+
+    .divider{
+      margin:22px 0 18px;
+      border:none;
+      border-top:1px solid var(--line);
+    }
+
+    .section-title{
+      font-size:1.42rem;
+      margin:1.4em 0 0.6em;
+      line-height:1.35;
+    }
+
+    a{ color:var(--link); text-decoration:none; }
+    a:hover{ text-decoration:underline; }
+
+    .links{
+      border-top:1px solid var(--line);
+      margin-top:22px;
+      padding-top:18px;
+    }
+
+    .small{
+      color:var(--muted);
+      font-size:0.98rem;
+      line-height:1.8;
+    }
+
+    .comments-wrap{
+      margin-top: 10px;
+      padding: 18px;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      background: #fff;
+    }
+    #disqus_thread{ margin-top:12px; }
+
+    @media (max-width: 640px){
+      h1{ font-size:1.8rem; }
+      p{ font-size:1.08rem; }
+      .card{ padding:20px; }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+
+    <div class="nav">
+      <a href="/">← Home</a>
+      <a href="/posts/post00009.html">Prev</a>
+    </div>
+
+    <article class="card">
+      <div class="tag">Life Philosophy · Post #00010</div>
+      <h1>ပုရွက်ဆိတ်က 
+        သူအပင်အပန်းခံ ကြိုးစားခဲ့တာကို<br>
+        နောင်တရပြီး ... <br>
+        နှံကောင်ကတော့ ဘဝကို ပျော်ပျော်ကြီးနေသွားတယ်</h1>
+      <div class="meta">by Haru · 1% Better Every Day</div>
+
+      <div class="figure">
+        <img src="/assets/images/post00010/cover.jpg" alt="Person lying on the grass looking at mountains" />
+        <div class="caption">Post by 1% Better Every Day</div>
+      </div>
+
+      <p>
+        ကျနော် မကြာသေးခင်က<br>
+        ပုရွက်ဆိတ်နဲ့ နှံကောင်ပုံပြင်ကို<br>
+        ပြောင်းပြန်ရေးထားတဲ့<br>
+        Version ကိုဖတ်လိုက်ရတယ်။
+      </p>
+
+      <p>
+        ပုရွက်ဆိတ်က<br>
+        သူအပင်အပန်းခံ ကြိုးစားခဲ့တာကို<br>
+        နောင်တရပြီး<br>
+        နှံကောင်ကြတော့ ဘဝကို<br>
+        ပျော်ပျော်ကြီးနေသွားတယ်ဆိုပြီး<br>
+        ရေးထားတယ်။
+      </p>
+
+      <p>
+        သူက “ဂျော့” နဲ့ “တွမ်”ဆိုတဲ့<br>
+        ညီအစ်ကိုနှစ်ယောက်အကြောင်းကို<br>
+        ရေးထားတာ။
+      </p>
+
+      <p>.<br>.<br>.</p>
+
+      <p>
+        တွမ်က ပုံပြင်ထဲနှံကောင်လို့ပြောလို့ရတယ်။<br>
+        တွမ်ပြောတာက “ပိုက်ဆံကို လိုတဲ့အခါကျမှ<br>
+        လိုသလောက်လေး သုံးရတာ<br>
+        စိတ်ပျက်ဖို့ကောင်းတယ်တဲ့။ “
+      </p>
+
+      <p>
+        တွမ်က သုံးလိုက်ရင်လည်း ဇိမ်ခံပစ္စည်းတွေ၊<br>
+        ဝတ်ကောင်းစားလှတွေ၊ အစားအသောက်တွေ<br>
+        ဆိုရင်လည်း စျေးကြီးလှတာတွေဆိုမှ။<br>
+        မိန်းမကလည်း ရှုပ်သေး၊<br>
+        မိန်းမလှလေးတွေ တစ်ယောက်ပြီး<br>
+        တစ်ယောက်ထည်လဲ တွဲတာ။
+      </p>
+
+      <p>
+        အသက်က ၄၆သာပြောတယ်။<br>
+        ၃၅ကြနေတာပဲ …
+      </p>
+
+      <p>
+        အဲ့လိုသုံးနေလို့<br>
+        တွမ်က ပိုက်ဆံချမ်းသာလို့သားဆိုတော့<br>
+        မဟုတ်ဘူး။<br>
+        သူဟာ ပိုက်ဆံကို ချေးပြီးသုံးတာ။
+      </p>
+
+      <p>.<br>.<br>.</p>
+
+      <p>
+        သူမချေးဖူးတဲ့လူဆိုလို့<br>
+        မရှိသလောက်ပဲ။<br>
+        တွမ်က အရမ်းပျော်ပျော်နေတတ်တော့<br>
+        အပေါင်းအသင်းများတယ်။<br>
+        အဲ့ဒီတော့တစ်ယောက်မဟုတ်တစ်ယောက်ဆီ<br>
+        ပတ်ချေးနေတာပဲ။
+      </p>
+
+      <p>
+        ဒုက္ခရောက် ပိုက်ဆံပြတ်လို့<br>
+        ပိုက်ဆံတွေချေးပြီး<br>
+        ပြန်လိမ်လိမ်မာမာနေမှာလားဆိုတော့<br>
+        ဟင့်အင်း ဆိုးမြဲဆိုး၊ မိုက်မြဲမိုက်ဆဲပဲ။
+      </p>
+
+      <p>
+        အများဆုံးချေးတာကတော့<br>
+        ရှေ့နေဖြစ်တဲ့<br>
+        သူ့အစ်ကို “ဂျော့”ဆီကပါ။
+      </p>
+
+      <p>
+        တွမ် ဘယ်လောက်ထိ<br>
+        ဘယ်လောက်ထိ ဆိုးလည်းဆိုရင် …
+      </p>
+
+      <p>.<br>.<br>.</p>
+
+      <p>
+        တစ်ခါ တွမ်က “ကရွန်ရှော”ဆိုတဲ့<br>
+        လူကို လိမ်လိုက်တယ်။<br>
+        ကရွှန်ရှောက တရားစွဲပါလေရော။
+      </p>
+
+      <p>
+        အကိုဖြစ်သူက ကိုယ့်ညီထောင်ကြတာ<br>
+        မကြည့်ရက်တော့ လူပင်ပန်းခံ၊<br>
+        ငွေပင်ပန်းခံ၊ ထောင်မကျအောင်<br>
+        အမှုလိုက်ပေးပြီး<br>
+        ပေါင်ငါးရာ အကုန်ခံလိုက်ရရော။
+      </p>
+
+      <p>
+        နောက်မှ ပြန်ကြားရတာက<br>
+        အမှုနိုင်တဲ့ ငွေနဲ့<br>
+        ကရွှန်ရှောနဲ့ သူ့ညီဟာ<br>
+        လောင်းကစားမြို့တော် မွန်တီကာလိုမှာ<br>
+        တစ်လ လောက်ပျော်ပါးနေပါသတဲ့။<br>
+        အစ်ကို ဂျော့က ပေါက်ကွဲပါလေရော။
+      </p>
+
+      <p>.<br>.<br>.</p>
+
+      <p>
+        ဂျော့ကတော့ တွမ်နဲ့ဆန့်ကျင်ဘက်ပဲ။<br>
+        အရမ်းလည်း ရိုးသားတယ်။<br>
+        အလုပ်လည်း<br>
+        အရမ်းကြိုးစားတယ်။<br>
+        ရတဲ့ငွေရဲ့ သုံးပုံတစ်ပုံကိုစုတယ်။<br>
+        လုပ်သက်၁၅နှစ်အတွင်းမှာ<br>
+        ဆယ့်ငါးရက်ထက်ပိုပြီး ခွင့်မယူဖူးဘူး။<br>
+        အသက်ကတော့ ၄၇ ရှိပြီ။
+      </p>
+
+      <p>
+        တွမ်က ဂျော့ထက် တစ်နှစ်ပဲငယ်တာ။<br>
+        ဒါပေမယ့် ဟိုက ၃၅ လောက်ပဲ ထင်ရပြီး<br>
+        နုနေပေမယ့်<br>
+        ဂျော့ခဗျာ ကြည့်လိုက်ရင် အမြဲ ပင်ပန်းနေတဲ့နေပြီး<br>
+        အိုစာနေတယ်။<br>
+        အဓိကကတော့ စိတ်ဖိစီးရတာကြောင့်လေ။
+      </p>
+
+      <p>
+        တနေ့ကြတော့<br>
+        ဂျော့တစ်ယောက် ပေါက်ကွဲပြီး<br>
+        စာရေးသူထံရောက်လာတယ်။
+      </p>
+
+      <p>.<br>.<br>.</p>
+
+      <div class="quote">
+        <p style="margin:0;">
+          “ ကျွန်တော့်ဘဝ တစ်လျောက်လုံး<br>
+          လိမ်မာရိုးသားခဲ့တယ်။<br>
+          အများလေးစားတာလဲ ခံရတယ်။<br>
+          အဲ့လိုလို အလုပ်ကြိုစားခဲ့တာကြောင့်<br>
+          အများကြီးရ သူဌေးဖြစ်လားဆိုတော့<br>
+          မဖြစ်ပါဘူး။
+        </p>
+      </div>
+
+      
+      <p>
+          ပင်စင်ယူမယ့်အချိန်ကြရင်<br>
+          အရင်းအနှီးကလေးနည်းနည်း<br>
+          အတိုးလေးနည်းနည်းနဲ့ နေနိုင်ရုံပဲရှိတယ်။<br><br>
+    
+          ဒါပေမယ့် တွမ်ကြတော့ဗျာ …..” <br><br>
+
+        ဂျော့ မျက်နှာကြီး နီမြန်းပြီး<br>
+        ဒေါသံ သံများဖြင့်<br>
+        စကားဆက်ပြောတယ်။
+      </p>
+
+      <p>.<br>.<br>. <br><br>
+        “ တွမ်က လတ်လျားလတ်လျားနေပြီး<br>
+        ဘာမှ အသုံးမကျဘူး။ အပျော်ကြူးတယ်။<br>
+        လူလေးစားမခံရတဲ့ လူပေလူတေ။<br>
+        တရားဥပဒေအရဆိုလည်း သူက<br>
+        ထောင်ထဲမှာရှိနေရမယ့်ကောင်။<br><br>
+    </p>
+
+      <div class="quote">
+        <p style="margin:0;">
+
+          ဒါပေမယ့်<br>
+          တွမ်က သူ့အမေလောက်ရှိတဲ့<br>
+          မိန်းမကြီးတစ်ယောက်နဲ့ညားပြီး<br>
+          အခု အဲ့ မိန်းမကြီးသေသွားတော့<br>
+          ရှိသမျှ စည်းစိမ်အားလုံး သူရလိုက်သတဲ့ဗျာ။
+
+        </p>
+    </div>
+    
+    <p><br>
+          ပေါင်၅သိန်းလောက် ငွေသားချည်း၊<br>
+          ရွက်လှေ င်္သဘောငယ်ကလေးက တစ်စီး ၊<br>
+          လန်ဒန်မှာက အိမ်တစ်လုံး၊<br>
+          တစ်မှာက အိမ်တစ်လုံး”<br><br>
+        ဂျော့ က လက်စီးကို ကျစ်ကျစ်<br>
+        ပါအောင်ဆုပ် စားပွဲကိုထုရင်း …
+      </p>
+
+      <p>.<br>.<br>.</p>
+
+      <div class="highlight">
+        <p style="margin:0;">
+          “ နည်းနည်းမှ မတရားဘူး။<br>
+          လောကကြီးက နည်းနည်းမှ<br>
+          မတရားဘူး ၊ အလကားပဲ “
+        </p>
+      </div>
+
+      <p>
+        လို့ပြောကာ ပေါက်ကွဲနေလေရဲ့ ….
+      </p>
+
+      <p>
+        ဒီပုံပြင်လေးမှာက<br>
+        မှားတာတွေရော<br>
+        မှန်တာတွေရော<br>
+        အများကြီးပါပဲ။
+      </p>
+
+      <p>
+        ဟုတ်တာပေါ့။<br>
+        တကယ့်လက်တွေ့မှာ တွမ့်လို<br>
+        နေမယ်ဆိုရင်<br>
+        ကျနော်တို့အားလုံး<br>
+        လမ်းဘေးရောက်ကုန်ကြမှာ လူတိုင်းသိတယ်။
+      </p>
+
+      <p>
+        ထီပေါက်တာမျိုးတို့<br>
+        ချမ်းသာတဲ့ မိန်းမကြီးကို ရတာမျိုးက<br>
+        တစ်သန်းမှ တစ်ယောက်မပြည့်ပါဘူး။<br>
+        အဲ့ဒါတွေကို သွားမက်နေလို့မရဘူး။
+      </p>
+
+      <p>.<br>.<br>.</p>
+
+      <p>
+        ဒါပေမယ့် ဂျော့လို လူမျိုးကရော? ….<br>
+        ကျနော်တို့ တစ်တွေဟာ ဂျော့များ<br>
+        ဖြစ်နေမလား?
+      </p>
+
+      <p>
+        ဘဝတစ်လျောက်လုံးကြိုးစားတယ်။<br>
+        အသက်၂၀ပြည့်ရင်<br>
+        ကျောင်းပြီးရင် ဘွဲ့ရရင်<br>
+        အသက်၃၀ပြည့်ရင်<br>
+        အိမ်ထောင်ကျရင်<br>
+        ကလေးရရင်<br>
+        ကလေး ကျောင်းတက်ရင်<br>
+        ကလေးကျောင်းပြီးရင် …
+      </p>
+
+      <p>
+        စတဲ့ လိုက်လေ ပြေးလေ ဝေးလေ<br>
+        အနာဂတ်အိပ်မက်တွေနောက်ကို<br>
+        လိုက်ရင်းလိုက်ရင်း<br>
+        ဘယ်တော့များ<br>
+        ပျော်နိုင်ပါ့မလဲ?<br>
+        ဘယ်တော့မှ လွတ်လပ်နိုင်မှာလဲ?
+      </p>
+
+      <p>
+        ကိုယ်ဖြစ်ချင်တာ<br>
+        ကိုယ်လုပ်ချင်တာတွေရော<br>
+        လုပ်နေရရဲ့လား?<br>
+        အနာဂတ်ကို မျှော်လွန်းအားကြီးနေပြီး<br>
+        ပစ္စုပန်မှာရော<br>
+        နေ ထိုင်နေရဲ့လား?<br>
+        ချမ်းသာရင် ပျော်မယ်ဆိုတော့<br>
+        ဘယ်တော့ချမ်းသာမှာလဲ?<br>
+        တကယ်ချမ်းသာမှုဆိုတာကရော<br>
+        ဘာလဲ?
+      </p>
+
+      <p>.<br>.<br>.</p>
+
+      <p>
+        ကျွန်တော်တို့<br>
+        အလိမ်ခံနေရတာတွေအများကြီးပါပဲ။<br>
+        ချမ်းသာဖို့အတွက်<br>
+        အလုပ်ကြိုးစားဖို့လိုပေမယ့်<br>
+        အလုပ်ကြိုးစားတိုင်း မချမ်းသာပါဘူး။
+      </p>
+
+      <p>
+        အဲ့ဒီအကြောင်းတွေ<br>
+        ပြောရရင် topic အကြီးကြီးပြော<br>
+        လို့ရရပါတယ်။<br>
+        သိချင်တယ်ဆိုရင်<br>
+        <strong>Dark side of capitalism</strong> လို့သာ<br>
+        ရိုက်ရှာကြည့်ပါ ….<br>
+        အများကြီး ထပ်သိလာမှာပါ။
+      </p>
+
+      <p>
+        ဒါပေမယ့် ဒီ Post က<br>
+    </p>
+
+    <div class="highlight">
+        <p>
+            
+            သင်လျောက်နေတဲ့ လမ်းကြောင်းဟာ<br>
+            မှန် ရောမှန်ရဲ့လား …<br>
+            နောက်ဆယ်နှစ်ကြာလို့<br>
+            အိပ်ယာထလာတဲ့အခါ<br>
+        </p>
+        
+        <p>
+            လည်ပတ်မြဲ ပုံစံတွေ<br>
+            ဖြတ်သန်းနေဆဲ<br>
+            ပတ်ဝန်းကျင်တွေနဲ့ပဲ နိုးထလာမှာပဲလား?<br>
+            ကိုယ်ဖြတ်သန်းနေတဲ့ ဘဝကို ကျေနပ်ရဲ့လား?
+        </p>
+    </div>
+
+      <p>.<br>.<br>.</p>
+
+      <p>
+        ဒါမှမဟုတ် ကိုယ့်ဘဝကို မကျေနပ်ကြောင်း<br>
+        ရုန်းကန်နေရကြောင်း<br>
+        ငြီးငြူနေရင်းနဲ့ပဲ ပြီးသွားမှာလားဆိုပြီး
+      </p>
+
+      <p>
+        ကိုယ့်ကိုယ်ကို<br>
+        ပြန်မေးခွန်းထုတ် reflect စေချင်ရုံသပ်သပ်ပါပဲ။
+      </p>
+
+      <p>
+        သင့်အတွက်<br>
+        တွေဝေစဉ်းစားစရာ အနည်းငယ်ကျန်ရင်<br>
+        ဒီ Post က တာဝန်ကျေပါပြီ။
+      </p>
+
+
+      <p style="margin-top:18px;">
+        Haru<br/>
+        1% Better Every Day
+      </p>
+
+      <hr class="divider" />
+
+      <div class="links">
+        <p class="small"><strong>ဒါမျိုးထပ်ဖတ်ချင်သေးရင် ...</strong></p>
+        <ul>
+          <li style="margin:0.35em 0; font-size:1.14rem;">
+            <a href="/course/">စာလုပ်ရတာ အဆ ၃၀ သက်သာစေမယ့် စာလေ့လာနည်းသင်တန်း</a>
+          </li>
+
+          <li style="margin:0.35em 0; font-size:1.14rem;">
+            <a href="/posts/post00005.html">မင်းက မင်းရည်မှန်းချက်ပြည့်တာကိုပဲ လိုချင်တာ ပြည့်အောင် ဖြည့်ချင်တာမဟုတ်ဘူးတဲ့</a>
+          </li>
+          <li style="margin:0.35em 0; font-size:1.14rem;">
+            <a href="/posts/post00003.html">ဘာသာရပ်တစ်ခုကို အမှတ်ကောင်းအောင်လုပ်တာနဲ့ Fall in Love တာက မတူဘူး</a>
+          </li>
+          <li style="margin:0.35em 0; font-size:1.14rem;">
+            <a href="/">Post တွေကို တစ်နေရာတည်းမှာ ဖတ်ချင်ရင် _ ကျနော့် Blog Page</a>
+          </li>
+        </ul>
+      </div>
+
+      <hr class="divider" />
+
+      <section class="comments-wrap">
+        <h2 class="section-title" style="margin-top:0;">💬 Comments</h2>
+        <p class="small" style="margin-top:-6px;">Anonymous comments allowed. Be kind. ❤️</p>
+
+        <div id="disqus_thread"></div>
+
+        <script>
+          var disqus_config = function () {
+            this.page.url = window.location.href;
+            this.page.identifier = window.location.pathname;
+          };
+
+          (function() {
+            var d = document, s = d.createElement('script');
+            s.src = 'https://post0001.disqus.com/embed.js';
+            s.setAttribute('data-timestamp', +new Date());
+            (d.head || d.body).appendChild(s);
+          })();
+        </script>
+
+        <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+      </section>
+
+    </article>
+  </div>
+</body>
+</html>

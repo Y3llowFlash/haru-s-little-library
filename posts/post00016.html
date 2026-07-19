@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html lang="my">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ဘဝက Linear မဟုတ်ဘူး</title>
+  <meta name="description" content="ဆရာဝန်မဖြစ်ခြင်းက ပိုကောင်းတဲ့လမ်းဖြစ်နေမယ်ဆိုတာ ဘယ်သူမှ မပြောနိုင်ဘူး">
+  <meta property="og:title" content="ဘဝက Linear မဟုတ်ဘူး">
+  <meta property="og:description" content="ဆရာဝန်မဖြစ်ခြင်းက ပိုကောင်းတဲ့လမ်းဖြစ်နေမယ်ဆိုတာ ဘယ်သူမှ မပြောနိုင်ဘူး">
+  <meta property="og:type" content="article">
+  <meta property="og:image" content="/assets/images/post00016/cover.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="ဘဝက Linear မဟုတ်ဘူး">
+  <meta name="twitter:description" content="ဆရာဝန်မဖြစ်ခြင်းက ပိုကောင်းတဲ့လမ်းဖြစ်နေမယ်ဆိုတာ ဘယ်သူမှ မပြောနိုင်ဘူး">
+  <meta name="twitter:image" content="/assets/images/post00016/cover.jpg">
+
+  <script data-goatcounter="https://post00016.goatcounter.com/count"
+          async src="//gc.zgo.at/count.js"></script>
+
+  <style>
+    @font-face {
+      font-family: "Yati";
+      src: url("/assets/fonts/YatiUni-Regular.ttf") format("truetype");
+      font-weight: 400;
+      font-style: normal;
+      font-display: swap;
+    }
+
+    :root{
+      --bg:#faf7ef;
+      --paper:#ffffff;
+      --text:#1f1f1f;
+      --muted:#6f6f6f;
+      --line:#e7e1d6;
+      --link:#8b5a3c;
+      --maxw:740px;
+      --accent:#c9493a;
+    }
+
+    *{ box-sizing:border-box; }
+    body{
+      margin:0;
+      background:var(--bg);
+      color:var(--text);
+      font-family:"Yati", serif;
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      line-height:1.95;
+    }
+
+    .container{
+      max-width:var(--maxw);
+      margin:56px auto;
+      padding:0 18px;
+    }
+
+    .nav{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      margin-bottom:16px;
+      gap:12px;
+    }
+
+    .nav a{
+      color:var(--muted);
+      text-decoration:none;
+      font-size:0.95rem;
+    }
+    .nav a:hover{ color:var(--text); }
+
+    .card{
+      background:var(--paper);
+      border:1px solid var(--line);
+      border-radius:16px;
+      padding:26px;
+    }
+
+    .tag{
+      display:inline-block;
+      font-size:0.85rem;
+      color:var(--muted);
+      border:1px solid var(--line);
+      padding:6px 10px;
+      border-radius:999px;
+      margin-bottom:10px;
+    }
+
+    h1{
+      font-size:2.08rem;
+      line-height:1.25;
+      margin:10px 0 10px;
+      letter-spacing:0.2px;
+    }
+
+    .meta{
+      color:var(--muted);
+      font-size:0.95rem;
+      margin-bottom:18px;
+    }
+
+    p{
+      font-size:1.18rem;
+      margin:0 0 1.2em;
+    }
+
+    .figure{ margin:18px 0 22px; }
+    .figure img{
+      width:100%;
+      height:auto;
+      border-radius:14px;
+      border:1px solid var(--line);
+      display:block;
+      background:#fff;
+    }
+    .caption{
+      color:var(--muted);
+      font-size:0.95rem;
+      margin-top:8px;
+      text-align:center;
+      line-height:1.6;
+    }
+
+    .section-title{
+      font-size:1.42rem;
+      margin:1.4em 0 0.6em;
+      line-height:1.35;
+    }
+
+    .highlight{
+      background:#fff3da;
+      border:1px solid #f0dfb5;
+      padding:14px 14px;
+      border-radius:12px;
+      margin:16px 0 18px;
+    }
+
+    .highlight p:last-child,
+    .quote p{
+      margin:0;
+    }
+
+    .quote{
+      border-left:4px solid var(--accent);
+      padding:8px 0 8px 16px;
+      margin:18px 0 20px;
+      color:#2a2a2a;
+    }
+
+    .dot{
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      gap:10px;
+      margin:22px 0 20px;
+      color:var(--muted);
+      font-size:1.05rem;
+    }
+
+    .separator{
+      margin:24px 0 22px;
+      color:#b7afa3;
+      text-align:center;
+      font-size:1.05rem;
+      line-height:1.3;
+      letter-spacing:0.22em;
+    }
+
+    .divider{
+      margin:22px 0 18px;
+      border:none;
+      border-top:1px solid var(--line);
+    }
+
+    ul{
+      font-size:1.15rem;
+      margin:0 0 1.25em 1.4em;
+      padding:0;
+    }
+
+    li{ margin:0.35em 0; }
+
+    a{ color:var(--link); text-decoration:none; }
+    a:hover{ text-decoration:underline; }
+
+    .links{
+      border-top:1px solid var(--line);
+      margin-top:22px;
+      padding-top:18px;
+    }
+
+    .small{
+      color:var(--muted);
+      font-size:0.98rem;
+      line-height:1.8;
+    }
+
+    .comments-wrap{
+      margin-top: 10px;
+      padding: 18px;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      background: #fff;
+    }
+
+    @media (max-width: 640px){
+      h1{ font-size:1.8rem; }
+      p, ul{ font-size:1.08rem; }
+      .card{ padding:20px; }
+      .container{
+        margin:42px auto;
+        padding:0 14px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+
+    <div class="nav">
+      <a href="/">← Home</a>
+      <a href="/posts/post00015.html">Prev</a>
+    </div>
+
+    <article class="card">
+      <div class="tag">Life Philosophy · Post #00016</div>
+      <h1>လိုချင်တဲ့ အမှတ်မမီလို့
+          ဆေးကျောင်းတက်လို့မရတော့ဘူးဆရာ
+          တခြားမေဂျာလေးပဲ ရွေးပြီး
+          ကျနော့်ဘဝကတော့ ဒီလိုပဲ အဆုံးသတ်ပြီထင်ပါရဲ့ </h1>
+      <div class="meta">by Haru · 1% Better Every Day</div>
+
+      <div class="figure">
+        <img src="/assets/images/post00016/cover.jpg" alt="ဘဝက Linear မဟုတ်ဘူး">
+        <div class="caption">လိုချင်တဲ့ လိုင်းမရတော့တာဟာ အဆုံးသတ်တစ်ခုလား?</div>
+      </div>
+
+      <div class="quote">
+        <p>
+          လိုချင်တဲ့ အမှတ်မမီလို့<br>
+          ဆေးကျောင်းတက်လို့မရတော့ဘူးဆရာ<br>
+          တခြားမေဂျာလေးပဲ ရွေးပြီး<br>
+          ကျနော့်ဘဝကတော့ ဒီလိုပဲ အဆုံးသတ်ပြီထင်ပါရဲ့
+        </p>
+      </div>
+
+      <p>
+        စိတ်ပျက်အားငယ်နေတဲ့ လေသံနဲ့ <br>
+        ကောင်လေးတစ်ယောက်က <br>
+        ကျနော့်ကို လာပြောလေရဲ့  ....
+      </p>
+
+      <div class="separator">。 。 。</div>
+
+      <h2 class="section-title">G12 Exam</h2>
+
+      <p>
+        G12 Exam <br>
+        အမှတ်စာရင်းနဲ့ Career ကို အဆုံးအဖြတ်ပေးတဲ့စနစ် <br>
+        G12 ရယ်လို့မှမဟုတ်ပါဘူး<br>
+        စာမေးပွဲတိုင်းက ဒီလိုပါပဲ
+      </p>
+
+      <p>
+        GED, IGCSE , EJU ဒီပညာရေးစနစ်ဖြစ်ဖြစ်<br>
+        Language အပိုင်းဆို IELTS ဖြစ်ဖြစ် JLPT ဖြစ်ဖြစ်<br>
+        Exam ဖြေလို့ အောင်ရှုံး အမှတ်တစ်ခုရရင်
+      </p>
+
+      <p>
+        အခွင့်အလမ်းတွေ ပွင့်ပြီး <br>
+        အခွင့်အရေးတွေရှိလာမယ်<br>
+        အဲ့သလိုမှ မဟုတ်ရင်တော့ ရေစုန်မြောပေရော့ ဆိုပြီး<br>
+        ကျားကုတ်ကျားခဲ ကြိုးစားလေ့ရှိတယ်
+      </p>
+
+      <p>
+        ဘာနဲ့တူလည်းဆိုတော့ <br>
+        မျဉ်းဖြောင့်ပေတံနဲ့တူတယ်
+      </p>
+
+      <div class="separator">。 。 。</div>
+
+      <h2 class="section-title">Linear Career Path</h2>
+
+      <p>
+        မူကြိုတက်မယ် ပြီးရင် မူလတန်း အလယ်တန်း<br>
+        အဲ့ဒီကနေ အထက်တန်း<br>
+        ပြီးတော့ Universityကနေ ဘွဲ့ရပြီးတော့<br>
+        ကိုယ်လိုချင်တဲ့ &quot; လိုင်း (Major) &quot; ကို ရွေးမယ်
+      </p>
+
+      <p>
+        အဲ့ဒီလိုင်းနဲ့ တစ်သက်လုံးလုပ်ရင်းနဲ့<br>
+        ပိုက်ဆံတွေအများကြီးရှိလာတဲ့အချိန်ကြ<br>
+        အနားယူကြမယ် <br>
+        ဒါကို Linear Career Path လို့ ခေါ်တယ်
+      </p>
+
+      <div class="figure">
+        <img src="/assets/images/post00016/life_is.jpg" alt="Set a goal, achieve it, and how it actually is" loading="lazy">
+        <div class="caption">တကယ်တော့ ဘဝက Linear မဟုတ်ဘူး</div>
+      </div>
+
+      <p>
+        ၈၀% သော ကျောင်းသား ကျောင်းသူတွေက<br>
+        သူတို့ ဘဝဟာ မျဉ်းဖြောင့်အတိုင်းပဲ<br>
+        တရွေ့ရွေ့ လေးသွားနေမယ်လို့ ပုံသေတွက်ထားကြတယ်
+      </p>
+
+      <div class="quote">
+        <p>
+          ဒါပေမယ့် ဘဝက Linear မဟုတ်ဘူး<br>
+          ဒါကို သိစေမြင်စေချင်တယ် ...
+        </p>
+      </div>
+
+      
+
+      <div class="separator">。 。 。</div>
+
+      <p>
+        အခုစာဖတ်နေတဲ့သူရဲ့ <br>
+        ဘဝက လိုတရနေတယ်<br>
+        အခက်အခဲ ဆူးငြောင့်ကသင်းမရှိဘဲ<br>
+        တရွေ့‌တရွေ့နဲ့ ဖြတ်သန်းနေရတယ်ဆိုရင်
+      </p>
+
+      <p>
+        ဂုဏ်ယူပါတယ်<br>
+        သင်က အင်မတန်ကံကောင်းတဲ့ 0.0001% သော<br>
+        လူတန်းစားမှာပါတယ်
+      </p>
+
+      <p>
+        ဒါမှမဟုတ် အသက်အရမ်းငယ်လွန်းလို့<br>
+        ဘဝကို သေချာ မဖြတ်သန်းရသေးလို့ဖြစ်ပါလိမ့်မယ်
+      </p>
+
+      <div class="separator">。 。 。</div>
+
+      <p>
+        အဲ့သလိုမှမဟုတ်ဘဲ<br>
+        ဘဝရဲ့ လွဲချော်မှုတွေနဲ့ ရင်ဆိုင်ခဲ့ရတယ်<br>
+        ရင်ဆိုင်နေရတယ်ဆိုရင်တော့<br>
+        ကျနော်ပြောတာ သဘောပေါက်မှာပေါ့
+      </p>
+
+      <ul>
+        <li>ရှုံးနိမ့်ခြင်းတွေရှိမယ်</li>
+        <li>လွဲချော်ခြင်းတွေရှိမယ်</li>
+        <li>မပိုင်ဆိုင်ရခြင်းတွေရှိမယ်</li>
+        <li>မဖြစ်ပါစေနဲ့ ရေရွတ်ခြင်းတွေ တည့်တိုးဖြစ်လာတာရှိမယ်</li>
+        <li>ဖြစ်ချင်တာတွေ မဖြစ်ရတာလဲရှိမယ်</li>
+        <li>ဘဝလမ်းကြောင်းကြီး ချော်ထွက်သွားခဲ့တာရှိမယ်</li>
+      </ul>
+
+      <p>
+        သေးသေးလေးမဟုတ်ဘဲ <br>
+        အဖြစ်အပျက် Event အကြီးကြီးတွေပေါ့
+      </p>
+
+      <div class="separator">。 。 。 。</div>
+
+      <div class="figure">
+        <img src="/assets/images/post00016/life_is_like_a_tree.jpg" alt="ဘဝက Linear မဟုတ်ဘူး" loading="lazy">
+        <div class="caption">ဘဝမှာ သင်မမြင်ရတဲ့အချိုးအကွေ့တွေ အများကြီးရှိနိုင်ပါတယ်</div>
+      </div>
+
+      <h2 class="section-title">လမ်းဆုံ လမ်းခွဲတွေ</h2>
+
+      <p>
+        ဒီအဖြစ်အပျက်ကနေ <br>
+        လမ်းဆုံ လမ်းခွဲတွေ ပေါ်ပေါက်လာတယ်<br>
+        ဆိုကြပါစို့
+      </p>
+
+      <p>
+        ဒီ ကလေးအနေနဲ့ပြောရမယ်ဆိုရင်<br>
+        ဆရာဝန်ဖြစ်သွားခြင်းက လမ်းခွဲတစ်ခု<br>
+        ဆရာဝန်မဖြစ်ခြင်း လမ်းခွဲတစ်ခု
+      </p>
+
+      <p>
+        ဆရာဝန်ဖြစ်သွားတဲ့လမ်းကို <br>
+        သူစိတ်ကူးယဉ်ပုံဖော်လို့ရပေမယ့်
+      </p>
+
+      <div class="highlight">
+        <p>
+          ဆရာဝန်မဟုတ်တဲ့လမ်းကို သူ ပုံမဖော်နိုင်ဘူး<br>
+          ဒါပေမယ့် တကယ့်လက်တွေ့မှာ <br>
+          ဆရာဝန်မဖြစ်ခြင်းက <br>
+          ပိုကောင်းတဲ့လမ်းဖြစ်နေမယ်ဆိုတာ
+        </p>
+
+        <div class="separator">。 。 。</div>
+
+        <p>
+          ဘယ်သူမှ မပြောနိုင်ဘူး<br>
+          ဆရာဝန်အမှတ် မမီလို့  ကျောင်းဆရာလုပ်တယ်<br>
+          ကလေးတွေနဲ့ စာသင်ကြ ပျော်ကြပါးကြနဲ့
+        </p>
+      </div>
+
+      <p>
+        ဘဝရဲ့ အဓိပ္ပာယ်အသစ်တစ်ခုကို ရှာတွေ့ပြီး<br>
+        ပို လေးနက်တဲ့ အရာကို ပိုင်ဆိုင်ရမယ်<br>
+        ဒီလိုမျိုးပေါ့
+      </p>
+
+      <p>
+        ကျနော်လည်း စာသင်မယ်လို့ရည်ရွယ်ချက်မရှိ၊<br>
+        ခံယူချက်မရှိဘဲနဲ့ အနီးနားကလေးတွေကို <br>
+        စာသင်ဖြစ်ရာက စာသင်ရတာကိုချစ်သွားတာပဲ<br>
+        ဒါကြောင့် ဘဝကို  ဘာကြီးဖြစ်ရမယ်<br>
+        Identity တစ်ခုထဲမှာပဲ ပိတ်မထားသင့်ဘူး
+      </p>
+
+      <div class="separator">。 。 。</div>
+
+      <h2 class="section-title">ကျနော့်အနေနဲ့ ပြောပြရမယ်ဆိုရင်</h2>
+
+      <p>
+        စာရေးတယ်<br>
+        Utube Video လုပ်တယ်<br>
+        စာသင်တယ်<br>
+        Code ရေးတယ်<br>
+        ကဗျာတွေချစ်တယ် <br>
+        စာအုပ်တွေထဲမှာ နစ်မြောမယ်
+      </p>
+
+      <p>
+        ကိုယ်ဟာ ဘာကြီးပါဆိုတဲ့ <br>
+        identity ခံယူချက် ဘောင်တစ်ခုတည်းမှာ <br>
+        ကိုယ့်ကိုယ်ကို ပိတ်မထားရင်<br>
+        မတူညီတဲ့ အရာတွေ ပေါင်းစပ်ပြီး<br>
+        မတူညီတဲ့ Life Style တွေကို ဖြတ်သန်းလို့ရတယ်<br>
+        ဘဝ ပေါင်းများစွာမှာ စီးမြောရှင်သန်လို့ရတယ်<br>
+        အဲ့ဒီလိုဆို တဖြည်းဖြည်းနဲ့ ကိုယ့်ရဲ့ တန်ဖိုးက တက်လာမယ်
+      </p>
+
+      <div class="separator">。 。 。</div>
+
+      <p>
+        ဖြစ်ချင်တာ မဖြစ်မလာရင်<br>
+        စိတ်ညစ်စရာမရှိဘူးရယ်<br>
+        ပိုကောင်းတဲ့ အခွင့်အရေးတွေလာဖို့ရှိလို့<br>
+        အခုဟာကို လက်လွတ်ဖို့ဖြစ်လာတာ<br>
+        လို့ပဲတွေးလိုက်
+      </p>
+
+      
+
+      <p>
+        ဘာလို့အဲ့ဒီလိုပြောရတာလဲဆိုတော့<br>
+        ဘဝက Linear မဟုတ်ဘဲ<br>
+        ပုံမှာ ပြထားတဲ့ သစ်ပင်နဲ့တူလို့
+      </p>
+
+      <p>
+        ပင်စည်တစ်ခုတည်းကနေ အစပြုပေမယ့်<br>
+        ဘဝ Moment တွေကနေ ကိုင်းဖြာသွားတယ်<br>
+        လွဲချော်ခြင်းတွေ ရွေးချယ်ခြင်းတွေ လုပ်ရတိုင်းလုပ်ရတိုင်း
+      </p>
+
+      <p>
+        ကိုင်းဖြာသွားရင်း ကိုင်းဖြာသွားရင်း<br>
+        ဘယ်လောက်ထိ ဖြာပြီး<br>
+        ဘာတွေဖြစ်မယ်ဆိုတာ ဘယ်သူမှ မပြောနိုင်ဘူး
+      </p>
+
+      <p>
+        ‌ဒါကြောင့် ဒီပုံထဲက သစ်ပင်လေး အရမ်းလှနေတာပေါ့<br>
+        အကိုင်းမရှိဘဲ ဖြောင့်ဖြောင့်တန်းတန်းကြီးသာဆို<br>
+        ပျင်းဖို့ကောင်းနေမယ်လို့ မထင်ဘူးလား?
+      </p>
+
+      <div class="figure">
+        <img src="/assets/images/post00016/tree.jpg" alt="တကယ်တော့ ဘဝက သစ်ပင်တစ်ပင်လိုပါပဲ" loading="lazy">
+        
+      </div>
+
+
+      <hr class="divider">
+
+      <div class="links">
+        <p class="small"><strong>ဒါမျိုးထပ်ဖတ်ချင်သေးရင် ...</strong></p>
+        <ul>
+          <li>
+            <a href="/course/">စာလုပ်ရတာ အဆ ၃၀ သက်သာစေမယ့် စာလေ့လာနည်းသင်တန်း</a>
+          </li>
+          <li>
+            <a href="/posts/post00005.html">မင်းက မင်းရည်မှန်းချက်ပြည့်တာကိုပဲ လိုချင်တာ ပြည့်အောင် ဖြည့်ချင်တာမဟုတ်ဘူးတဲ့</a>
+          </li>
+          <li>
+            <a href="/posts/post00003.html">ဘာသာရပ်တစ်ခုကို အမှတ်ကောင်းအောင်လုပ်တာနဲ့ Fall in Love တာက မတူဘူး</a>
+          </li>
+          <li>
+            <a href="/">Post တွေကို တစ်နေရာတည်းမှာ ဖတ်ချင်ရင် _ ကျနော့် Blog Page</a>
+          </li>
+        </ul>
+      </div>
+
+    </article>
+  </div>
+</body>
+</html>
