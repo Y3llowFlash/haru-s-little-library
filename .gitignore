@@ -1,0 +1,21 @@
+node_modules/
+dist/
+coverage/
+
+# Secrets and local configuration
+.env
+.env.*
+!.env.example
+*.local
+
+# Hosting and tool state
+.vercel/
+.openai/
+.wrangler/
+
+# Logs and editor files
+*.log
+npm-debug.log*
+.DS_Store
+.idea/
+.vscode/
