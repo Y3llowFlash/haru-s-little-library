@@ -849,6 +849,32 @@ button { font: inherit; }
   .reader-toolbar { min-height: 42px; }
   .flipbook-stage { height: min(72dvh, 610px); }
   .reader-controls { margin-top: -10px; }
+
+  /* Compact typography belongs only to short desktop windows. */
+  .page-content {
+    padding: 22px 24px 34px;
+    font-size: 14px;
+    line-height: 1.72;
+  }
+  .page-content p { margin-bottom: .9em; }
+  .page-content h1,
+  .page-content h2,
+  .page-content h3 { margin: .45em 0 .58em; line-height: 1.42; }
+  .page-content h2 { font-size: 1.08em; }
+  .editorial-chapter > h2:first-child,
+  .editorial-story > h2:first-child,
+  .editorial-ending > h2:first-child { font-size: 1.18em; }
+  .page-content img { max-height: 190px; }
+  .page-content .editorial-image img { max-height: min(42vh, 280px); }
+  .page-content .editorial-spotlight .highlight,
+  .page-content .editorial-spotlight .quote,
+  .page-content .editorial-spotlight .pull-quote,
+  .page-content .editorial-spotlight blockquote {
+    font-size: 1.02em;
+    line-height: 1.72;
+  }
+  .reader-cover h1 { font-size: clamp(18px, 2.25vw, 27px); }
+  .reader-cover img { max-height: 150px; }
 }
 
 @media (max-width: 760px) {
