@@ -205,6 +205,7 @@ function Reader({ book, onClose }: { book: Book; onClose: () => void }) {
   const [loadError, setLoadError] = useState(false);
   const flipBookRef = useRef<FlipBookHandle | null>(null);
   const openedOnce = useRef(false);
+  const [desktopPageSize, setDesktopPageSize] = useState({ width: 460, height: 650 });
 
   useEffect(() => {
     let cancelled = false;
@@ -230,7 +231,7 @@ function Reader({ book, onClose }: { book: Book; onClose: () => void }) {
     const paginate = async () => {
       await document.fonts?.ready;
       if (!cancelled) {
-        const contentPages = paginateEditorialSections(payload.sections);
+        const contentPages = paginateEditorialSections(payload.sections, desktopPageSize);
         setPages([
           makeCoverPage(book),
           ...contentPages,
@@ -247,7 +248,24 @@ function Reader({ book, onClose }: { book: Book; onClose: () => void }) {
       cancelled = true;
       window.removeEventListener("resize", handleResize);
     };
-  }, [book, payload]);
+  }, [book, payload, desktopPageSize]);
+
+  useEffect(() => {
+    const updateDesktopPageSize = () => {
+      if (window.innerWidth < 760) {
+        setDesktopPageSize({ width: 460, height: 650 });
+        return;
+      }
+
+      // Keep the full open book, controls, and header inside shorter desktop windows.
+      const height = Math.max(420, Math.min(650, window.innerHeight - 158));
+      setDesktopPageSize({ width: Math.round((height * 460) / 650), height: Math.round(height) });
+    };
+
+    updateDesktopPageSize();
+    window.addEventListener("resize", updateDesktopPageSize);
+    return () => window.removeEventListener("resize", updateDesktopPageSize);
+  }, []);
 
   useEffect(() => {
     const handleKey = (event: KeyboardEvent) => {
@@ -291,12 +309,12 @@ function Reader({ book, onClose }: { book: Book; onClose: () => void }) {
             ref={flipBookRef}
             className="flipbook"
             style={{}}
-            width={460}
-            height={650}
+            width={desktopPageSize.width}
+            height={desktopPageSize.height}
             minWidth={280}
-            maxWidth={580}
+            maxWidth={desktopPageSize.width}
             minHeight={420}
-            maxHeight={820}
+            maxHeight={desktopPageSize.height}
             size="stretch"
             startPage={0}
             drawShadow
@@ -361,15 +379,19 @@ function makeCoverPage(book: Book) {
   </section>`;
 }
 
-function paginateEditorialSections(sections: EditorialSection[]) {
+function paginateEditorialSections(
+  sections: EditorialSection[],
+  desktopPageSize: { width: number; height: number },
+) {
   const viewportWidth = window.innerWidth;
   const viewportHeight = window.innerHeight;
   const portrait = viewportWidth < 760;
-  const width = portrait ? Math.min(viewportWidth - 42, 460) : Math.min((viewportWidth - 120) / 2, 560);
-  const pageRatioHeight = width * (650 / 460);
+  const mobileWidth = Math.min(viewportWidth - 42, 460);
+  const mobileRatioHeight = mobileWidth * (650 / 460);
+  const width = portrait ? mobileWidth : desktopPageSize.width;
   const height = portrait
-    ? Math.max(390, Math.min(viewportHeight - 180, pageRatioHeight))
-    : Math.max(520, Math.min(viewportHeight - 180, pageRatioHeight, 760));
+    ? Math.max(390, Math.min(viewportHeight - 180, mobileRatioHeight))
+    : desktopPageSize.height;
 
   const measure = document.createElement("div");
   measure.className = "page-content page-measure";
