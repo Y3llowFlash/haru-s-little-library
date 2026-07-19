@@ -16,6 +16,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@vercel/analytics": "^2.0.1",
     "react": "19.2.6",
     "react-dom": "19.2.6",
     "react-pageflip": "^2.0.3"
@@ -28,3 +29,4 @@
     "vite": "8.0.13"
   }
 }
+
