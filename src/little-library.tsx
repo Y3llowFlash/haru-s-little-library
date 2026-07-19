@@ -39,7 +39,7 @@ const books: Book[] = [
     id: "post00001",
     number: "001",
     title: "ပိုကြိုးစားတိုင်း စာပိုရလာမယ်လို့ ထင်နေတုန်းပဲလား?",
-    label: "ပိုကြိုးစားတိုင်း?",
+    label: "ပိုကြိုးစားတိုင်း စာပိုရလာမယ်လို့  ထင်နေ ... ",
     cover: "/assets/images/post00001/cover.jpg",
     color: "#d87954",
     colorDark: "#9b4932",
@@ -51,7 +51,7 @@ const books: Book[] = [
     id: "post00004",
     number: "004",
     title: "စာမလုပ်ဘဲ စာရနိုင်မယ့်နည်းလမ်းရှိလား?",
-    label: "Meta Learning",
+    label: "စာမလုပ်ဘဲ စာရနိုင်မယ့် .. ",
     cover: "/assets/images/post00004/cover_girl_and_books.jpg",
     color: "#dea33d",
     colorDark: "#a96c23",
@@ -63,7 +63,7 @@ const books: Book[] = [
     id: "post00006",
     number: "006",
     title: "စာကျက်တိုင်း စာမရနေတာ ဘာကြောင့်လဲ?",
-    label: "Illusion of Learning",
+    label: "စာကျက်တိုင်း စာမရနေတာ ... ",
     cover: "/assets/images/post00006/cover_boy_with_books.jpg",
     color: "#6f8f8b",
     colorDark: "#3f6663",
@@ -75,7 +75,7 @@ const books: Book[] = [
     id: "post00007",
     number: "007",
     title: "Active Recall — စာကျက်ပြီး စာမရတာမျိုး မဖြစ်စေမယ့် စာလုပ်နည်း",
-    label: "Active Recall",
+    label: "Active Recall စာကျက်နည်း",
     cover: "/assets/images/post00007/cover_books_and_a_girl.jpg",
     color: "#b9633f",
     colorDark: "#78402d",
@@ -87,7 +87,7 @@ const books: Book[] = [
     id: "post00009",
     number: "009",
     title: "စာလုပ်ချိန်နည်းနည်းနဲ့ အမှတ်များများရစေမယ့် စာလုပ်နည်း (၅) ခု",
-    label: "စာလုပ်နည်း (၅) ခု",
+    label: "စာလုပ်ချိန်နည်းနည်းနဲ့ အမှတ်များများ ... ",
     cover: "/assets/images/post00009/study_effectively_for_cover.jpg",
     color: "#375c68",
     colorDark: "#203e48",
@@ -135,7 +135,7 @@ export default function LittleLibrary() {
         <p className="eyebrow">A SMALL HOME FOR BIG THOUGHTS</p>
         <h1>Haru&apos;s Little Library</h1>
         <p className="hero-note">
-          စာအုပ်လေးတစ်အုပ် ရွေးပါ။<br />
+          စာအုပ်လေးတစ်အုပ်ကို ရွေးပါ။<br />
           တစ်မျက်နှာချင်း အေးအေးဆေးဆေး ဖတ်ကြမယ်။
         </p>
       </section>
@@ -143,8 +143,8 @@ export default function LittleLibrary() {
       <section className="shelf-scene" aria-labelledby="shelf-title">
         <h2 id="shelf-title" className="sr-only">Choose an article from the shelf</h2>
         <div className={`book-title-card ${hoveredBook ? "is-visible" : ""}`} aria-live="polite">
-          <span>{hoveredBook?.number ?? "ရွေးကြည့်ပါ"}</span>
-          <strong>{hoveredBook?.title ?? "စာအုပ်ကို ထိကြည့်ပါ"}</strong>
+          <strong>{hoveredBook?.number ?? "စာအုပ်ကို ဖိပြီး"}</strong>
+          <span>{hoveredBook?.title ?? "ရွေးကြည့်ပါ"}</span>
         </div>
 
         <div className="shelf-wall">
@@ -183,13 +183,13 @@ export default function LittleLibrary() {
             <span />
           </div>
         </div>
-        <p className="shelf-hint"><span>↖</span> စာအုပ်တစ်အုပ်ကို ထိပြီး ဖွင့်ကြည့်ပါ</p>
+        <p className="shelf-hint"><span>↖</span> စာအုပ်ကလေကို ထိပြီးဖွင့်ပါ</p>
       </section>
 
       <footer className="library-footer">
-        <span>Five books for now.</span>
+        <span>အခုတော့ ၅ အုပ်ပေါ့လေ</span>
         <span className="footer-flower" aria-hidden="true">✣</span>
-        <span>More stories are coming.</span>
+        <span>နောက်ကျ အများကြီးထပ်လာမယ်နော် 🙂‍↔️</span>
       </footer>
 
       {selectedBook && <Reader book={selectedBook} onClose={closeBook} />}
@@ -235,7 +235,7 @@ function Reader({ book, onClose }: { book: Book; onClose: () => void }) {
         setPages([
           makeCoverPage(book),
           ...contentPages,
-          `<section class="end-page"><span>✣</span><p>ဒီစာအုပ်လေးကို<br>ဒီမှာပဲ အဆုံးသတ်ပါမယ်။</p><small>Haru · 1% Better Every Day</small></section>`,
+          `<section class="end-page"><span>✣</span><p>ဒီစာအုပ်လေးကိုတော့<br>ဒီမှာပဲ အဆုံးသတ်ပါမယ်။</p><small>Haru · 1% Better Every Day</small></section>`,
         ]);
         setTimeout(() => setIsOpening(false), 180);
       }
