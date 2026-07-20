@@ -404,26 +404,27 @@ button { font: inherit; }
   will-change: transform;
 }
 
+/* Every frame in the run-cycle sheet natively faces left. */
 @keyframes shelf-runner-crossing {
   0%, 3% {
     left: 0;
-    transform: scaleX(1);
+    transform: scaleX(-1);
   }
   47% {
     left: calc(100% - var(--runner-width));
-    transform: scaleX(1);
+    transform: scaleX(-1);
   }
   50% {
     left: calc(100% - var(--runner-width));
-    transform: scaleX(-1);
+    transform: scaleX(1);
   }
   97% {
     left: 0;
-    transform: scaleX(-1);
+    transform: scaleX(1);
   }
   100% {
     left: 0;
-    transform: scaleX(1);
+    transform: scaleX(-1);
   }
 }
 
