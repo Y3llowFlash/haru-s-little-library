@@ -5,7 +5,7 @@ const root = process.cwd();
 const sourceRoot = join(root, "past_data");
 const outputRoot = join(root, "public");
 const contentRoot = join(outputRoot, "content");
-const ids = [1, 4, 6, 7, 9];
+const ids = [1, 4, 6, 7, 9, 14, 15];
 
 const plans = {
   post00001: [
@@ -154,6 +154,68 @@ const plans = {
 
     // Coda — keep the invitation to share, its link, and the author's sign-off.
     section("ending", range(42, 45)),
+  ],
+  post00014: [
+    // Opening — contrast effortless entertainment with the resistance to useful work.
+    section("flow", range(4, 8)),
+
+    // Part 1 — define dopamine as craving, then follow it through the rat experiment.
+    section("chapter", range(9, 10)),
+    section("spotlight", [11]),
+    section("flow", range(12, 13)),
+    section("story", range(15, 19)),
+    section("spotlight", [20]),
+
+    // Part 2 — explain tolerance with the buffet metaphor and its study consequence.
+    section("chapter", range(21, 24)),
+    section("image", [25]),
+    section("story", range(26, 27)),
+
+    // Part 3 — reset the baseline, compare the two detox options, then pause on the image.
+    section("chapter", range(28, 31)),
+    section("flow", range(32, 33)),
+    section("image", [34]),
+
+    // Part 4 — build a reward system that puts effort before easy dopamine.
+    section("chapter", range(35, 36)),
+    section("spotlight", [37]),
+    section("flow", [38]),
+    section("image", [39]),
+
+    // Part 5 — turn the idea into five small, usable practices.
+    section("chapter", range(40, 42)),
+    section("flow", range(43, 45)),
+
+    // Coda — dopamine is not the enemy; where it comes from is the real choice.
+    section("ending", range(47, 49)),
+    section("spotlight", [50]),
+    section("ending", [51]),
+  ],
+  post00015: [
+    // Opening — name the pain of knowing an answer but losing it to a careless mistake.
+    section("flow", range(4, 6)),
+    section("spotlight", [7]),
+    section("image", [8]),
+
+    // Diagnosis — System 1 takes over under time pressure and skips the full question.
+    section("chapter", range(9, 13)),
+    section("chapter", range(14, 15)),
+
+    // Method 1 — Pointing and Calling, its evidence, and its exam-room adaptation.
+    section("chapter", range(17, 18)),
+    section("image", [19]),
+    section("spotlight", [20]),
+    section("flow", [21]),
+
+    // Method 2 — reduce the emotional weight so System 2 can stay awake.
+    section("chapter", range(23, 25)),
+
+    // Method 3 — check from a new direction instead of rereading the same path.
+    section("chapter", range(27, 29)),
+    section("image", [30]),
+
+    // Coda — accuracy first; attention control is a trainable habit.
+    section("ending", range(32, 35)),
   ],
 };
 

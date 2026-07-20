@@ -95,6 +95,31 @@ const books: Book[] = [
     width: 68,
     lean: -1,
   },
+
+  {
+    id: "post00014",
+    number: "014",
+    title: "စာလုပ်ဖို့ ပျင်းနေတာ သင့်အမှားမဟုတ်ဘူး",
+    label: "စာလုပ်ဖို့ ပျင်းနေတာ သင့်အမှားမဟုတ်ဘူး",
+    cover: "/assets/images/post00014/cover.jpg",
+    color: "#80627f",
+    colorDark: "#4f3a51",
+    height: 202,
+    width: 58,
+    lean: -2,
+  },
+  {
+    id: "post00015",
+    number: "015",
+    title: "စာမေးပွဲမှာ မလျှမ်းအောင် ဘယ်လိုဖြေမလဲ?",
+    label: "စာမေးပွဲမှာ မလျှမ်းအောင် ဘယ်လိုဖြေမလဲ?",
+    cover: "/assets/images/post00015/cover.jpg",
+    color: "#82945c",
+    colorDark: "#4d5d39",
+    height: 214,
+    width: 60,
+    lean: 1,
+  },
 ];
 
 export default function LittleLibrary() {
@@ -161,6 +186,7 @@ export default function LittleLibrary() {
                     "--book-dark": book.colorDark,
                     "--book-height": `${book.height}px`,
                     "--book-width": `${book.width}px`,
+                    "--book-mobile-width": `${Math.round(book.width * 0.72)}px`,
                     "--book-lean": `${book.lean}deg`,
                   } as React.CSSProperties
                 }

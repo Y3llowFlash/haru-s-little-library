@@ -906,6 +906,13 @@ button { font: inherit; }
   .swipe-note { display: none; }
 }
 
+@media (max-width: 480px) {
+  .shelf-book {
+    flex-basis: var(--book-mobile-width);
+    width: var(--book-mobile-width);
+  }
+}
+
 @media (max-width: 380px) {
   .books-row { width: 116%; margin-left: -8%; transform: scale(.88); }
   .book-title-card { margin-bottom: 5px; }
