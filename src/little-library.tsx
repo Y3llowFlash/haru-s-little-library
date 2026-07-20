@@ -34,7 +34,7 @@ type FlipBookHandle = {
   } | undefined;
 };
 
-const chibiNarutoRunner = new URL("./assets/chibi-naruto-shelf.png", import.meta.url).href;
+const chibiNarutoRunCycle = new URL("./assets/chibi-naruto-run-cycle.png", import.meta.url).href;
 
 const books: Book[] = [
   {
@@ -210,12 +210,14 @@ export default function LittleLibrary() {
           </div>
           <div className="shelf-runner" aria-hidden="true">
             <span className="shelf-runner-sprite">
-              <img
-                src={chibiNarutoRunner}
-                alt=""
-                draggable="false"
-                decoding="async"
-              />
+              <span className="shelf-runner-cycle">
+                <img
+                  src={chibiNarutoRunCycle}
+                  alt=""
+                  draggable="false"
+                  decoding="async"
+                />
+              </span>
             </span>
           </div>
           <div className="wood-shelf" aria-hidden="true">

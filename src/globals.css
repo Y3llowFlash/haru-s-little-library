@@ -349,6 +349,7 @@ button { font: inherit; }
 
 .shelf-runner {
   --runner-width: 64px;
+  --runner-height: 80px;
   position: absolute;
   z-index: 4;
   right: 4%;
@@ -364,47 +365,76 @@ button { font: inherit; }
   bottom: 0;
   left: 0;
   width: var(--runner-width);
+  height: var(--runner-height);
   transform-origin: center bottom;
   animation: shelf-runner-crossing 12s linear infinite;
   will-change: left, transform;
 }
 
-.shelf-runner img {
+.shelf-runner-sprite::after {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  right: 16%;
+  bottom: -1px;
+  left: 16%;
+  height: 5px;
+  border-radius: 50%;
+  background: rgba(53, 28, 13, .22);
+  filter: blur(2px);
+  animation: shelf-runner-shadow .64s steps(8, end) infinite;
+}
+
+.shelf-runner-cycle {
   display: block;
   width: 100%;
-  height: auto;
+  height: 100%;
+  overflow: hidden;
+  filter: drop-shadow(0 4px 3px rgba(53, 28, 13, .24));
+}
+
+.shelf-runner-cycle img {
+  display: block;
+  width: 800%;
+  max-width: none;
+  height: 100%;
   -webkit-user-drag: none;
   user-select: none;
-  filter: drop-shadow(0 4px 3px rgba(53, 28, 13, .24));
-  animation: shelf-runner-bounce .22s ease-in-out infinite alternate;
+  animation: shelf-runner-frames .64s steps(8, end) infinite;
+  will-change: transform;
 }
 
 @keyframes shelf-runner-crossing {
   0%, 3% {
     left: 0;
-    transform: scaleX(-1);
+    transform: scaleX(1);
   }
   47% {
     left: calc(100% - var(--runner-width));
-    transform: scaleX(-1);
+    transform: scaleX(1);
   }
   50% {
     left: calc(100% - var(--runner-width));
-    transform: scaleX(1);
+    transform: scaleX(-1);
   }
   97% {
     left: 0;
-    transform: scaleX(1);
+    transform: scaleX(-1);
   }
   100% {
     left: 0;
-    transform: scaleX(-1);
+    transform: scaleX(1);
   }
 }
 
-@keyframes shelf-runner-bounce {
-  from { transform: translateY(0) rotate(-2deg); }
-  to { transform: translateY(-3px) rotate(2deg); }
+@keyframes shelf-runner-frames {
+  from { transform: translateX(0); }
+  to { transform: translateX(-100%); }
+}
+
+@keyframes shelf-runner-shadow {
+  0%, 25%, 50%, 75%, 100% { transform: scaleX(1); opacity: .82; }
+  12.5%, 37.5%, 62.5%, 87.5% { transform: scaleX(.72); opacity: .55; }
 }
 
 .shelf-hint {
@@ -956,6 +986,7 @@ button { font: inherit; }
   .bookend { flex-basis: 14px; }
   .shelf-runner {
     --runner-width: 52px;
+    --runner-height: 65px;
     right: 2%;
     left: 2%;
     height: 70px;
@@ -999,5 +1030,9 @@ button { font: inherit; }
     animation: none !important;
     transform: translateX(-50%);
   }
-  .shelf-runner img { animation: none !important; }
+  .shelf-runner-sprite::after,
+  .shelf-runner-cycle img {
+    animation: none !important;
+    transform: none !important;
+  }
 }
