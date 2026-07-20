@@ -206,6 +206,16 @@ export default function LittleLibrary() {
             ))}
             <div className="bookend bookend-right" aria-hidden="true" />
           </div>
+          <div className="shelf-runner" aria-hidden="true">
+            <span className="shelf-runner-sprite">
+              <img
+                src="/assets/characters/chibi-naruto-shelf.png"
+                alt=""
+                draggable="false"
+                decoding="async"
+              />
+            </span>
+          </div>
           <div className="wood-shelf" aria-hidden="true">
             <span />
           </div>
