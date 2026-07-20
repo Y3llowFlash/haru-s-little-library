@@ -209,7 +209,6 @@ export default function LittleLibrary() {
             <div className="bookend bookend-right" aria-hidden="true" />
           </div>
           <div className="shelf-runner" aria-hidden="true">
-            <span className="shelf-runner-shadow" />
             <span className="shelf-runner-sprite">
               <span className="shelf-runner-cycle">
                 <img
