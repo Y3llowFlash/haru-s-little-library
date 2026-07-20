@@ -350,7 +350,7 @@ button { font: inherit; }
 .shelf-runner {
   --runner-width: 64px;
   --runner-height: 80px;
-  --runner-cycle-duration: .64s;
+  --parkour-duration: 13.6s;
   position: absolute;
   z-index: 4;
   right: 4%;
@@ -368,7 +368,7 @@ button { font: inherit; }
   width: var(--runner-width);
   height: var(--runner-height);
   transform-origin: center bottom;
-  animation: shelf-runner-crossing 12s linear infinite;
+  animation: shelf-runner-parkour var(--parkour-duration) linear infinite;
   will-change: left, transform;
 }
 
@@ -385,22 +385,22 @@ button { font: inherit; }
     linear-gradient(90deg, rgba(132, 80, 39, .3), transparent) 7px 8px / 82% 1px no-repeat,
     linear-gradient(90deg, rgba(132, 80, 39, .22), transparent) 3px 14px / 64% 1px no-repeat;
   transform-origin: left center;
-  animation: shelf-runner-speed-lines var(--runner-cycle-duration) step-end infinite;
+  animation: shelf-runner-parkour-speed var(--parkour-duration) step-end infinite;
 }
 
-.shelf-runner-sprite::after {
-  content: "";
+.shelf-runner-shadow {
   position: absolute;
-  z-index: -1;
-  right: 16%;
-  bottom: -1px;
-  left: 16%;
+  z-index: 0;
+  bottom: -2px;
+  left: 0;
+  width: var(--runner-width);
   height: 5px;
   border-radius: 50%;
   background: rgba(53, 28, 13, .22);
   filter: blur(2px);
   transform-origin: center;
-  animation: shelf-runner-shadow var(--runner-cycle-duration) step-end infinite;
+  animation: shelf-runner-parkour-shadow var(--parkour-duration) linear infinite;
+  will-change: left, transform, opacity;
 }
 
 .shelf-runner-cycle {
@@ -410,7 +410,6 @@ button { font: inherit; }
   overflow: hidden;
   filter: drop-shadow(0 4px 3px rgba(53, 28, 13, .24));
   transform-origin: center bottom;
-  animation: shelf-runner-body var(--runner-cycle-duration) step-end infinite;
 }
 
 .shelf-runner-cycle img {
@@ -420,74 +419,240 @@ button { font: inherit; }
   height: 100%;
   -webkit-user-drag: none;
   user-select: none;
-  animation: shelf-runner-frames var(--runner-cycle-duration) steps(8, end) infinite;
+  animation: shelf-runner-parkour-poses var(--parkour-duration) step-end infinite;
   will-change: transform;
 }
 
-/* Every frame in the run-cycle sheet natively faces left. */
-@keyframes shelf-runner-crossing {
-  0%, 1% {
+/*
+ * The sheet natively faces left. Percentage translations keep the horizontal
+ * route responsive; vertical percentages scale with the mascot's own height.
+ * Each jump follows an animated ballistic arc with brief contact frames.
+ */
+@keyframes shelf-runner-parkour {
+  0%, 2% {
     left: 0;
-    transform: translateY(0) scaleX(-1) rotate(-2deg);
+    transform: translate(0, 0) scaleX(-1.08) scaleY(.9) rotate(-2deg);
   }
-  47.5% {
-    left: calc(100% - var(--runner-width));
-    transform: translateY(0) scaleX(-1) rotate(-2deg);
+  4% {
+    left: 4%;
+    transform: translate(-4%, -30%) scaleX(-.96) scaleY(1.08) rotate(-7deg);
+  }
+  8% {
+    left: 12%;
+    transform: translate(-12%, -80%) scaleX(-.98) scaleY(1.04) rotate(-8deg);
+  }
+  12% {
+    left: 20%;
+    transform: translate(-20%, -110%) scaleX(-1) rotate(-4deg);
+  }
+  13% {
+    left: 22%;
+    transform: translate(-22%, -92%) scaleX(-1.05) scaleY(.95) rotate(8deg);
+  }
+  15% {
+    left: 25%;
+    transform: translate(-25%, -125%) scaleX(-.96) scaleY(1.08) rotate(-9deg);
+  }
+  20% {
+    left: 35%;
+    transform: translate(-35%, -180%) scaleX(-.98) scaleY(1.04) rotate(-5deg);
+  }
+  25% {
+    left: 45%;
+    transform: translate(-45%, -135%) scaleX(-1) rotate(-1deg);
+  }
+  28% {
+    left: 50%;
+    transform: translate(-50%, -50%) scaleX(-1.02) scaleY(.98) rotate(4deg);
+  }
+  29% {
+    left: 52%;
+    transform: translate(-52%, 0) scaleX(-1.1) scaleY(.87) rotate(2deg);
+  }
+  31% {
+    left: 54%;
+    transform: translate(-54%, 0) scaleX(-1.04) scaleY(.94) rotate(-4deg);
+  }
+  33% {
+    left: 58%;
+    transform: translate(-58%, -25%) scaleX(-.96) scaleY(1.08) rotate(-8deg);
+  }
+  37% {
+    left: 68%;
+    transform: translate(-68%, -105%) scaleX(-.98) scaleY(1.04) rotate(-7deg);
+  }
+  41% {
+    left: 79%;
+    transform: translate(-79%, -170%) scaleX(-1) scaleY(1.03) rotate(-4deg);
+  }
+  45% {
+    left: 90%;
+    transform: translate(-90%, -90%) scaleX(-1.01) rotate(1deg);
   }
   48% {
-    left: calc(100% - var(--runner-width));
-    transform: translateY(1px) scaleX(-1.04) scaleY(.94) rotate(1deg);
+    left: 100%;
+    transform: translate(-100%, 0) scaleX(-1.1) scaleY(.87) rotate(2deg);
+  }
+  49% {
+    left: 100%;
+    transform: translate(-100%, 0) scaleX(-1.04) scaleY(.94);
   }
   49.99% {
-    left: calc(100% - var(--runner-width));
-    transform: translateY(1px) scaleX(-.82) scaleY(1.05);
+    left: 100%;
+    transform: translate(-100%, 0) scaleX(-.78) scaleY(1.06);
   }
   50%, 51% {
-    left: calc(100% - var(--runner-width));
-    transform: translateY(0) scaleX(1) rotate(-2deg);
+    left: 100%;
+    transform: translate(-100%, 0) scaleX(1.04) scaleY(.94) rotate(-2deg);
   }
-  97.5% {
-    left: 0;
-    transform: translateY(0) scaleX(1) rotate(-2deg);
+  53% {
+    left: 97%;
+    transform: translate(-97%, -20%) scaleX(.96) scaleY(1.08) rotate(-8deg);
   }
-  98% {
+  57% {
+    left: 89%;
+    transform: translate(-89%, -85%) scaleX(.98) scaleY(1.04) rotate(-7deg);
+  }
+  61% {
+    left: 80%;
+    transform: translate(-80%, -145%) scaleX(1) scaleY(1.03) rotate(-5deg);
+  }
+  64% {
+    left: 71%;
+    transform: translate(-71%, -180%) scaleX(.98) scaleY(1.04) rotate(-3deg);
+  }
+  67% {
+    left: 63%;
+    transform: translate(-63%, -120%) scaleX(1) rotate(0deg);
+  }
+  69% {
+    left: 59%;
+    transform: translate(-59%, -40%) scaleX(1.02) scaleY(.98) rotate(4deg);
+  }
+  70% {
+    left: 57%;
+    transform: translate(-57%, 0) scaleX(1.1) scaleY(.87) rotate(2deg);
+  }
+  72% {
+    left: 54%;
+    transform: translate(-54%, 0) scaleX(1.04) scaleY(.94) rotate(-4deg);
+  }
+  74% {
+    left: 50%;
+    transform: translate(-50%, -30%) scaleX(.96) scaleY(1.08) rotate(-8deg);
+  }
+  78% {
+    left: 40%;
+    transform: translate(-40%, -120%) scaleX(.98) scaleY(1.04) rotate(-7deg);
+  }
+  82% {
+    left: 30%;
+    transform: translate(-30%, -175%) scaleX(1) scaleY(1.03) rotate(-4deg);
+  }
+  86% {
+    left: 20%;
+    transform: translate(-20%, -110%) scaleX(1) rotate(0deg);
+  }
+  89% {
+    left: 14%;
+    transform: translate(-14%, -65%) scaleX(1.05) scaleY(.95) rotate(8deg);
+  }
+  90% {
+    left: 12%;
+    transform: translate(-12%, -90%) scaleX(.96) scaleY(1.08) rotate(-9deg);
+  }
+  92% {
+    left: 9%;
+    transform: translate(-9%, -70%) scaleX(.99) scaleY(1.03) rotate(-4deg);
+  }
+  95% {
+    left: 3%;
+    transform: translate(-3%, -25%) scaleX(1.02) scaleY(.98) rotate(4deg);
+  }
+  96% {
     left: 0;
-    transform: translateY(1px) scaleX(1.04) scaleY(.94) rotate(1deg);
+    transform: translate(0, 0) scaleX(1.1) scaleY(.87) rotate(2deg);
+  }
+  98.5% {
+    left: 0;
+    transform: translate(0, 0) scaleX(1.04) scaleY(.94);
   }
   99.99% {
     left: 0;
-    transform: translateY(1px) scaleX(.82) scaleY(1.05);
+    transform: translate(0, 0) scaleX(.78) scaleY(1.06);
   }
   100% {
     left: 0;
-    transform: translateY(0) scaleX(-1) rotate(-2deg);
+    transform: translate(0, 0) scaleX(-1.08) scaleY(.9) rotate(-2deg);
   }
 }
 
-@keyframes shelf-runner-frames {
-  from { transform: translateX(0); }
-  to { transform: translateX(-100%); }
+/* The eight drawings are exposed as a pose bank, not a looping run cycle. */
+@keyframes shelf-runner-parkour-poses {
+  0%, 2% { transform: translateX(-62.5%); }
+  4% { transform: translateX(-25%); }
+  8% { transform: translateX(0); }
+  12% { transform: translateX(-75%); }
+  13% { transform: translateX(-25%); }
+  15% { transform: translateX(-37.5%); }
+  20% { transform: translateX(-50%); }
+  25% { transform: translateX(-87.5%); }
+  28% { transform: translateX(-75%); }
+  29% { transform: translateX(-62.5%); }
+  31% { transform: translateX(-12.5%); }
+  33% { transform: translateX(-25%); }
+  37% { transform: translateX(0); }
+  41% { transform: translateX(-50%); }
+  45% { transform: translateX(-37.5%); }
+  48%, 49% { transform: translateX(-62.5%); }
+  50%, 51% { transform: translateX(-12.5%); }
+  53% { transform: translateX(-25%); }
+  57% { transform: translateX(0); }
+  61% { transform: translateX(-37.5%); }
+  64% { transform: translateX(-50%); }
+  67% { transform: translateX(-87.5%); }
+  69% { transform: translateX(-75%); }
+  70% { transform: translateX(-62.5%); }
+  72% { transform: translateX(-12.5%); }
+  74% { transform: translateX(-25%); }
+  78% { transform: translateX(0); }
+  82% { transform: translateX(-50%); }
+  86% { transform: translateX(-37.5%); }
+  89% { transform: translateX(-75%); }
+  90% { transform: translateX(-25%); }
+  92% { transform: translateX(-87.5%); }
+  95% { transform: translateX(-75%); }
+  96% { transform: translateX(-62.5%); }
+  98.5%, 100% { transform: translateX(-12.5%); }
 }
 
-@keyframes shelf-runner-body {
-  0%, 50%, 100% { transform: translateY(-2px) scale(.99, 1.01); }
-  12.5%, 62.5% { transform: translateY(1px) scale(1.025, .965); }
-  25%, 75% { transform: translateY(0) scale(1.01, .99); }
-  37.5%, 87.5% { transform: translateY(-3px) scale(.99, 1.02); }
+@keyframes shelf-runner-parkour-shadow {
+  0%, 2% { left: 0; opacity: .82; transform: translateX(0) scaleX(1.12); }
+  8% { left: 12%; opacity: .48; transform: translateX(-12%) scaleX(.72); }
+  13% { left: 22%; opacity: .64; transform: translateX(-22%) scaleX(.88); }
+  20% { left: 35%; opacity: .24; transform: translateX(-35%) scaleX(.42); }
+  29% { left: 52%; opacity: .88; transform: translateX(-52%) scaleX(1.2); }
+  31% { left: 54%; opacity: .72; transform: translateX(-54%) scaleX(1); }
+  41% { left: 79%; opacity: .26; transform: translateX(-79%) scaleX(.44); }
+  48%, 51% { left: 100%; opacity: .88; transform: translateX(-100%) scaleX(1.2); }
+  57% { left: 89%; opacity: .46; transform: translateX(-89%) scaleX(.68); }
+  64% { left: 71%; opacity: .24; transform: translateX(-71%) scaleX(.42); }
+  70% { left: 57%; opacity: .88; transform: translateX(-57%) scaleX(1.2); }
+  72% { left: 54%; opacity: .72; transform: translateX(-54%) scaleX(1); }
+  82% { left: 30%; opacity: .24; transform: translateX(-30%) scaleX(.42); }
+  89% { left: 14%; opacity: .54; transform: translateX(-14%) scaleX(.76); }
+  90% { left: 12%; opacity: .46; transform: translateX(-12%) scaleX(.68); }
+  96%, 100% { left: 0; opacity: .88; transform: translateX(0) scaleX(1.2); }
 }
 
-@keyframes shelf-runner-shadow {
-  0%, 50%, 100% { transform: scaleX(.68); opacity: .46; }
-  12.5%, 62.5% { transform: scaleX(1.08); opacity: .84; }
-  25%, 75% { transform: scaleX(.92); opacity: .7; }
-  37.5%, 87.5% { transform: scaleX(.62); opacity: .38; }
-}
-
-@keyframes shelf-runner-speed-lines {
-  0%, 50%, 100% { opacity: .48; transform: scaleX(.92); }
-  12.5%, 62.5% { opacity: .08; transform: scaleX(.45); }
-  25%, 75% { opacity: .24; transform: scaleX(.7); }
-  37.5%, 87.5% { opacity: .58; transform: scaleX(1); }
+@keyframes shelf-runner-parkour-speed {
+  0%, 2%, 13%, 29%, 31%, 48%, 51%, 70%, 72%, 89%, 96%, 100% {
+    opacity: 0;
+    transform: scaleX(.35);
+  }
+  4%, 15%, 33%, 53%, 74%, 90% { opacity: .42; transform: scaleX(.72); }
+  8%, 25%, 37%, 45%, 57%, 67%, 78%, 86%, 92% { opacity: .58; transform: scaleX(.9); }
+  20%, 41%, 64%, 82% { opacity: .72; transform: scaleX(1.08); }
 }
 
 .shelf-hint {
@@ -1084,10 +1249,18 @@ button { font: inherit; }
     transform: translateX(-50%);
   }
   .shelf-runner-sprite::before { display: none; }
-  .shelf-runner-sprite::after,
-  .shelf-runner-cycle,
-  .shelf-runner-cycle img {
+  .shelf-runner-shadow {
+    left: 50%;
+    animation: none !important;
+    opacity: .58;
+    transform: translateX(-50%) scaleX(.8);
+  }
+  .shelf-runner-cycle {
     animation: none !important;
     transform: none !important;
+  }
+  .shelf-runner-cycle img {
+    animation: none !important;
+    transform: translateX(-12.5%) !important;
   }
 }
