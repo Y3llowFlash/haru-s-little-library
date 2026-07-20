@@ -245,6 +245,14 @@ button { font: inherit; }
   transition: transform .24s cubic-bezier(.2,.8,.2,1), filter .24s ease, box-shadow .24s ease;
 }
 
+/* Keep long-press gestures on a book focused on opening it, not selecting its spine text. */
+.shelf-book,
+.shelf-book * {
+  -webkit-user-select: none;
+  user-select: none;
+  -webkit-touch-callout: none;
+}
+
 .shelf-book::before,
 .shelf-book::after {
   content: "";
