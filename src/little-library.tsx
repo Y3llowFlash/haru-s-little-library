@@ -95,7 +95,6 @@ const books: Book[] = [
     width: 68,
     lean: -1,
   },
-
   {
     id: "post00014",
     number: "014",
@@ -159,68 +158,137 @@ export default function LittleLibrary() {
       <section className="library-hero" id="top">
         <p className="eyebrow">စာကျက်နည်းနှင့် ဘဝအတွေးအခေါ်များကို မျှဝေရာနေရာ</p>
         <h1>Haru&apos;s Little Library</h1>
-        <br></br>
-        {/* <p className="hero-note">
-          စာအုပ်လေးတစ်အုပ်ကို ရွေးပါ။<br />
-          တစ်မျက်နှာချင်း အေးအေးဆေးဆေး ဖတ်ကြမယ်။
-        </p> */}
+        <br />
       </section>
 
       <section className="shelf-scene" aria-labelledby="shelf-title">
         <h2 id="shelf-title" className="sr-only">Choose an article from the shelf</h2>
-        <div className={`book-title-card ${hoveredBook ? "is-visible" : ""}`} aria-live="polite">
-          <strong>{hoveredBook?.number ?? "စာအုပ်လေးကိုဖိပြီး"}</strong>
-          <span>{hoveredBook?.title ?? "ရွေးကြည့်ပါ"}</span>
+
+        <div className="cozy-shelf-wall">
+          <span className="shelf-glow shelf-glow-top" aria-hidden="true" />
+          <span className="shelf-glow shelf-glow-middle" aria-hidden="true" />
+          <span className="shelf-glow shelf-glow-bottom" aria-hidden="true" />
+
+          <div className="hanging-vine" aria-hidden="true">
+            <span className="vine-line" />
+            <span className="vine-leaf" />
+            <span className="vine-leaf" />
+            <span className="vine-leaf" />
+            <span className="vine-leaf" />
+            <span className="vine-leaf" />
+            <span className="vine-leaf" />
+            <span className="vine-leaf" />
+            <span className="vine-leaf" />
+          </div>
+
+          <div className="top-decor-row" aria-hidden="true">
+            <div className="decor-plant">
+              <span className="stem stem-one" />
+              <span className="stem stem-two" />
+              <span className="stem stem-three" />
+              <span className="leaf leaf-one" />
+              <span className="leaf leaf-two" />
+              <span className="leaf leaf-three" />
+              <span className="leaf leaf-four" />
+              <span className="pot" />
+            </div>
+
+            <div className="bubble-candle">
+              {Array.from({ length: 9 }, (_, index) => <span key={index} />)}
+            </div>
+
+            <div className="quote-card">
+              <small>Haru&apos;s reminder</small>
+              <strong>You are some kind of wonderful</strong>
+            </div>
+          </div>
+
+          <WaveShelf className="top-wave-shelf" />
+
+          <div className="main-shelf-zone">
+            <div className={`book-title-card ${hoveredBook ? "is-visible" : ""}`} aria-live="polite">
+              <strong>{hoveredBook?.number ?? "စာအုပ်လေးကိုဖိပြီး"}</strong>
+              <span>{hoveredBook?.title ?? "ရွေးကြည့်ပါ"}</span>
+            </div>
+
+            <div className="shelf-wall">
+              <div className="books-row">
+                <div className="bookend bookend-left" aria-hidden="true" />
+                {books.map((book) => (
+                  <button
+                    key={book.id}
+                    className="shelf-book"
+                    style={
+                      {
+                        "--book-color": book.color,
+                        "--book-dark": book.colorDark,
+                        "--book-height": `${book.height}px`,
+                        "--book-width": `${book.width}px`,
+                        "--book-mobile-width": `${Math.round(book.width * 0.72)}px`,
+                        "--book-lean": `${book.lean}deg`,
+                      } as React.CSSProperties
+                    }
+                    onMouseEnter={() => setHoveredBook(book)}
+                    onMouseLeave={() => setHoveredBook(null)}
+                    onFocus={() => setHoveredBook(book)}
+                    onBlur={() => setHoveredBook(null)}
+                    onTouchStart={() => setHoveredBook(book)}
+                    onClick={() => openBook(book)}
+                    aria-label={`Open ${book.title}`}
+                  >
+                    <span className="book-top-line" />
+                    <span className="book-number">{book.number}</span>
+                    <span className="book-spine-title">{book.label}</span>
+                    <span className="book-foot">HARU</span>
+                  </button>
+                ))}
+                <div className="bookend bookend-right" aria-hidden="true" />
+              </div>
+              <WaveShelf className="books-wave-shelf" />
+            </div>
+          </div>
+
+          <div className="bottom-decor-row" aria-hidden="true">
+            <div className="mini-lamp">
+              <span className="lamp-shade" />
+              <span className="lamp-base" />
+            </div>
+
+            <div className="postcard">little joys</div>
+
+            <div className="cloud-friend">
+              <span className="cloud-face">
+                <span className="cloud-eye" />
+                <span className="cloud-eye" />
+                <span className="cloud-smile" />
+              </span>
+            </div>
+          </div>
+
+          <WaveShelf className="bottom-wave-shelf" />
         </div>
 
-        <div className="shelf-wall">
-          <div className="books-row">
-            <div className="bookend bookend-left" aria-hidden="true" />
-            {books.map((book) => (
-              <button
-                key={book.id}
-                className="shelf-book"
-                style={
-                  {
-                    "--book-color": book.color,
-                    "--book-dark": book.colorDark,
-                    "--book-height": `${book.height}px`,
-                    "--book-width": `${book.width}px`,
-                    "--book-mobile-width": `${Math.round(book.width * 0.72)}px`,
-                    "--book-lean": `${book.lean}deg`,
-                  } as React.CSSProperties
-                }
-                onMouseEnter={() => setHoveredBook(book)}
-                onMouseLeave={() => setHoveredBook(null)}
-                onFocus={() => setHoveredBook(book)}
-                onBlur={() => setHoveredBook(null)}
-                onTouchStart={() => setHoveredBook(book)}
-                onClick={() => openBook(book)}
-                aria-label={`Open ${book.title}`}
-              >
-                <span className="book-top-line" />
-                <span className="book-number">{book.number}</span>
-                <span className="book-spine-title">{book.label}</span>
-                <span className="book-foot">HARU</span>
-              </button>
-            ))}
-            <div className="bookend bookend-right" aria-hidden="true" />
-          </div>
-          <div className="wood-shelf" aria-hidden="true">
-            <span />
-          </div>
-        </div>
-        <p className="shelf-hint"><span>↖</span> စာအုပ်ကလေကို ထိပြီးဖွင့်ပါ</p>
+        <p className="shelf-hint"><span>↖</span> စာအုပ်ကလေးကို ထိပြီးဖွင့်ပါ</p>
       </section>
 
       <footer className="library-footer">
-        <span>အခုတော့ ၅ အုပ်ပေါ့လေ</span>
+        <span>အခုတော့ ၇ အုပ်ပေါ့လေ</span>
         <span className="footer-flower" aria-hidden="true">✣</span>
         <span>နောက်ကျ အများကြီးထပ်လာမယ်နော် 🙂‍↔️</span>
       </footer>
 
       {selectedBook && <Reader book={selectedBook} onClose={closeBook} />}
     </main>
+  );
+}
+
+function WaveShelf({ className }: { className: string }) {
+  return (
+    <div className={`wave-shelf ${className}`} aria-hidden="true">
+      <svg viewBox="0 0 760 90" preserveAspectRatio="none">
+        <path d="M0 30C44 7 91 56 139 28C187 0 228 52 279 25C331 -2 380 53 430 25C482 -3 529 50 581 28C635 5 691 50 760 27V66C704 87 650 55 591 75C532 95 481 58 421 78C361 98 314 57 255 76C196 95 149 57 90 78C47 92 20 79 0 72Z" />
+      </svg>
+    </div>
   );
 }
 
