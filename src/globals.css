@@ -1,3 +1,6 @@
+/* Hallmark · macrostructure: preserved shelf-scene · genre: atmospheric · tone: quiet painterly storybook night · anchor hue: dusty indigo
+ * pre-emit critique: P5 H5 E5 S5 R5 V4 · enrichment: painterly video + watercolor, cloth, and painted-wood material craft
+ */
 @font-face {
   font-family: "Pu Lone";
   src: url("/assets/fonts/PT20PuLone-Bold.ttf") format("truetype");
@@ -45,15 +48,63 @@ button { font: inherit; }
 }
 
 .library-shell {
+  --night-deep: oklch(18% 0.04 274);
+  --night-mid: oklch(24% 0.045 274);
+  --night-dusty: oklch(33% 0.042 272);
+  --night-cloud: oklch(40% 0.035 268);
+  --night-text: oklch(91% 0.028 83);
+  --night-text-muted: oklch(75% 0.032 78);
+  --night-text-dim: oklch(68% 0.026 75);
+  --night-gold: oklch(78% 0.095 82);
+  --night-amber: oklch(66% 0.105 58);
+  --night-focus: oklch(84% 0.11 84);
+  --night-surface: oklch(27% 0.035 273);
+  --night-surface-raised: oklch(31% 0.035 270);
+  --night-rule: oklch(53% 0.035 72);
+  --night-shadow: oklch(12% 0.025 278);
+  --night-shadow-warm: oklch(16% 0.028 42);
+  --night-wood-lit: oklch(64% 0.105 58);
+  --night-wood-mid: oklch(49% 0.095 53);
+  --night-wood-dark: oklch(32% 0.065 48);
   position: relative;
   isolation: isolate;
   min-height: 100dvh;
   overflow: hidden;
   padding: 24px clamp(14px, 4vw, 48px) 30px;
+  color: var(--night-text);
   background:
-    radial-gradient(circle at 12% 8%, rgba(255,255,255,.72), transparent 24%),
-    radial-gradient(circle at 86% 78%, rgba(190,138,82,.11), transparent 26%),
-    linear-gradient(180deg, #f7efdf 0%, #f0e3ca 100%);
+    radial-gradient(ellipse at 50% 70%, color-mix(in oklch, var(--night-amber) 11%, transparent), transparent 43%),
+    radial-gradient(ellipse at 18% 24%, color-mix(in oklch, var(--night-cloud) 24%, transparent), transparent 48%),
+    radial-gradient(ellipse at 82% 18%, color-mix(in oklch, var(--night-dusty) 32%, transparent), transparent 44%),
+    radial-gradient(ellipse at center, transparent 34%, color-mix(in oklch, var(--night-shadow) 54%, transparent) 100%),
+    linear-gradient(180deg, var(--night-mid), var(--night-deep));
+}
+
+.starry-night-video {
+  position: absolute;
+  inset: 0;
+  z-index: -3;
+  display: block;
+  width: 100%;
+  height: 100%;
+  border: 0;
+  opacity: .76;
+  object-fit: cover;
+  object-position: 24% 50%;
+  pointer-events: none;
+}
+
+.night-video-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: -2;
+  pointer-events: none;
+  background:
+    radial-gradient(ellipse at 50% 17%, color-mix(in oklch, var(--night-deep) 74%, transparent) 0 13%, transparent 42%),
+    linear-gradient(180deg, transparent 48%, color-mix(in oklch, var(--night-deep) 60%, transparent) 100%),
+    radial-gradient(ellipse at 50% 57%, color-mix(in oklch, var(--night-amber) 10%, transparent), transparent 42%),
+    radial-gradient(ellipse at center, transparent 36%, color-mix(in oklch, var(--night-shadow) 58%, transparent) 100%),
+    linear-gradient(180deg, color-mix(in oklch, var(--night-mid) 32%, transparent), color-mix(in oklch, var(--night-deep) 42%, transparent));
 }
 
 .paper-grain {
@@ -61,11 +112,17 @@ button { font: inherit; }
   inset: 0;
   z-index: -1;
   pointer-events: none;
-  opacity: .24;
-  background-image:
-    repeating-radial-gradient(circle at 20% 30%, rgba(79,52,30,.11) 0 0.6px, transparent .8px 4px),
-    repeating-linear-gradient(93deg, transparent 0 13px, rgba(255,255,255,.24) 14px 15px);
-  mix-blend-mode: multiply;
+  opacity: .1;
+  background: url("./assets/night-library/watercolor-paper-texture.png") center / cover no-repeat;
+  mix-blend-mode: soft-light;
+}
+
+@media (min-width: 30.0625rem) {
+  .starry-night-video { object-position: 38% 50%; }
+}
+
+@media (min-width: 56.25rem) {
+  .starry-night-video { object-position: 50% 50%; }
 }
 
 .library-header {
@@ -74,7 +131,7 @@ button { font: inherit; }
   justify-content: space-between;
   width: min(100%, 840px);
   margin: 0 auto;
-  color: var(--muted-ink);
+  color: var(--night-text-muted);
   font-family: Georgia, serif;
 }
 
@@ -82,10 +139,16 @@ button { font: inherit; }
   display: flex;
   align-items: center;
   gap: 8px;
-  color: var(--ink);
+  color: var(--night-text);
   text-decoration: none;
   font-size: 15px;
   letter-spacing: .02em;
+}
+
+.wordmark:focus-visible {
+  border-radius: 4px;
+  outline: 2px solid var(--night-focus);
+  outline-offset: 4px;
 }
 
 .wordmark-mark {
@@ -93,7 +156,7 @@ button { font: inherit; }
   place-items: center;
   width: 30px;
   aspect-ratio: 1;
-  border: 1px solid rgba(64,43,29,.42);
+  border: 1px solid color-mix(in oklch, var(--night-gold) 48%, transparent);
   border-radius: 50%;
   font-size: 14px;
   font-style: italic;
@@ -106,6 +169,76 @@ button { font: inherit; }
   text-transform: uppercase;
 }
 
+.library-header-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.library-bgm-toggle {
+  display: grid;
+  flex: 0 0 auto;
+  place-items: center;
+  width: 42px;
+  height: 42px;
+  padding: 0;
+  border: 1px solid color-mix(in oklch, var(--night-gold) 34%, transparent);
+  border-radius: 50%;
+  background: color-mix(in oklch, var(--night-surface) 58%, transparent);
+  color: var(--night-text-muted);
+  cursor: pointer;
+  line-height: 1;
+  transition:
+    color 160ms ease-out,
+    border-color 160ms ease-out,
+    background-color 160ms ease-out;
+}
+
+.library-bgm-toggle svg {
+  width: 19px;
+  height: 19px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.65;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.library-bgm-toggle[aria-pressed="true"] {
+  border-color: color-mix(in oklch, var(--night-gold) 58%, transparent);
+  background: color-mix(in oklch, var(--night-surface-raised) 72%, transparent);
+  color: var(--night-gold);
+}
+
+@media (hover: hover) {
+  .library-bgm-toggle:hover {
+    border-color: color-mix(in oklch, var(--night-gold) 52%, transparent);
+    background: color-mix(in oklch, var(--night-surface-raised) 68%, transparent);
+    color: var(--night-text);
+  }
+}
+
+.library-bgm-toggle:focus-visible {
+  outline: 2px solid var(--night-focus);
+  outline-offset: 3px;
+}
+
+.library-bgm-toggle:active {
+  transform: translateY(1px);
+}
+
+.library-bgm-toggle:disabled {
+  border-color: color-mix(in oklch, var(--night-rule) 24%, transparent);
+  background: color-mix(in oklch, var(--night-surface) 42%, transparent);
+  color: var(--night-text-dim);
+  cursor: not-allowed;
+  opacity: .55;
+}
+
+.library-bgm-audio {
+  display: none;
+}
+
 .library-hero {
   width: min(100%, 760px);
   margin: clamp(42px, 8vh, 82px) auto 10px;
@@ -114,7 +247,7 @@ button { font: inherit; }
 
 .eyebrow {
   margin: 0 0 14px;
-  color: #a06e49;
+  color: var(--night-gold);
   font-family: Georgia, serif;
   font-size: 10px;
   letter-spacing: .22em;
@@ -122,6 +255,7 @@ button { font: inherit; }
 
 .library-hero h1 {
   margin: 0;
+  color: var(--night-text);
   font-family: Georgia, "Times New Roman", serif;
   font-size: clamp(37px, 8.5vw, 68px);
   font-weight: 500;
@@ -132,12 +266,14 @@ button { font: inherit; }
 
 .hero-note {
   margin: 22px auto 0;
-  color: var(--muted-ink);
+  color: var(--night-text-muted);
   font-size: clamp(14px, 3.8vw, 17px);
   line-height: 1.8;
 }
 
 .shelf-scene {
+  --totoro-perch-width: 44px;
+  --totoro-scene-shift: -22px;
   position: relative;
   width: min(100%, 720px);
   margin: 18px auto 0;
@@ -153,12 +289,12 @@ button { font: inherit; }
   max-width: calc(100% - 24px);
   margin: 0 auto 12px;
   padding: 8px 13px 7px;
-  opacity: .52;
-  border: 1px solid rgba(80,52,31,.15);
+  opacity: .76;
+  border: 1px solid color-mix(in oklch, var(--night-rule) 34%, transparent);
   border-radius: 99px;
-  background: rgba(255,251,240,.66);
-  box-shadow: 0 8px 24px rgba(89,57,31,.05);
-  color: var(--muted-ink);
+  background: color-mix(in oklch, var(--night-surface-raised) 88%, transparent);
+  box-shadow: 0 8px 24px color-mix(in oklch, var(--night-shadow) 28%, transparent);
+  color: var(--night-text-muted);
   transform: translateY(3px);
   transition: opacity .22s ease, transform .22s ease, box-shadow .22s ease;
 }
@@ -166,12 +302,12 @@ button { font: inherit; }
 .book-title-card.is-visible {
   opacity: 1;
   transform: translateY(0);
-  box-shadow: 0 10px 26px rgba(89,57,31,.12);
+  box-shadow: 0 10px 26px color-mix(in oklch, var(--night-shadow) 46%, transparent);
 }
 
 .book-title-card span {
   flex: 0 0 auto;
-  color: #a66d43;
+  color: var(--night-gold);
   font-family: Georgia, serif;
   font-size: 10px;
   letter-spacing: .14em;
@@ -179,6 +315,7 @@ button { font: inherit; }
 
 .book-title-card strong {
   overflow: hidden;
+  color: var(--night-text);
   font-size: 13px;
   font-weight: 400;
   line-height: 1.35;
@@ -192,25 +329,33 @@ button { font: inherit; }
   align-items: end;
   min-height: 266px;
   padding: 0 8px;
+  transform: translateX(var(--totoro-scene-shift));
 }
 
 .shelf-wall::before {
   content: "";
   position: absolute;
-  right: 8%;
-  bottom: 15px;
-  width: 76%;
-  height: 92%;
-  background: rgba(83,51,27,.15);
-  clip-path: polygon(8% 0, 100% 22%, 84% 100%, 0 74%);
-  filter: blur(4px);
-  transform: translate(26px, 22px);
+  right: 3%;
+  bottom: -4px;
+  width: 94%;
+  height: 82%;
+  background: radial-gradient(ellipse at 50% 88%, color-mix(in oklch, var(--night-shadow-warm) 62%, transparent), transparent 68%);
+  transform: translateY(14px);
   pointer-events: none;
+}
+
+.shelf-wall::after {
+  content: "";
+  position: absolute;
+  z-index: 1;
+  inset: 20% 6% 7%;
+  pointer-events: none;
+  background: radial-gradient(ellipse at 50% 86%, color-mix(in oklch, var(--night-amber) 16%, transparent), transparent 66%);
 }
 
 .books-row {
   position: relative;
-  z-index: 2;
+  z-index: 3;
   display: flex;
   align-items: flex-end;
   justify-content: center;
@@ -220,8 +365,30 @@ button { font: inherit; }
   transform-origin: bottom center;
 }
 
+.books-row::after {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  right: 7%;
+  bottom: 7px;
+  left: 7%;
+  height: 18px;
+  pointer-events: none;
+  background: radial-gradient(ellipse at center, color-mix(in oklch, var(--night-shadow-warm) 72%, transparent), transparent 72%);
+}
+
 .shelf-book {
+  --book-grain-angle: 89deg;
+  --book-grain-shift: 0px;
+  --book-sheen-x: 24%;
+  --book-wear-x: 76%;
+  --book-cloth-position: 18% 24%;
+  --book-cloth-size: 1100px;
+  --book-texture-opacity: .18;
+  --book-wear-opacity: .40;
+  --book-radius: 3px 4px 1px 2px;
   position: relative;
+  isolation: isolate;
   display: block;
   flex: 0 0 var(--book-width);
   width: var(--book-width);
@@ -230,19 +397,40 @@ button { font: inherit; }
   overflow: hidden;
   cursor: pointer;
   border: 0;
-  border-radius: 3px 4px 1px 2px;
+  border-radius: var(--book-radius);
   outline: none;
   color: rgba(255,245,220,.92);
   background:
-    linear-gradient(90deg, rgba(255,255,255,.24), transparent 13%, transparent 76%, rgba(42,20,7,.22)),
-    linear-gradient(180deg, var(--book-color), var(--book-dark));
+    linear-gradient(
+      92deg,
+      color-mix(in oklch, var(--night-text) 17%, transparent),
+      transparent 14% 72%,
+      color-mix(in oklch, var(--night-shadow-warm) 22%, transparent)
+    ),
+    linear-gradient(
+      180deg,
+      color-mix(in oklch, var(--night-dusty) 11%, transparent),
+      transparent 24% 73%,
+      color-mix(in oklch, var(--night-amber) 9%, transparent)
+    ),
+    linear-gradient(
+      178deg,
+      color-mix(in oklch, var(--book-color) 91%, var(--night-dusty)),
+      var(--book-color) 42%,
+      color-mix(in oklch, var(--book-dark) 88%, var(--night-amber)) 100%
+    );
   box-shadow:
-    inset 2px 0 rgba(255,255,255,.24),
-    inset -2px 0 rgba(40,18,6,.18),
-    3px 5px 6px rgba(66,36,16,.2);
+    inset 1px 0 color-mix(in oklch, var(--night-text) 23%, transparent),
+    inset -2px 0 color-mix(in oklch, var(--night-shadow-warm) 32%, transparent),
+    inset 0 -7px 9px color-mix(in oklch, var(--night-shadow-warm) 16%, transparent),
+    0 3px 2px -2px color-mix(in oklch, var(--night-shadow) 82%, transparent),
+    3px 7px 9px color-mix(in oklch, var(--night-shadow-warm) 48%, transparent);
   transform: rotate(var(--book-lean)) translateY(0);
   transform-origin: bottom center;
-  transition: transform .24s cubic-bezier(.2,.8,.2,1), filter .24s ease, box-shadow .24s ease;
+  transition:
+    transform .24s cubic-bezier(.2,.8,.2,1),
+    filter .18s cubic-bezier(.2,.8,.2,1),
+    box-shadow .18s cubic-bezier(.2,.8,.2,1);
 }
 
 /* Keep long-press gestures on a book focused on opening it, not selecting its spine text. */
@@ -257,31 +445,167 @@ button { font: inherit; }
 .shelf-book::after {
   content: "";
   position: absolute;
-  left: 6px;
-  right: 6px;
-  height: 1px;
-  background: rgba(255,235,194,.55);
+  z-index: 1;
+  inset: 0;
+  pointer-events: none;
 }
-.shelf-book::before { top: 18px; }
-.shelf-book::after { bottom: 19px; }
+
+.shelf-book::before {
+  background:
+    radial-gradient(
+      ellipse at var(--book-sheen-x) 28%,
+      color-mix(in oklch, var(--night-text) 13%, transparent),
+      transparent 38%
+    ),
+    url("./assets/night-library/book-cloth-texture.png");
+  background-position: 0 0, var(--book-cloth-position);
+  background-repeat: no-repeat;
+  background-size: auto, var(--book-cloth-size) var(--book-cloth-size);
+  opacity: var(--book-texture-opacity);
+  mix-blend-mode: soft-light;
+}
+
+.shelf-book::after {
+  background:
+    radial-gradient(
+      ellipse at var(--book-wear-x) -7%,
+      color-mix(in oklch, var(--night-text) 19%, transparent),
+      transparent 31%
+    ),
+    radial-gradient(
+      circle at 100% 100%,
+      color-mix(in oklch, var(--night-shadow-warm) 26%, transparent),
+      transparent 36%
+    ),
+    linear-gradient(
+      180deg,
+      color-mix(in oklch, var(--night-dusty) 11%, transparent),
+      transparent 25% 76%,
+      color-mix(in oklch, var(--night-amber) 13%, transparent)
+    );
+  box-shadow:
+    inset 0 1px color-mix(in oklch, var(--night-text) 15%, transparent),
+    inset 0 -2px color-mix(in oklch, var(--night-shadow-warm) 24%, transparent);
+  opacity: var(--book-wear-opacity);
+}
+
+.shelf-book:nth-of-type(1) {
+  --book-grain-angle: 88.4deg;
+  --book-grain-shift: -3px;
+  --book-cloth-position: 8% 16%;
+  --book-sheen-x: 29%;
+  --book-wear-x: 68%;
+  --book-radius: 4px 3px 1px 2px;
+}
+
+.shelf-book:nth-of-type(2) {
+  --book-grain-angle: 90.7deg;
+  --book-grain-shift: 4px;
+  --book-cloth-position: 34% 9%;
+  --book-sheen-x: 18%;
+  --book-wear-x: 82%;
+  --book-texture-opacity: .2;
+  --book-radius: 2px 5px 2px 1px;
+}
+
+.shelf-book:nth-of-type(3) {
+  --book-grain-angle: 89.3deg;
+  --book-grain-shift: 1px;
+  --book-cloth-position: 62% 27%;
+  --book-sheen-x: 38%;
+  --book-wear-x: 72%;
+  --book-texture-opacity: .17;
+  --book-wear-opacity: .35;
+  --book-radius: 4px 4px 1px 3px;
+}
+
+.shelf-book:nth-of-type(4) {
+  --book-grain-angle: 91.2deg;
+  --book-grain-shift: -5px;
+  --book-cloth-position: 21% 43%;
+  --book-sheen-x: 23%;
+  --book-wear-x: 61%;
+  --book-texture-opacity: .15;
+  --book-radius: 3px 5px 1px 2px;
+}
+
+.shelf-book:nth-of-type(5) {
+  --book-grain-angle: 88.8deg;
+  --book-grain-shift: 6px;
+  --book-cloth-position: 76% 12%;
+  --book-sheen-x: 34%;
+  --book-wear-x: 79%;
+  --book-texture-opacity: .21;
+  --book-wear-opacity: .44;
+  --book-radius: 5px 3px 2px 1px;
+}
+
+.shelf-book:nth-of-type(6) {
+  --book-grain-angle: 90.4deg;
+  --book-grain-shift: -1px;
+  --book-cloth-position: 45% 61%;
+  --book-sheen-x: 20%;
+  --book-wear-x: 66%;
+  --book-texture-opacity: .19;
+  --book-radius: 3px 4px 2px 3px;
+}
+
+.shelf-book:nth-of-type(7) {
+  --book-grain-angle: 89.6deg;
+  --book-grain-shift: 3px;
+  --book-cloth-position: 88% 36%;
+  --book-sheen-x: 41%;
+  --book-wear-x: 84%;
+  --book-texture-opacity: .17;
+  --book-wear-opacity: .37;
+  --book-radius: 4px 3px 1px 2px;
+}
+
+.book-top-line {
+  position: absolute;
+  z-index: 2;
+  top: 18px;
+  right: 6px;
+  left: 6px;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    color-mix(in oklch, var(--night-text) 57%, transparent) 18% 77%,
+    transparent
+  );
+  opacity: .72;
+  transform: translateX(calc(var(--book-grain-shift) * .18));
+}
 
 .shelf-book:hover,
 .shelf-book:focus-visible {
   z-index: 4;
-  filter: brightness(1.16) saturate(1.08);
+  filter: brightness(1.045) saturate(1.01);
   box-shadow:
-    inset 2px 0 rgba(255,255,255,.32),
-    0 0 0 2px rgba(255,241,190,.62),
-    0 0 30px 8px color-mix(in srgb, var(--book-color) 58%, transparent),
-    5px 12px 16px rgba(66,36,16,.28);
+    inset 1px 0 color-mix(in oklch, var(--night-text) 25%, transparent),
+    inset -2px 0 color-mix(in oklch, var(--night-shadow-warm) 28%, transparent),
+    0 0 0 1px color-mix(in oklch, var(--night-gold) 48%, transparent),
+    4px 11px 13px color-mix(in oklch, var(--night-shadow-warm) 58%, transparent);
   transform: rotate(0) translateY(-12px) scale(1.045);
+}
+
+.shelf-book:focus-visible {
+  outline: 2px solid var(--night-focus);
+  outline-offset: 3px;
 }
 
 .shelf-book:active { transform: rotate(0) translateY(-7px) scale(.98); }
 
 .book-number,
-.book-foot {
+.book-foot,
+.book-spine-title {
   position: absolute;
+  z-index: 2;
+}
+
+.book-number,
+.book-foot {
   left: 50%;
   font-family: Georgia, serif;
   letter-spacing: .13em;
@@ -305,55 +629,354 @@ button { font: inherit; }
 }
 
 .bookend {
+  --wood-grain-position: 34% 52%;
   position: relative;
+  isolation: isolate;
   flex: 0 0 18px;
   height: 116px;
   margin: 0 2px;
-  border-radius: 2px;
-  background: linear-gradient(90deg, #7f4b28, #bd7845 35%, #75401f);
-  box-shadow: 3px 4px 6px rgba(62,34,17,.2);
+  border-radius: 3px 2px 2px 3px;
+  background:
+    radial-gradient(
+      ellipse at 38% 8%,
+      color-mix(in oklch, var(--night-text) 13%, transparent),
+      transparent 36%
+    ),
+    linear-gradient(
+      91deg,
+      var(--night-wood-dark),
+      color-mix(in oklch, var(--night-wood-lit) 91%, var(--night-dusty)) 34%,
+      var(--night-wood-mid) 58%,
+      var(--night-wood-dark)
+    );
+  box-shadow:
+    inset 1px 0 color-mix(in oklch, var(--night-text) 13%, transparent),
+    inset -2px 0 color-mix(in oklch, var(--night-shadow) 31%, transparent),
+    0 3px 2px -2px color-mix(in oklch, var(--night-shadow) 78%, transparent),
+    3px 6px 8px color-mix(in oklch, var(--night-shadow-warm) 52%, transparent);
 }
+
+.bookend::before {
+  content: "";
+  position: absolute;
+  z-index: 1;
+  inset: 0;
+  border-radius: inherit;
+  background:
+    linear-gradient(
+      180deg,
+      color-mix(in oklch, var(--night-dusty) 14%, transparent),
+      transparent 31% 72%,
+      color-mix(in oklch, var(--night-amber) 9%, transparent)
+    ),
+    url("./assets/night-library/painted-wood-grain.png") var(--wood-grain-position) / cover no-repeat;
+  opacity: .32;
+  mix-blend-mode: soft-light;
+  pointer-events: none;
+}
+
 .bookend::after {
   content: "";
   position: absolute;
+  z-index: 2;
   left: -7px;
   right: -7px;
   bottom: 0;
   height: 13px;
   border-radius: 2px;
-  background: #8f532d;
+  background:
+    url("./assets/night-library/painted-wood-grain.png") var(--wood-grain-position) / cover no-repeat,
+    linear-gradient(
+      90deg,
+      color-mix(in oklch, var(--night-wood-dark) 91%, var(--night-dusty)),
+      var(--night-wood-mid) 37%,
+      color-mix(in oklch, var(--night-wood-dark) 90%, var(--night-amber))
+    );
+  background-blend-mode: soft-light, normal;
+  box-shadow:
+    inset 0 1px color-mix(in oklch, var(--night-text) 12%, transparent),
+    0 3px 2px -2px color-mix(in oklch, var(--night-shadow) 76%, transparent);
+  pointer-events: none;
+}
+
+.bookend-right {
+  --wood-grain-position: 72% 46%;
+  border-radius: 2px 4px 3px 2px;
+}
+
+.bookend-right::before {
+  opacity: .29;
+}
+
+.totoro-companion {
+  --totoro-frame-size: 78px;
+  --totoro-breathe-rise: -1.1px;
+  --totoro-breathe-scale-x: 1.006;
+  --totoro-breathe-scale-y: 1.009;
+  --totoro-settle-rise: -.28px;
+  --totoro-settle-scale-x: 1.0015;
+  --totoro-settle-scale-y: 1.002;
+  --totoro-shadow-rest-scale: 1.012;
+  --totoro-shadow-inhale-scale: .965;
+  --totoro-shadow-inhale-opacity: .68;
+  --totoro-motion-duration: 5.8s;
+  --totoro-motion-ease: cubic-bezier(.65, 0, .35, 1);
+  position: absolute;
+  z-index: 3;
+  right: -55px;
+  bottom: 8px;
+  width: var(--totoro-frame-size);
+  aspect-ratio: 1;
+  pointer-events: none;
+  user-select: none;
+}
+
+.totoro-anchor,
+.totoro-breathe,
+.totoro-settle,
+.totoro-body {
+  position: absolute;
+  inset: 0;
+}
+
+.totoro-breathe,
+.totoro-settle {
+  transform-origin: 50% 91%;
+}
+
+.totoro-anchor::before {
+  content: "";
+  position: absolute;
+  z-index: 0;
+  inset: 14% 9% 1% 13%;
+  background: radial-gradient(
+    ellipse at 57% 66%,
+    color-mix(in oklch, var(--night-shadow) 24%, transparent),
+    transparent 67%
+  );
+  pointer-events: none;
+}
+
+.totoro-contact-shadow {
+  position: absolute;
+  z-index: 1;
+  left: 52%;
+  bottom: 7%;
+  width: 58%;
+  height: 12%;
+  background:
+    radial-gradient(
+      ellipse at center,
+      color-mix(in oklch, var(--night-shadow-warm) 82%, transparent) 0 24%,
+      transparent 72%
+    ),
+    radial-gradient(
+      ellipse at center,
+      color-mix(in oklch, var(--night-shadow) 56%, transparent) 0 18%,
+      transparent 76%
+    );
+  transform: translateX(-50%);
+  opacity: .76;
+}
+
+.totoro-body {
+  z-index: 2;
+}
+
+.totoro-image {
+  position: absolute;
+  inset: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  filter: brightness(.84) saturate(.80) contrast(.96);
+}
+
+.totoro-image-closed {
+  z-index: 1;
+  opacity: 0;
+}
+
+.totoro-lighting {
+  position: absolute;
+  z-index: 2;
+  inset: 0;
+  background:
+    radial-gradient(
+      circle at 66% 74%,
+      color-mix(in oklch, var(--night-amber) 13%, transparent),
+      transparent 39%
+    ),
+    linear-gradient(
+      102deg,
+      color-mix(in oklch, var(--night-dusty) 26%, transparent),
+      transparent 53%
+    );
+  opacity: .72;
+  pointer-events: none;
+  -webkit-mask: var(--totoro-art) center / contain no-repeat;
+  mask: var(--totoro-art) center / contain no-repeat;
+  mix-blend-mode: multiply;
+}
+
+.totoro-companion.is-motion-active .totoro-breathe {
+  animation: totoro-breathe var(--totoro-motion-duration) var(--totoro-motion-ease) infinite;
+}
+
+.totoro-companion.is-motion-active .totoro-settle {
+  animation: totoro-settle var(--totoro-motion-duration) var(--totoro-motion-ease) 140ms infinite;
+}
+
+.totoro-companion.is-motion-active .totoro-contact-shadow {
+  animation: totoro-shadow-breathe var(--totoro-motion-duration) var(--totoro-motion-ease) infinite;
+}
+
+@keyframes totoro-breathe {
+  0%,
+  100% {
+    transform: translateY(0) scaleX(1) scaleY(1);
+  }
+
+  47% {
+    transform:
+      translateY(var(--totoro-breathe-rise))
+      scaleX(var(--totoro-breathe-scale-x))
+      scaleY(var(--totoro-breathe-scale-y));
+  }
+}
+
+@keyframes totoro-settle {
+  0%,
+  100% {
+    transform: translateY(0) scaleX(1) scaleY(1);
+  }
+
+  50% {
+    transform:
+      translateY(var(--totoro-settle-rise))
+      scaleX(var(--totoro-settle-scale-x))
+      scaleY(var(--totoro-settle-scale-y));
+  }
+}
+
+@keyframes totoro-shadow-breathe {
+  0%,
+  100% {
+    transform: translateX(-50%) scaleX(var(--totoro-shadow-rest-scale));
+    opacity: .78;
+  }
+
+  47% {
+    transform: translateX(-50%) scaleX(var(--totoro-shadow-inhale-scale));
+    opacity: var(--totoro-shadow-inhale-opacity);
+  }
 }
 
 .wood-shelf {
   position: absolute;
-  z-index: 3;
-  right: 0;
+  isolation: isolate;
+  z-index: 4;
+  right: calc(0px - var(--totoro-perch-width));
   bottom: 0;
   left: 0;
   height: 21px;
   border-radius: 3px 3px 5px 5px;
   background:
-    linear-gradient(90deg, transparent, rgba(255,226,171,.27) 32%, transparent 56%),
-    linear-gradient(180deg, #c27b45 0 30%, #9a592f 32% 72%, #6e3d20 74% 100%);
-  box-shadow: 0 12px 13px rgba(62,35,17,.3);
+    radial-gradient(
+      ellipse at 31% 8%,
+      color-mix(in oklch, var(--night-gold) 24%, transparent),
+      transparent 30%
+    ),
+    radial-gradient(
+      ellipse at 73% 72%,
+      color-mix(in oklch, var(--night-shadow-warm) 18%, transparent),
+      transparent 36%
+    ),
+    linear-gradient(
+      177deg,
+      color-mix(in oklch, var(--night-wood-lit) 90%, var(--night-dusty)) 0 30%,
+      var(--night-wood-mid) 34% 69%,
+      color-mix(in oklch, var(--night-wood-dark) 92%, var(--night-dusty)) 75% 100%
+    );
+  box-shadow:
+    inset 0 1px color-mix(in oklch, var(--night-text) 12%, transparent),
+    inset 0 -2px color-mix(in oklch, var(--night-shadow) 34%, transparent),
+    0 12px 14px color-mix(in oklch, var(--night-shadow-warm) 66%, transparent);
 }
+
+.wood-shelf::before,
+.wood-shelf::after {
+  content: "";
+  position: absolute;
+  z-index: 1;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+}
+
+.wood-shelf::before {
+  background: url("./assets/night-library/painted-wood-grain.png") 50% 48% / cover no-repeat;
+  opacity: .28;
+  mix-blend-mode: soft-light;
+}
+
+.wood-shelf::after {
+  background:
+    radial-gradient(
+      ellipse at 18% 45%,
+      color-mix(in oklch, var(--night-text) 9%, transparent),
+      transparent 26%
+    ),
+    linear-gradient(
+      180deg,
+      color-mix(in oklch, var(--night-dusty) 16%, transparent),
+      transparent 39% 72%,
+      color-mix(in oklch, var(--night-shadow-warm) 24%, transparent)
+    );
+  opacity: .63;
+}
+
 .wood-shelf span {
   position: absolute;
+  z-index: 2;
   right: 5%;
   bottom: -13px;
   left: 5%;
   height: 13px;
-  background: linear-gradient(90deg, #754120, #a96537 18%, #754120 100%);
+  background:
+    linear-gradient(
+      180deg,
+      color-mix(in oklch, var(--night-dusty) 14%, transparent),
+      transparent 34%
+    ),
+    linear-gradient(
+      91deg,
+      color-mix(in oklch, var(--night-wood-dark) 94%, var(--night-dusty)),
+      var(--night-wood-mid) 18%,
+      color-mix(in oklch, var(--night-wood-dark) 92%, var(--night-shadow-warm)) 100%
+    );
+  box-shadow: inset 0 2px 3px color-mix(in oklch, var(--night-shadow) 34%, transparent);
   clip-path: polygon(0 0, 100% 0, 96% 100%, 4% 100%);
+}
+
+.wood-shelf span::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: url("./assets/night-library/painted-wood-grain.png") 50% 72% / cover no-repeat;
+  opacity: .22;
+  mix-blend-mode: soft-light;
+  pointer-events: none;
 }
 
 .shelf-hint {
   margin: 24px 0 0;
-  color: #9c795e;
+  color: var(--night-text-muted);
   font-size: 12px;
   text-align: center;
 }
-.shelf-hint span { font-family: sans-serif; font-size: 17px; }
+.shelf-hint span { color: var(--night-gold); font-family: sans-serif; font-size: 17px; }
 
 .library-footer {
   display: flex;
@@ -361,12 +984,89 @@ button { font: inherit; }
   justify-content: center;
   gap: 12px;
   margin: clamp(45px, 8vh, 90px) auto 0;
-  color: #997e68;
+  color: var(--night-text-dim);
   font-family: Georgia, serif;
   font-size: 10px;
   letter-spacing: .04em;
 }
-.footer-flower { color: #b47549; font-size: 15px; }
+.footer-flower { color: var(--night-gold); font-size: 15px; }
+
+@media (min-width: 481px) {
+  .shelf-scene {
+    --totoro-perch-width: 96px;
+    --totoro-scene-shift: -36px;
+  }
+
+  .totoro-companion {
+    --totoro-frame-size: 152px;
+    --totoro-breathe-rise: -1.5px;
+    --totoro-breathe-scale-x: 1.008;
+    --totoro-breathe-scale-y: 1.012;
+    --totoro-settle-rise: -.38px;
+    --totoro-settle-scale-x: 1.002;
+    --totoro-settle-scale-y: 1.0035;
+    --totoro-shadow-rest-scale: 1.018;
+    --totoro-shadow-inhale-scale: .95;
+    --totoro-shadow-inhale-opacity: .64;
+    z-index: 2;
+    right: -25px;
+    bottom: 2px;
+  }
+}
+
+@media (min-width: 900px) {
+  .shelf-scene {
+    --totoro-perch-width: 132px;
+    --totoro-scene-shift: -52px;
+  }
+
+  .totoro-companion {
+    --totoro-frame-size: 202px;
+    right: -66px;
+    bottom: 0;
+  }
+}
+
+@media (min-width: 341px) and (max-width: 390px) {
+  .shelf-scene {
+    --totoro-perch-width: 56px;
+    --totoro-scene-shift: -34px;
+  }
+
+  .totoro-companion { right: -66px; }
+}
+
+@media (min-width: 391px) and (max-width: 480px) {
+  .shelf-scene {
+    --totoro-perch-width: 52px;
+    --totoro-scene-shift: -26px;
+  }
+}
+
+@media (max-width: 340px) {
+  .totoro-companion { right: -64px; }
+}
+
+@media (max-width: 480px) {
+  .paper-grain { opacity: .07; }
+
+  .books-row .shelf-book {
+    --book-cloth-size: 1500px;
+    --book-texture-opacity: .1;
+    --book-wear-opacity: .29;
+  }
+
+  .bookend::before { opacity: .2; }
+  .wood-shelf::before { opacity: .18; }
+  .wood-shelf::after { opacity: .48; }
+  .wood-shelf span::before { opacity: .14; }
+
+  .books-row:has(.shelf-book:hover),
+  .books-row:has(.shelf-book:focus-visible),
+  .books-row:has(.shelf-book:active) {
+    z-index: 5;
+  }
+}
 
 /* Reader */
 .reader-overlay {
@@ -927,5 +1627,23 @@ button { font: inherit; }
 }
 
 @media (prefers-reduced-motion: reduce) {
+  .totoro-breathe,
+  .totoro-settle,
+  .totoro-contact-shadow {
+    animation: none !important;
+  }
+
+  .totoro-breathe,
+  .totoro-settle {
+    transform: none !important;
+  }
+
+  .totoro-contact-shadow {
+    transform: translateX(-50%) !important;
+    opacity: .76 !important;
+  }
+
+  .totoro-image-closed { opacity: 0 !important; }
+  .night-video-overlay { opacity: .42; }
   *, *::before, *::after { scroll-behavior: auto !important; animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
 }

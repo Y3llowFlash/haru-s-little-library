@@ -2,6 +2,9 @@
 
 import { forwardRef, useEffect, useRef, useState } from "react";
 import HTMLFlipBook from "react-pageflip";
+import LibraryBgm from "./library-bgm";
+import StarryNightVideo from "./starry-night-video";
+import TotoroShelfCompanion from "./totoro-shelf-companion";
 
 type Book = {
   id: string;
@@ -147,13 +150,18 @@ export default function LittleLibrary() {
 
   return (
     <main className="library-shell">
+      <StarryNightVideo readerOpen={selectedBook !== null} />
+      <div className="night-video-overlay" aria-hidden="true" />
       <div className="paper-grain" aria-hidden="true" />
       <header className="library-header">
         <a className="wordmark" href="#top" aria-label="Haru's Little Library home">
           <span className="wordmark-mark">H</span>
           <span>Haru</span>
         </a>
-        <p>1% Better Every Day</p>
+        <div className="library-header-actions">
+          <p>1% Better Every Day</p>
+          <LibraryBgm readerOpen={selectedBook !== null} />
+        </div>
       </header>
 
       <section className="library-hero" id="top">
@@ -206,6 +214,7 @@ export default function LittleLibrary() {
             ))}
             <div className="bookend bookend-right" aria-hidden="true" />
           </div>
+          <TotoroShelfCompanion readerOpen={selectedBook !== null} />
           <div className="wood-shelf" aria-hidden="true">
             <span />
           </div>
