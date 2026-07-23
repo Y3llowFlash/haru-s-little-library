@@ -1,6 +1,6 @@
 @font-face {
-  font-family: "Yati";
-  src: url("/assets/fonts/YatiUni-Regular.ttf") format("truetype");
+  font-family: "Pu Lone";
+  src: url("/assets/fonts/PT20PuLone-Bold.ttf") format("truetype");
   font-display: swap;
   font-style: normal;
   font-weight: 400;
@@ -24,7 +24,7 @@ body {
   margin: 0;
   background: var(--cream);
   color: var(--ink);
-  font-family: "Yati", Georgia, serif;
+  font-family: "Pu Lone", Georgia, serif;
   min-height: 100vh;
   -webkit-font-smoothing: antialiased;
 }
@@ -504,7 +504,7 @@ button { font: inherit; }
   height: 100%;
   padding: clamp(23px, 4.3vw, 42px) clamp(21px, 4vw, 38px) clamp(30px, 5vw, 48px);
   overflow: hidden;
-  font-family: "Yati", Georgia, serif;
+  font-family: "Pu Lone", Georgia, serif;
   font-size: clamp(14px, 1.5vw, 18px);
   line-height: 1.86;
 }

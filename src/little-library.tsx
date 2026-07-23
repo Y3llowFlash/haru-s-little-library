@@ -214,7 +214,7 @@ export default function LittleLibrary() {
       </section>
 
       <footer className="library-footer">
-        <span>အခုတော့ ၅ အုပ်ပေါ့လေ</span>
+        <span>အခုတော့ ၇ အုပ်ပေါ့လေ</span>
         <span className="footer-flower" aria-hidden="true">✣</span>
         <span>နောက်ကျ အများကြီးထပ်လာမယ်နော် 🙂‍↔️</span>
       </footer>
