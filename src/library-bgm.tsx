@@ -135,6 +135,35 @@ export default function LibraryBgm({ readerOpen }: { readerOpen: boolean }) {
   }, [fadeTo, readerOpen]);
 
   useEffect(() => {
+    const handleFirstInteraction = (event: PointerEvent) => {
+      const target = event.target;
+
+      // The toggle owns its own click so a pointer press on it cannot enable
+      // the music here and then immediately disable it in handleToggle.
+      if (target instanceof Element && target.closest(".library-bgm-toggle")) {
+        return;
+      }
+
+      if (enabledRef.current) return;
+
+      enabledRef.current = true;
+      setEnabled(true);
+      void startPlayback();
+    };
+
+    window.addEventListener("pointerdown", handleFirstInteraction, {
+      capture: true,
+      once: true,
+    });
+
+    return () => {
+      window.removeEventListener("pointerdown", handleFirstInteraction, {
+        capture: true,
+      });
+    };
+  }, [startPlayback]);
+
+  useEffect(() => {
     const handleVisibilityChange = () => {
       const audio = audioRef.current;
       if (!audio) return;

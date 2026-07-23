@@ -112,7 +112,7 @@ button { font: inherit; }
   inset: 0;
   z-index: -1;
   pointer-events: none;
-  opacity: .1;
+  opacity: .04;
   background: url("./assets/night-library/watercolor-paper-texture.png") center / cover no-repeat;
   mix-blend-mode: soft-light;
 }
@@ -669,9 +669,13 @@ button { font: inherit; }
       transparent 31% 72%,
       color-mix(in oklch, var(--night-amber) 9%, transparent)
     ),
-    url("./assets/night-library/painted-wood-grain.png") var(--wood-grain-position) / cover no-repeat;
-  opacity: .32;
-  mix-blend-mode: soft-light;
+    url("./assets/night-library/painted-wood-grain.png");
+  background-position: 0 0, var(--wood-grain-position);
+  background-repeat: no-repeat;
+  background-size: auto, 348px 116px;
+  filter: contrast(1.55) saturate(.84);
+  opacity: .3;
+  mix-blend-mode: normal;
   pointer-events: none;
 }
 
@@ -685,7 +689,7 @@ button { font: inherit; }
   height: 13px;
   border-radius: 2px;
   background:
-    url("./assets/night-library/painted-wood-grain.png") var(--wood-grain-position) / cover no-repeat,
+    url("./assets/night-library/painted-wood-grain.png") var(--wood-grain-position) / 390px 130px no-repeat,
     linear-gradient(
       90deg,
       color-mix(in oklch, var(--night-wood-dark) 91%, var(--night-dusty)),
@@ -916,9 +920,12 @@ button { font: inherit; }
 }
 
 .wood-shelf::before {
-  background: url("./assets/night-library/painted-wood-grain.png") 50% 48% / cover no-repeat;
-  opacity: .28;
-  mix-blend-mode: soft-light;
+  background: url("./assets/night-library/painted-wood-grain.png") 48% 44% / 900px 300px no-repeat;
+  filter: contrast(1.6) saturate(.86);
+  opacity: .34;
+  mix-blend-mode: normal;
+  -webkit-mask-image: linear-gradient(180deg, rgba(0,0,0,.76) 0 24%, #000 31%);
+  mask-image: linear-gradient(180deg, rgba(0,0,0,.76) 0 24%, #000 31%);
 }
 
 .wood-shelf::after {
@@ -934,7 +941,7 @@ button { font: inherit; }
       transparent 39% 72%,
       color-mix(in oklch, var(--night-shadow-warm) 24%, transparent)
     );
-  opacity: .63;
+  opacity: .56;
 }
 
 .wood-shelf span {
@@ -964,9 +971,10 @@ button { font: inherit; }
   content: "";
   position: absolute;
   inset: 0;
-  background: url("./assets/night-library/painted-wood-grain.png") 50% 72% / cover no-repeat;
-  opacity: .22;
-  mix-blend-mode: soft-light;
+  background: url("./assets/night-library/painted-wood-grain.png") 57% 68% / 820px 273px no-repeat;
+  filter: contrast(1.45) saturate(.78);
+  opacity: .18;
+  mix-blend-mode: normal;
   pointer-events: none;
 }
 
@@ -1048,7 +1056,7 @@ button { font: inherit; }
 }
 
 @media (max-width: 480px) {
-  .paper-grain { opacity: .07; }
+  .paper-grain { opacity: .03; }
 
   .books-row .shelf-book {
     --book-cloth-size: 1500px;
@@ -1056,10 +1064,10 @@ button { font: inherit; }
     --book-wear-opacity: .29;
   }
 
-  .bookend::before { opacity: .2; }
-  .wood-shelf::before { opacity: .18; }
+  .bookend::before { opacity: .25; }
+  .wood-shelf::before { opacity: .29; }
   .wood-shelf::after { opacity: .48; }
-  .wood-shelf span::before { opacity: .14; }
+  .wood-shelf span::before { opacity: .15; }
 
   .books-row:has(.shelf-book:hover),
   .books-row:has(.shelf-book:focus-visible),
@@ -1188,18 +1196,39 @@ button { font: inherit; }
   height: 100%;
   overflow: hidden;
   background:
-    linear-gradient(90deg, rgba(81,55,31,.06), transparent 6%, transparent 93%, rgba(81,55,31,.035)),
-    radial-gradient(circle at 32% 18%, rgba(255,255,255,.7), transparent 34%),
+    linear-gradient(90deg, rgba(81,55,31,.085), rgba(120,83,47,.025) 4%, transparent 11%, transparent 92%, rgba(81,55,31,.055)),
+    radial-gradient(ellipse at 31% 16%, rgba(255,255,255,.42), transparent 48%),
+    radial-gradient(ellipse at 76% 82%, rgba(179,126,69,.028), transparent 52%),
     #fffaf0;
 }
 
 .book-page.--left .page-paper {
   background:
-    linear-gradient(90deg, rgba(81,55,31,.025), transparent 8%, transparent 91%, rgba(81,55,31,.1)),
+    linear-gradient(90deg, rgba(81,55,31,.045), transparent 8%, transparent 89%, rgba(120,83,47,.035) 94%, rgba(81,55,31,.12)),
+    radial-gradient(ellipse at 69% 17%, rgba(255,255,255,.38), transparent 48%),
+    radial-gradient(ellipse at 24% 79%, rgba(179,126,69,.026), transparent 52%),
     #fffaf0;
 }
 
+.page-paper::before {
+  content: "";
+  position: absolute;
+  z-index: 0;
+  inset: 0;
+  background: url("./assets/night-library/watercolor-paper-texture.png") center / cover no-repeat;
+  filter: brightness(.65) contrast(2.2) saturate(.62);
+  mix-blend-mode: multiply;
+  opacity: .17;
+  pointer-events: none;
+}
+
+.book-cover-page .page-paper::before {
+  content: none;
+}
+
 .page-content {
+  position: relative;
+  z-index: 1;
   width: 100%;
   height: 100%;
   padding: clamp(23px, 4.3vw, 42px) clamp(21px, 4vw, 38px) clamp(30px, 5vw, 48px);
@@ -1454,6 +1483,7 @@ button { font: inherit; }
 
 .page-number {
   position: absolute;
+  z-index: 1;
   bottom: 12px;
   left: 50%;
   color: #a08b76;
@@ -1600,6 +1630,7 @@ button { font: inherit; }
   .reader-progress { width: 48px; }
   .reader-heading strong { font-size: 11px; }
   .flipbook-stage { width: 100%; height: calc(100dvh - 132px); max-height: 760px; }
+  .page-paper::before { opacity: .12; }
   .page-content { padding: 25px 22px 36px; font-size: 16px; line-height: 1.88; }
   .page-content img { max-height: 210px; }
   .reader-controls { margin-top: -2px; }
