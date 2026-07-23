@@ -1,6 +1,6 @@
 @font-face {
-  font-family: "Yati";
-  src: url("/assets/fonts/YatiUni-Regular.ttf") format("truetype");
+  font-family: "PuPu";
+  src: url("/assets/fonts/M01_PuPu-Regular.ttf") format("truetype");
   font-display: swap;
   font-style: normal;
   font-weight: 400;
@@ -24,7 +24,7 @@ body {
   margin: 0;
   background: var(--cream);
   color: var(--ink);
-  font-family: "Yati", Georgia, serif;
+  font-family: "PuPu", Georgia, serif;
   min-height: 100vh;
   -webkit-font-smoothing: antialiased;
 }
@@ -349,6 +349,8 @@ button { font: inherit; }
 
 .shelf-runner {
   --runner-width: 64px;
+  --runner-height: 80px;
+  --runner-cycle-duration: .64s;
   position: absolute;
   z-index: 4;
   right: 4%;
@@ -364,47 +366,128 @@ button { font: inherit; }
   bottom: 0;
   left: 0;
   width: var(--runner-width);
+  height: var(--runner-height);
   transform-origin: center bottom;
   animation: shelf-runner-crossing 12s linear infinite;
   will-change: left, transform;
 }
 
-.shelf-runner img {
-  display: block;
-  width: 100%;
-  height: auto;
-  -webkit-user-drag: none;
-  user-select: none;
-  filter: drop-shadow(0 4px 3px rgba(53, 28, 13, .24));
-  animation: shelf-runner-bounce .22s ease-in-out infinite alternate;
+.shelf-runner-sprite::before {
+  content: "";
+  position: absolute;
+  z-index: -2;
+  top: 39%;
+  left: 72%;
+  width: 34px;
+  height: 17px;
+  background:
+    linear-gradient(90deg, rgba(132, 80, 39, .42), transparent) 0 2px / 100% 1px no-repeat,
+    linear-gradient(90deg, rgba(132, 80, 39, .3), transparent) 7px 8px / 82% 1px no-repeat,
+    linear-gradient(90deg, rgba(132, 80, 39, .22), transparent) 3px 14px / 64% 1px no-repeat;
+  transform-origin: left center;
+  animation: shelf-runner-speed-lines var(--runner-cycle-duration) step-end infinite;
 }
 
+.shelf-runner-sprite::after {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  right: 16%;
+  bottom: -1px;
+  left: 16%;
+  height: 5px;
+  border-radius: 50%;
+  background: rgba(53, 28, 13, .22);
+  filter: blur(2px);
+  transform-origin: center;
+  animation: shelf-runner-shadow var(--runner-cycle-duration) step-end infinite;
+}
+
+.shelf-runner-cycle {
+  display: block;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  filter: drop-shadow(0 4px 3px rgba(53, 28, 13, .24));
+  transform-origin: center bottom;
+  animation: shelf-runner-body var(--runner-cycle-duration) step-end infinite;
+}
+
+.shelf-runner-cycle img {
+  display: block;
+  width: 800%;
+  max-width: none;
+  height: 100%;
+  -webkit-user-drag: none;
+  user-select: none;
+  animation: shelf-runner-frames var(--runner-cycle-duration) steps(8, end) infinite;
+  will-change: transform;
+}
+
+/* Every frame in the run-cycle sheet natively faces left. */
 @keyframes shelf-runner-crossing {
-  0%, 3% {
+  0%, 1% {
     left: 0;
-    transform: scaleX(-1);
+    transform: translateY(0) scaleX(-1) rotate(-2deg);
   }
-  47% {
+  47.5% {
     left: calc(100% - var(--runner-width));
-    transform: scaleX(-1);
+    transform: translateY(0) scaleX(-1) rotate(-2deg);
   }
-  50% {
+  48% {
     left: calc(100% - var(--runner-width));
-    transform: scaleX(1);
+    transform: translateY(1px) scaleX(-1.04) scaleY(.94) rotate(1deg);
   }
-  97% {
+  49.99% {
+    left: calc(100% - var(--runner-width));
+    transform: translateY(1px) scaleX(-.82) scaleY(1.05);
+  }
+  50%, 51% {
+    left: calc(100% - var(--runner-width));
+    transform: translateY(0) scaleX(1) rotate(-2deg);
+  }
+  97.5% {
     left: 0;
-    transform: scaleX(1);
+    transform: translateY(0) scaleX(1) rotate(-2deg);
+  }
+  98% {
+    left: 0;
+    transform: translateY(1px) scaleX(1.04) scaleY(.94) rotate(1deg);
+  }
+  99.99% {
+    left: 0;
+    transform: translateY(1px) scaleX(.82) scaleY(1.05);
   }
   100% {
     left: 0;
-    transform: scaleX(-1);
+    transform: translateY(0) scaleX(-1) rotate(-2deg);
   }
 }
 
-@keyframes shelf-runner-bounce {
-  from { transform: translateY(0) rotate(-2deg); }
-  to { transform: translateY(-3px) rotate(2deg); }
+@keyframes shelf-runner-frames {
+  from { transform: translateX(0); }
+  to { transform: translateX(-100%); }
+}
+
+@keyframes shelf-runner-body {
+  0%, 50%, 100% { transform: translateY(-2px) scale(.99, 1.01); }
+  12.5%, 62.5% { transform: translateY(1px) scale(1.025, .965); }
+  25%, 75% { transform: translateY(0) scale(1.01, .99); }
+  37.5%, 87.5% { transform: translateY(-3px) scale(.99, 1.02); }
+}
+
+@keyframes shelf-runner-shadow {
+  0%, 50%, 100% { transform: scaleX(.68); opacity: .46; }
+  12.5%, 62.5% { transform: scaleX(1.08); opacity: .84; }
+  25%, 75% { transform: scaleX(.92); opacity: .7; }
+  37.5%, 87.5% { transform: scaleX(.62); opacity: .38; }
+}
+
+@keyframes shelf-runner-speed-lines {
+  0%, 50%, 100% { opacity: .48; transform: scaleX(.92); }
+  12.5%, 62.5% { opacity: .08; transform: scaleX(.45); }
+  25%, 75% { opacity: .24; transform: scaleX(.7); }
+  37.5%, 87.5% { opacity: .58; transform: scaleX(1); }
 }
 
 .shelf-hint {
@@ -564,7 +647,7 @@ button { font: inherit; }
   height: 100%;
   padding: clamp(23px, 4.3vw, 42px) clamp(21px, 4vw, 38px) clamp(30px, 5vw, 48px);
   overflow: hidden;
-  font-family: "Yati", Georgia, serif;
+  font-family: "PuPu", Georgia, serif;
   font-size: clamp(14px, 1.5vw, 18px);
   line-height: 1.86;
 }
@@ -956,6 +1039,7 @@ button { font: inherit; }
   .bookend { flex-basis: 14px; }
   .shelf-runner {
     --runner-width: 52px;
+    --runner-height: 65px;
     right: 2%;
     left: 2%;
     height: 70px;
@@ -999,5 +1083,11 @@ button { font: inherit; }
     animation: none !important;
     transform: translateX(-50%);
   }
-  .shelf-runner img { animation: none !important; }
+  .shelf-runner-sprite::before { display: none; }
+  .shelf-runner-sprite::after,
+  .shelf-runner-cycle,
+  .shelf-runner-cycle img {
+    animation: none !important;
+    transform: none !important;
+  }
 }
