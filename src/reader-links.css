@@ -43,8 +43,7 @@
 
 .page-content a.reader-book-link:focus-visible,
 .page-content a.reader-home-link:focus-visible,
-.page-content a.reader-external-link:focus-visible,
-.reader-related-book:focus-visible {
+.page-content a.reader-external-link:focus-visible {
   border-radius: 4px;
   outline: 2px solid rgba(129, 80, 47, .58);
   outline-offset: 3px;
@@ -67,93 +66,6 @@
   font-size: .72em;
   font-weight: 400;
   white-space: nowrap;
-}
-
-.reader-related-books {
-  width: min(100%, 360px);
-  margin: 1.25rem auto 0;
-  padding-top: 1rem;
-  border-top: 1px solid rgba(118, 87, 58, .24);
-  text-align: left;
-}
-
-.reader-related-heading {
-  display: block;
-  margin-bottom: .62rem;
-  color: #70503a;
-  font-size: .88rem;
-  letter-spacing: .02em;
-  text-align: center;
-}
-
-.reader-related-list {
-  display: grid;
-  gap: .48rem;
-}
-
-.reader-related-book {
-  display: grid;
-  grid-template-columns: auto minmax(0, 1fr);
-  align-items: center;
-  gap: .68rem;
-  padding: .58rem .7rem;
-  border: 1px solid rgba(118, 87, 58, .22);
-  border-radius: 9px;
-  background: rgba(255, 249, 235, .52);
-  color: #513522;
-  text-decoration: none;
-  transition: border-color 160ms ease, background-color 160ms ease, transform 160ms ease;
-}
-
-.reader-related-book span {
-  color: #9a714b;
-  font-family: Georgia, serif;
-  font-size: .62rem;
-  letter-spacing: .08em;
-  white-space: nowrap;
-}
-
-.reader-related-book b {
-  min-width: 0;
-  overflow: hidden;
-  font-size: .78rem;
-  font-weight: 700;
-  line-height: 1.45;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
-
-.end-page .reader-related-books {
-  width: min(82%, 330px);
-  margin-top: 1rem;
-  border-top-color: rgba(248, 234, 210, .22);
-}
-
-.end-page .reader-related-heading {
-  color: rgba(248, 234, 210, .82);
-}
-
-.end-page .reader-related-book {
-  border-color: rgba(248, 234, 210, .24);
-  background: rgba(255, 246, 226, .09);
-  color: #fff2dc;
-}
-
-.end-page .reader-related-book span {
-  color: #d7b98d;
-}
-
-@media (hover: hover) {
-  .reader-related-book:hover {
-    border-color: rgba(118, 87, 58, .42);
-    background: rgba(255, 249, 235, .82);
-    transform: translateY(-1px);
-  }
-
-  .end-page .reader-related-book:hover {
-    border-color: rgba(248, 234, 210, .42);
-    background: rgba(255, 246, 226, .16);
-  }
 }
 
 .reader-overlay .flipbook-stage {
@@ -182,24 +94,4 @@ body.reader-book-switching .reader-overlay .flipbook-stage::after {
   font-size: .82rem;
   pointer-events: none;
   transform: translate(-50%, -50%);
-}
-
-@media (max-width: 759px) {
-  .reader-related-books {
-    margin-top: .9rem;
-    padding-top: .72rem;
-  }
-
-  .reader-related-book {
-    padding: .5rem .58rem;
-  }
-
-  .reader-related-book b {
-    font-size: .72rem;
-  }
-
-  .end-page .reader-related-books {
-    width: 84%;
-    margin-top: .72rem;
-  }
 }
