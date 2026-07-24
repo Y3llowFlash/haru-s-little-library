@@ -123,11 +123,36 @@
   white-space: nowrap;
 }
 
+.end-page .reader-related-books {
+  width: min(82%, 330px);
+  margin-top: 1rem;
+  border-top-color: rgba(248, 234, 210, .22);
+}
+
+.end-page .reader-related-heading {
+  color: rgba(248, 234, 210, .82);
+}
+
+.end-page .reader-related-book {
+  border-color: rgba(248, 234, 210, .24);
+  background: rgba(255, 246, 226, .09);
+  color: #fff2dc;
+}
+
+.end-page .reader-related-book span {
+  color: #d7b98d;
+}
+
 @media (hover: hover) {
   .reader-related-book:hover {
     border-color: rgba(118, 87, 58, .42);
     background: rgba(255, 249, 235, .82);
     transform: translateY(-1px);
+  }
+
+  .end-page .reader-related-book:hover {
+    border-color: rgba(248, 234, 210, .42);
+    background: rgba(255, 246, 226, .16);
   }
 }
 
@@ -171,5 +196,10 @@ body.reader-book-switching .reader-overlay .flipbook-stage::after {
 
   .reader-related-book b {
     font-size: .72rem;
+  }
+
+  .end-page .reader-related-books {
+    width: 84%;
+    margin-top: .72rem;
   }
 }
