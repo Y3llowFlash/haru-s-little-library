@@ -1,6 +1,7 @@
 {
   "name": "haru-s-little-library",
   "version": "1.0.0",
+  "description": "A mobile-first Burmese reading library with day and night scenes and an interactive page-turning reader.",
   "private": true,
   "type": "module",
   "engines": {
