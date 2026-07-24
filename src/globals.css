@@ -1037,22 +1037,29 @@ button { font: inherit; }
 
 @media (min-width: 341px) and (max-width: 390px) {
   .shelf-scene {
-    --totoro-perch-width: 56px;
-    --totoro-scene-shift: -34px;
+    --totoro-perch-width: 80px;
+    --totoro-scene-shift: -36px;
   }
 
-  .totoro-companion { right: -66px; }
+  .totoro-companion { right: -70px; }
 }
 
 @media (min-width: 391px) and (max-width: 480px) {
   .shelf-scene {
-    --totoro-perch-width: 52px;
-    --totoro-scene-shift: -26px;
+    --totoro-perch-width: 68px;
+    --totoro-scene-shift: -34px;
   }
+
+  .totoro-companion { right: -58px; }
 }
 
 @media (max-width: 340px) {
-  .totoro-companion { right: -64px; }
+  .shelf-scene {
+    --totoro-perch-width: 76px;
+    --totoro-scene-shift: -34px;
+  }
+
+  .totoro-companion { right: -66px; }
 }
 
 @media (max-width: 480px) {
@@ -1616,14 +1623,49 @@ button { font: inherit; }
 }
 
 @media (max-width: 760px) {
-  .library-shell { min-height: 100svh; padding-top: 16px; }
+  .library-shell {
+    min-height: 100svh;
+    padding-top: max(18px, env(safe-area-inset-top));
+    padding-bottom: calc(36px + env(safe-area-inset-bottom));
+  }
+  .library-header { width: calc(100% - 4px); }
   .library-header p { display: none; }
-  .library-hero { margin-top: clamp(38px, 7vh, 62px); }
-  .library-hero h1 { max-width: 340px; margin-inline: auto; }
-  .shelf-scene { margin-top: 6px; }
-  .shelf-wall { min-height: 250px; padding-inline: 0; }
+  .library-hero {
+    margin-top: clamp(48px, 7.5vh, 64px);
+    margin-bottom: 0;
+  }
+  .library-hero br { display: none; }
+  .eyebrow { margin-bottom: 14px; }
+  .library-hero h1 {
+    min-width: 0;
+    max-width: 100%;
+    margin-inline: auto;
+    font-size: clamp(34px, 9.5vw, 37px);
+    line-height: .94;
+    overflow-wrap: anywhere;
+  }
+  .shelf-scene {
+    --mobile-shelf-scale: .96;
+    margin-top: 20px;
+  }
+  .shelf-wall {
+    min-height: 250px;
+    padding-inline: 0;
+    transform: translateX(var(--totoro-scene-shift)) scale(var(--mobile-shelf-scale));
+    transform-origin: bottom center;
+  }
   .books-row { min-height: 220px; gap: 3px; padding-inline: 6px; }
   .bookend { flex-basis: 14px; }
+  .shelf-hint {
+    margin-top: 24px;
+    font-size: 11px;
+    line-height: 1.55;
+  }
+  .shelf-hint span { font-size: 14px; }
+  .library-footer {
+    margin-top: clamp(58px, 8vh, 70px);
+    line-height: 1.65;
+  }
 
   .reader-overlay { padding-inline: 8px; }
   .reader-toolbar { grid-template-columns: 42px minmax(0,1fr) 52px; }
@@ -1638,6 +1680,8 @@ button { font: inherit; }
 }
 
 @media (max-width: 480px) {
+  .shelf-scene { --mobile-shelf-scale: .9; }
+
   .shelf-book {
     flex-basis: var(--book-mobile-width);
     width: var(--book-mobile-width);
@@ -1645,9 +1689,17 @@ button { font: inherit; }
 }
 
 @media (max-width: 380px) {
-  .books-row { width: 116%; margin-left: -8%; transform: scale(.88); }
-  .book-title-card { margin-bottom: 5px; }
-  .shelf-hint { margin-top: 15px; }
+  .shelf-scene { --mobile-shelf-scale: .87; }
+  .book-title-card { margin-bottom: 12px; }
+}
+
+@media (min-width: 381px) and (max-width: 390px) {
+  .shelf-scene { --mobile-shelf-scale: .88; }
+}
+
+@media (max-width: 340px) {
+  .shelf-scene { --mobile-shelf-scale: .86; }
+  .library-hero h1 { letter-spacing: -.055em; }
 }
 
 @media (max-height: 700px) and (max-width: 760px) {
