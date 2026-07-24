@@ -104,6 +104,7 @@ function decorateAnchor(anchor: HTMLAnchorElement, activeBookId: string | null) 
   anchor.removeAttribute("data-link-status");
   anchor.removeAttribute("aria-current");
   anchor.removeAttribute("aria-disabled");
+  anchor.removeAttribute("tabindex");
 
   const linkedBookId = bookIdFromHref(rawHref);
   if (linkedBookId && libraryBooks[linkedBookId]) {
@@ -138,6 +139,7 @@ function decorateAnchor(anchor: HTMLAnchorElement, activeBookId: string | null) 
     anchor.href = "#";
     anchor.classList.add("reader-link-unavailable");
     anchor.setAttribute("aria-disabled", "true");
+    anchor.setAttribute("tabindex", "-1");
     anchor.dataset.linkStatus = "စင်ပေါ် မရောက်သေးပါ";
     anchor.title = "ဒီအကြောင်းအရာကို စာအုပ်စင်ထဲ မထည့်ရသေးပါ";
     anchor.removeAttribute("target");
@@ -152,12 +154,16 @@ function decorateAnchor(anchor: HTMLAnchorElement, activeBookId: string | null) 
   }
 }
 
+function isLibraryBook(book: LibraryBook | undefined): book is LibraryBook {
+  return Boolean(book);
+}
+
 function createRelatedBooks(endPage: HTMLElement, activeBookId: string) {
   if (endPage.querySelector(".reader-related-books")) return;
   const activeBook = libraryBooks[activeBookId];
   if (!activeBook) return;
 
-  const related = activeBook.related.map((id) => libraryBooks[id]).filter(Boolean);
+  const related = activeBook.related.map((id) => libraryBooks[id]).filter(isLibraryBook);
   if (!related.length) return;
 
   const nav = document.createElement("nav");
