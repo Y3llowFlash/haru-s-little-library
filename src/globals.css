@@ -1702,6 +1702,66 @@ button { font: inherit; }
   .library-hero h1 { letter-spacing: -.055em; }
 }
 
+/* Keep the complete shelf illustration comfortably inside phone gutters. */
+@media (max-width: 767px) {
+  .shelf-scene {
+    --mobile-shelf-scale: .83;
+    --mobile-shelf-nudge: -4px;
+  }
+
+  .shelf-wall {
+    transform:
+      translateX(calc(var(--totoro-scene-shift) + var(--mobile-shelf-nudge)))
+      scale(var(--mobile-shelf-scale));
+    transform-origin: center bottom;
+  }
+
+  .shelf-hint { margin-top: 36px; }
+}
+
+@media (max-width: 480px) {
+  .shelf-scene { --mobile-shelf-nudge: 5.5px; }
+}
+
+@media (max-width: 400px) {
+  .shelf-scene { --mobile-shelf-scale: .8; }
+}
+
+@media (max-width: 389px) {
+  .shelf-scene { --mobile-shelf-scale: .75; }
+}
+
+@media (min-width: 341px) and (max-width: 389px) {
+  .shelf-scene {
+    --totoro-perch-width: 96px;
+    --mobile-shelf-nudge: 0px;
+  }
+  .totoro-companion { right: -86px; }
+}
+
+@media (max-width: 340px) {
+  .shelf-scene {
+    --mobile-shelf-scale: .75;
+    --mobile-shelf-nudge: 2.5px;
+  }
+}
+
+/* Existing illustration-size steps need small scale corrections to keep equal visual gutters. */
+@media (min-width: 481px) and (max-width: 540px) {
+  .shelf-scene { --mobile-shelf-scale: .8; }
+}
+
+@media (min-width: 661px) and (max-width: 760px) {
+  .shelf-scene { --mobile-shelf-scale: .85; }
+}
+
+@media (min-width: 761px) and (max-width: 767px) {
+  .shelf-scene {
+    --mobile-shelf-scale: .93;
+    --mobile-shelf-nudge: -9px;
+  }
+}
+
 @media (max-height: 700px) and (max-width: 760px) {
   .reader-toolbar { min-height: 42px; }
   .flipbook-stage { height: calc(100dvh - 116px); }
