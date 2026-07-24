@@ -153,6 +153,19 @@ export default function LittleLibrary() {
   }, []);
 
   useEffect(() => {
+    document.body.classList.add("library-page-active");
+
+    return () => {
+      document.body.classList.remove("library-page-active");
+      document.body.removeAttribute("data-library-theme");
+    };
+  }, []);
+
+  useEffect(() => {
+    document.body.dataset.libraryTheme = libraryTheme;
+  }, [libraryTheme]);
+
+  useEffect(() => {
     const themePreference = window.matchMedia("(prefers-color-scheme: dark)");
     const handleThemeChange = (event: MediaQueryListEvent) => {
       setLibraryTheme(event.matches ? "night" : "day");
