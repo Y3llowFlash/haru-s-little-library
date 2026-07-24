@@ -2,7 +2,6 @@ type LibraryBook = {
   id: string;
   number: string;
   title: string;
-  related: string[];
 };
 
 const libraryBooks: Record<string, LibraryBook> = {
@@ -10,43 +9,36 @@ const libraryBooks: Record<string, LibraryBook> = {
     id: "post00001",
     number: "001",
     title: "ပိုကြိုးစားတိုင်း စာပိုရလာမယ်လို့ ထင်နေတုန်းပဲလား?",
-    related: ["post00004", "post00009"],
   },
   post00004: {
     id: "post00004",
     number: "004",
     title: "စာမလုပ်ဘဲ စာရနိုင်မယ့်နည်းလမ်းရှိလား?",
-    related: ["post00001", "post00006"],
   },
   post00006: {
     id: "post00006",
     number: "006",
     title: "စာကျက်တိုင်း စာမရနေတာ ဘာကြောင့်လဲ?",
-    related: ["post00007", "post00001"],
   },
   post00007: {
     id: "post00007",
     number: "007",
     title: "Active Recall — စာကျက်ပြီး စာမရတာမျိုး မဖြစ်စေမယ့် စာလုပ်နည်း",
-    related: ["post00006", "post00009"],
   },
   post00009: {
     id: "post00009",
     number: "009",
     title: "စာလုပ်ချိန်နည်းနည်းနဲ့ အမှတ်များများရစေမယ့် စာလုပ်နည်း (၅) ခု",
-    related: ["post00004", "post00007"],
   },
   post00014: {
     id: "post00014",
     number: "014",
     title: "စာလုပ်ဖို့ ပျင်းနေတာ သင့်အမှားမဟုတ်ဘူး",
-    related: ["post00004", "post00015"],
   },
   post00015: {
     id: "post00015",
     number: "015",
     title: "စာမေးပွဲမှာ မလျှမ်းအောင် ဘယ်လိုဖြေမလဲ?",
-    related: ["post00006", "post00014"],
   },
 };
 
@@ -154,50 +146,9 @@ function decorateAnchor(anchor: HTMLAnchorElement, activeBookId: string | null) 
   }
 }
 
-function isLibraryBook(book: LibraryBook | undefined): book is LibraryBook {
-  return Boolean(book);
-}
-
-function createRelatedBooks(endPage: HTMLElement, activeBookId: string) {
-  if (endPage.querySelector(".reader-related-books")) return;
-  const activeBook = libraryBooks[activeBookId];
-  if (!activeBook) return;
-
-  const related = activeBook.related.map((id) => libraryBooks[id]).filter(isLibraryBook);
-  if (!related.length) return;
-
-  const nav = document.createElement("nav");
-  nav.className = "reader-related-books";
-  nav.setAttribute("aria-label", "ဆက်ဖတ်ရန် စာအုပ်များ");
-
-  const heading = document.createElement("strong");
-  heading.className = "reader-related-heading";
-  heading.textContent = "နောက်တစ်အုပ် ဆက်ဖတ်မယ်";
-  nav.appendChild(heading);
-
-  const list = document.createElement("div");
-  list.className = "reader-related-list";
-
-  related.forEach((book) => {
-    const link = document.createElement("a");
-    link.className = "reader-related-book";
-    link.href = `?book=${book.id}`;
-    link.dataset.originalHref = `?book=${book.id}`;
-    link.dataset.bookId = book.id;
-    link.innerHTML = `<span>BOOK ${book.number}</span><b>${book.title}</b>`;
-    list.appendChild(link);
-  });
-
-  nav.appendChild(list);
-  endPage.appendChild(nav);
-}
-
 function decorateReaderLinks(root: ParentNode = document) {
   const activeBookId = currentBookId();
   root.querySelectorAll<HTMLAnchorElement>(".reader-overlay .page-content a").forEach((anchor) => decorateAnchor(anchor, activeBookId));
-
-  if (!activeBookId) return;
-  root.querySelectorAll<HTMLElement>(".reader-overlay .end-page").forEach((endPage) => createRelatedBooks(endPage, activeBookId));
 }
 
 function showBookSwitchingState() {
