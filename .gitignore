@@ -19,3 +19,5 @@ npm-debug.log*
 .DS_Store
 .idea/
 .vscode/
+src/assets/night-library/bgm.mp4
+src/assets/night-library/bgm-CZeFZX4T.m4a

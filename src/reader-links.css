@@ -1,0 +1,97 @@
+.page-content a.reader-book-link,
+.page-content a.reader-home-link,
+.page-content a.reader-external-link {
+  color: #81502f;
+  font-weight: 700;
+  text-decoration-color: rgba(129, 80, 47, .34);
+  text-decoration-line: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: .2em;
+  transition: color 160ms ease, text-decoration-color 160ms ease;
+}
+
+.page-content a.reader-book-link::after {
+  content: "  ↗";
+  font-family: Georgia, serif;
+  font-size: .78em;
+  font-weight: 400;
+  white-space: nowrap;
+}
+
+.page-content a.reader-home-link::after {
+  content: "  ↩";
+  font-family: Georgia, serif;
+  font-size: .82em;
+}
+
+.page-content a.reader-external-link::after {
+  content: "  ↗";
+  font-family: Georgia, serif;
+  font-size: .72em;
+  opacity: .72;
+}
+
+.page-content a.reader-book-link:hover,
+.page-content a.reader-book-link:focus-visible,
+.page-content a.reader-home-link:hover,
+.page-content a.reader-home-link:focus-visible,
+.page-content a.reader-external-link:hover,
+.page-content a.reader-external-link:focus-visible {
+  color: #57321d;
+  text-decoration-color: currentColor;
+}
+
+.page-content a.reader-book-link:focus-visible,
+.page-content a.reader-home-link:focus-visible,
+.page-content a.reader-external-link:focus-visible {
+  border-radius: 4px;
+  outline: 2px solid rgba(129, 80, 47, .58);
+  outline-offset: 3px;
+}
+
+.page-content a.reader-book-link.is-current-book,
+.page-content a.reader-link-unavailable {
+  color: #887769;
+  cursor: default;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.page-content a.reader-book-link.is-current-book::after,
+.page-content a.reader-link-unavailable::after {
+  content: "  ·  " attr(data-link-status);
+  display: inline;
+  color: #9b8b7d;
+  font-family: inherit;
+  font-size: .72em;
+  font-weight: 400;
+  white-space: nowrap;
+}
+
+.reader-overlay .flipbook-stage {
+  position: relative;
+}
+
+.reader-overlay .flipbook {
+  transition: opacity 180ms ease;
+}
+
+body.reader-book-switching .reader-overlay .flipbook {
+  opacity: 0;
+}
+
+body.reader-book-switching .reader-overlay .flipbook-stage::after {
+  content: "နောက်စာအုပ်ကို ဖွင့်နေပါတယ်…";
+  position: absolute;
+  z-index: 60;
+  top: 50%;
+  left: 50%;
+  padding: .72rem 1rem;
+  border: 1px solid rgba(238, 220, 190, .26);
+  border-radius: 999px;
+  background: rgba(37, 29, 25, .76);
+  color: #f1e5cd;
+  font-size: .82rem;
+  pointer-events: none;
+  transform: translate(-50%, -50%);
+}
