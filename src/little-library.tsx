@@ -3,7 +3,10 @@
 import { forwardRef, useEffect, useRef, useState } from "react";
 import HTMLFlipBook from "react-pageflip";
 import LibraryBgm from "./library-bgm";
-import StarryNightVideo from "./starry-night-video";
+import LibraryBackgroundVideo, {
+  getSystemTheme,
+  type LibraryTheme,
+} from "./starry-night-video";
 import TotoroShelfCompanion from "./totoro-shelf-companion";
 
 type Book = {
@@ -128,6 +131,7 @@ const books: Book[] = [
 export default function LittleLibrary() {
   const [selectedBook, setSelectedBook] = useState<Book | null>(null);
   const [hoveredBook, setHoveredBook] = useState<Book | null>(null);
+  const [libraryTheme, setLibraryTheme] = useState<LibraryTheme>(getSystemTheme);
 
   const openBook = (book: Book) => {
     setSelectedBook(book);
@@ -148,11 +152,29 @@ export default function LittleLibrary() {
     return () => window.removeEventListener("popstate", handlePopState);
   }, []);
 
+  useEffect(() => {
+    const themePreference = window.matchMedia("(prefers-color-scheme: dark)");
+    const handleThemeChange = (event: MediaQueryListEvent) => {
+      setLibraryTheme(event.matches ? "night" : "day");
+    };
+
+    themePreference.addEventListener("change", handleThemeChange);
+    return () => themePreference.removeEventListener("change", handleThemeChange);
+  }, []);
+
+  const toggleTheme = () => {
+    setLibraryTheme((currentTheme) => currentTheme === "night" ? "day" : "night");
+  };
+
+  const themeToggleLabel =
+    libraryTheme === "night" ? "Switch to day mode" : "Switch to night mode";
+
   return (
     <main className="library-shell">
-      <StarryNightVideo readerOpen={selectedBook !== null} />
-      <div className="night-video-overlay" aria-hidden="true" />
-      <div className="paper-grain" aria-hidden="true" />
+      <LibraryBackgroundVideo
+        readerOpen={selectedBook !== null}
+        requestedTheme={libraryTheme}
+      />
       <header className="library-header">
         <a className="wordmark" href="#top" aria-label="Haru's Little Library home">
           <span className="wordmark-mark">H</span>
@@ -160,6 +182,25 @@ export default function LittleLibrary() {
         </a>
         <div className="library-header-actions">
           <p>1% Better Every Day</p>
+          <button
+            className="library-theme-toggle"
+            type="button"
+            aria-label={themeToggleLabel}
+            aria-pressed={libraryTheme === "night"}
+            title={themeToggleLabel}
+            onClick={toggleTheme}
+          >
+            {libraryTheme === "night" ? (
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <circle cx="12" cy="12" r="3.25" />
+                <path d="M12 2.75v2M12 19.25v2M2.75 12h2M19.25 12h2M5.46 5.46l1.42 1.42M17.12 17.12l1.42 1.42M18.54 5.46l-1.42 1.42M6.88 17.12l-1.42 1.42" />
+              </svg>
+            ) : (
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M19.35 15.1A8.25 8.25 0 0 1 8.9 4.65 8.25 8.25 0 1 0 19.35 15.1Z" />
+              </svg>
+            )}
+          </button>
           <LibraryBgm readerOpen={selectedBook !== null} />
         </div>
       </header>

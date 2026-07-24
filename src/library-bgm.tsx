@@ -138,9 +138,12 @@ export default function LibraryBgm({ readerOpen }: { readerOpen: boolean }) {
     const handleFirstInteraction = (event: PointerEvent) => {
       const target = event.target;
 
-      // The toggle owns its own click so a pointer press on it cannot enable
-      // the music here and then immediately disable it in handleToggle.
-      if (target instanceof Element && target.closest(".library-bgm-toggle")) {
+      // Header controls own their clicks, so neither the music toggle nor the
+      // visual-theme toggle can accidentally enable audio through this handler.
+      if (
+        target instanceof Element &&
+        target.closest(".library-bgm-toggle, .library-theme-toggle")
+      ) {
         return;
       }
 
