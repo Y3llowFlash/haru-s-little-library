@@ -7,7 +7,16 @@ import starryBackgroundPoster from "./assets/night-library/starry-background-pos
 import starryBackground from "./assets/night-library/starry_background.mp4";
 
 export type LibraryTheme = "day" | "night";
-type TransitionPhase = "covering" | "idle" | "revealing";
+type LayerSlot = "primary" | "secondary";
+type TransitionState = {
+  from: LayerSlot;
+  to: LayerSlot;
+  phase: "loading" | "crossfading";
+};
+
+const CROSSFADE_DURATION = 1400;
+const REDUCED_MOTION_CROSSFADE_DURATION = 180;
+const INCOMING_VIDEO_TIMEOUT = 2600;
 
 const libraryBackgrounds = {
   day: {
@@ -26,62 +35,16 @@ export const getSystemTheme = (): LibraryTheme =>
 const getMotionAllowed = () =>
   !window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
+const getOtherSlot = (slot: LayerSlot): LayerSlot =>
+  slot === "primary" ? "secondary" : "primary";
+
 function safelyPlay(video: HTMLVideoElement) {
   const playRequest = video.play();
   if (playRequest) {
     void playRequest.catch(() => {
-      // Decorative media can remain on its current frame when autoplay is unavailable.
+      // Decorative media can remain on its poster/current frame when autoplay is unavailable.
     });
   }
-}
-
-function waitForDelay(duration: number, signal: AbortSignal) {
-  return new Promise<void>((resolve) => {
-    if (signal.aborted) {
-      resolve();
-      return;
-    }
-
-    const finish = () => {
-      window.clearTimeout(timeout);
-      signal.removeEventListener("abort", finish);
-      resolve();
-    };
-    const timeout = window.setTimeout(finish, duration);
-    signal.addEventListener("abort", finish, { once: true });
-  });
-}
-
-function waitForVideoReady(video: HTMLVideoElement, signal: AbortSignal) {
-  return new Promise<"aborted" | "error" | "ready">((resolve) => {
-    if (signal.aborted) {
-      resolve("aborted");
-      return;
-    }
-
-    if (video.readyState >= HTMLMediaElement.HAVE_CURRENT_DATA) {
-      resolve("ready");
-      return;
-    }
-
-    const finish = (result: "aborted" | "error" | "ready") => {
-      window.clearTimeout(timeout);
-      video.removeEventListener("loadeddata", handleReady);
-      video.removeEventListener("canplay", handleReady);
-      video.removeEventListener("error", handleError);
-      signal.removeEventListener("abort", handleAbort);
-      resolve(result);
-    };
-    const handleReady = () => finish("ready");
-    const handleError = () => finish("error");
-    const handleAbort = () => finish("aborted");
-    const timeout = window.setTimeout(() => finish("error"), 2400);
-
-    video.addEventListener("loadeddata", handleReady, { once: true });
-    video.addEventListener("canplay", handleReady, { once: true });
-    video.addEventListener("error", handleError, { once: true });
-    signal.addEventListener("abort", handleAbort, { once: true });
-  });
 }
 
 export default function LibraryBackgroundVideo({
@@ -91,207 +54,250 @@ export default function LibraryBackgroundVideo({
   readerOpen: boolean;
   requestedTheme: LibraryTheme;
 }) {
-  const videoRef = useRef<HTMLVideoElement | null>(null);
   const initialThemeRef = useRef<LibraryTheme>(requestedTheme);
-  const [theme, setTheme] = useState<LibraryTheme>(initialThemeRef.current);
+  const videoRefs = useRef<Record<LayerSlot, HTMLVideoElement | null>>({
+    primary: null,
+    secondary: null,
+  });
   const [motionAllowed, setMotionAllowed] = useState(getMotionAllowed);
-  const [transition, setTransition] = useState<{
-    direction: `to-${LibraryTheme}`;
-    phase: TransitionPhase;
-  }>({ direction: `to-${initialThemeRef.current}`, phase: "idle" });
-  const themeRef = useRef(theme);
-  const desiredThemeRef = useRef(theme);
-  const motionAllowedRef = useRef(motionAllowed);
-  const readerOpenRef = useRef(readerOpen);
-  const processingThemeRef = useRef(false);
-  const requestThemeRef = useRef<((theme: LibraryTheme) => void) | null>(null);
-
-  readerOpenRef.current = readerOpen;
-  motionAllowedRef.current = motionAllowed;
+  const [visibleSlot, setVisibleSlot] = useState<LayerSlot>("primary");
+  const [layers, setLayers] = useState<Record<LayerSlot, LibraryTheme | null>>({
+    primary: initialThemeRef.current,
+    secondary: null,
+  });
+  const [transition, setTransition] = useState<TransitionState | null>(null);
+  const finishTimerRef = useRef<number | null>(null);
 
   useEffect(() => {
-    const video = videoRef.current;
-    if (!video) return;
-
     const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+    const syncMotionPreference = () => setMotionAllowed(!reducedMotion.matches);
 
-    const syncSourceWithPreference = () => {
-      const allowMotion = !reducedMotion.matches;
-      motionAllowedRef.current = allowMotion;
-      setMotionAllowed(allowMotion);
-
-      if (allowMotion) {
-        const activeBackground = libraryBackgrounds[themeRef.current];
-        video.poster = activeBackground.poster;
-        video.preload = "metadata";
-        if (video.getAttribute("src") !== activeBackground.video) {
-          video.src = activeBackground.video;
-          video.load();
-        }
-        return;
-      }
-
-      video.pause();
-      video.autoplay = false;
-      video.preload = "none";
-      video.removeAttribute("src");
-      video.load();
-    };
-
-    reducedMotion.addEventListener("change", syncSourceWithPreference);
+    syncMotionPreference();
+    reducedMotion.addEventListener("change", syncMotionPreference);
 
     return () => {
-      reducedMotion.removeEventListener("change", syncSourceWithPreference);
-      video.pause();
-      video.removeAttribute("src");
-      video.load();
+      reducedMotion.removeEventListener("change", syncMotionPreference);
     };
   }, []);
 
   useEffect(() => {
-    const video = videoRef.current;
-    if (!video) return;
+    const activeTheme = layers[visibleSlot];
+    if (transition || activeTheme === requestedTheme) return;
 
-    const controller = new AbortController();
+    const incomingSlot = getOtherSlot(visibleSlot);
+    setLayers((currentLayers) => ({
+      ...currentLayers,
+      [incomingSlot]: requestedTheme,
+    }));
+    setTransition({
+      from: visibleSlot,
+      to: incomingSlot,
+      phase: "loading",
+    });
+  }, [layers, requestedTheme, transition, visibleSlot]);
 
-    const processThemeChanges = async () => {
-      if (processingThemeRef.current) return;
-      processingThemeRef.current = true;
+  useEffect(() => {
+    if (!transition || transition.phase !== "loading") return;
 
-      while (
-        !controller.signal.aborted &&
-        desiredThemeRef.current !== themeRef.current
-      ) {
-        const incomingTheme = desiredThemeRef.current;
-        const direction = `to-${incomingTheme}` as const;
-        const coverDuration = motionAllowedRef.current ? 440 : 80;
-        const revealDuration = motionAllowedRef.current ? 680 : 80;
+    const incomingVideo = videoRefs.current[transition.to];
+    if (!incomingVideo) return;
 
-        setTransition({ direction, phase: "covering" });
-        await waitForDelay(coverDuration, controller.signal);
-        if (controller.signal.aborted) break;
+    let cancelled = false;
+    let readinessTimer: number | null = null;
 
-        const incomingBackground = libraryBackgrounds[incomingTheme];
-        video.pause();
-        video.poster = incomingBackground.poster;
-        themeRef.current = incomingTheme;
-        setTheme(incomingTheme);
+    const beginCrossfade = () => {
+      if (cancelled) return;
 
-        let ready: "aborted" | "error" | "ready" = "ready";
-        if (motionAllowedRef.current) {
-          video.preload = "metadata";
-          video.src = incomingBackground.video;
-          video.load();
-          ready = await waitForVideoReady(video, controller.signal);
-        } else {
-          video.autoplay = false;
-          video.preload = "none";
-          video.removeAttribute("src");
-          video.load();
+      if (readinessTimer !== null) {
+        window.clearTimeout(readinessTimer);
+        readinessTimer = null;
+      }
+
+      incomingVideo.removeEventListener("loadeddata", beginCrossfade);
+      incomingVideo.removeEventListener("canplay", beginCrossfade);
+      incomingVideo.removeEventListener("error", beginCrossfade);
+
+      const shouldPlay = motionAllowed && !readerOpen && !document.hidden;
+      if (shouldPlay && incomingVideo.readyState >= HTMLMediaElement.HAVE_CURRENT_DATA) {
+        safelyPlay(incomingVideo);
+      }
+
+      // Let React paint the incoming poster/frame at opacity 0 before fading it in.
+      window.setTimeout(() => {
+        if (!cancelled) {
+          setTransition((currentTransition) =>
+            currentTransition && currentTransition.to === transition.to
+              ? { ...currentTransition, phase: "crossfading" }
+              : currentTransition,
+          );
         }
+      }, 32);
+    };
 
-        if (ready === "aborted") break;
-        if (ready === "error") {
-          video.removeAttribute("src");
-          video.load();
-        }
+    if (!motionAllowed || incomingVideo.readyState >= HTMLMediaElement.HAVE_CURRENT_DATA) {
+      beginCrossfade();
+    } else {
+      incomingVideo.addEventListener("loadeddata", beginCrossfade, { once: true });
+      incomingVideo.addEventListener("canplay", beginCrossfade, { once: true });
+      // The poster is a safe fallback if the MP4 is slow or unavailable.
+      incomingVideo.addEventListener("error", beginCrossfade, { once: true });
+      readinessTimer = window.setTimeout(beginCrossfade, INCOMING_VIDEO_TIMEOUT);
+    }
 
+    return () => {
+      cancelled = true;
+      if (readinessTimer !== null) window.clearTimeout(readinessTimer);
+      incomingVideo.removeEventListener("loadeddata", beginCrossfade);
+      incomingVideo.removeEventListener("canplay", beginCrossfade);
+      incomingVideo.removeEventListener("error", beginCrossfade);
+    };
+  }, [motionAllowed, readerOpen, transition]);
+
+  useEffect(() => {
+    if (!transition || transition.phase !== "crossfading") return;
+
+    if (finishTimerRef.current !== null) {
+      window.clearTimeout(finishTimerRef.current);
+    }
+
+    const duration = motionAllowed
+      ? CROSSFADE_DURATION
+      : REDUCED_MOTION_CROSSFADE_DURATION;
+
+    finishTimerRef.current = window.setTimeout(() => {
+      const outgoingVideo = videoRefs.current[transition.from];
+      outgoingVideo?.pause();
+
+      setVisibleSlot(transition.to);
+      setLayers((currentLayers) => ({
+        ...currentLayers,
+        [transition.from]: null,
+      }));
+      setTransition(null);
+      finishTimerRef.current = null;
+    }, duration);
+
+    return () => {
+      if (finishTimerRef.current !== null) {
+        window.clearTimeout(finishTimerRef.current);
+        finishTimerRef.current = null;
+      }
+    };
+  }, [motionAllowed, transition]);
+
+  useEffect(() => {
+    const syncPlayback = () => {
+      (Object.keys(videoRefs.current) as LayerSlot[]).forEach((slot) => {
+        const video = videoRefs.current[slot];
+        const theme = layers[slot];
+        if (!video || !theme) return;
+
+        const participatesInTransition =
+          transition !== null && (transition.from === slot || transition.to === slot);
         const shouldPlay =
-          motionAllowedRef.current &&
-          !readerOpenRef.current &&
+          motionAllowed &&
+          !readerOpen &&
           !document.hidden &&
-          ready === "ready";
+          (slot === visibleSlot || participatesInTransition);
+
         video.autoplay = shouldPlay;
         if (shouldPlay) safelyPlay(video);
-
-        setTransition({ direction, phase: "revealing" });
-        await waitForDelay(revealDuration, controller.signal);
-        if (controller.signal.aborted) break;
-        setTransition({ direction, phase: "idle" });
-      }
-
-      processingThemeRef.current = false;
-    };
-
-    requestThemeRef.current = (incomingTheme: LibraryTheme) => {
-      desiredThemeRef.current = incomingTheme;
-
-      const incomingPoster = new Image();
-      incomingPoster.src = libraryBackgrounds[incomingTheme].poster;
-
-      void processThemeChanges();
-    };
-
-    return () => {
-      controller.abort();
-      requestThemeRef.current = null;
-    };
-  }, []);
-
-  useEffect(() => {
-    requestThemeRef.current?.(requestedTheme);
-  }, [requestedTheme]);
-
-  useEffect(() => {
-    const video = videoRef.current;
-    if (!video) return;
-
-    const syncPlayback = () => {
-      const shouldPlay = motionAllowed && !readerOpen && !document.hidden;
-      video.autoplay = shouldPlay;
-
-      if (shouldPlay) {
-        safelyPlay(video);
-      } else {
-        video.pause();
-      }
+        else video.pause();
+      });
     };
 
     syncPlayback();
-    video.addEventListener("canplay", syncPlayback);
     document.addEventListener("visibilitychange", syncPlayback);
+    return () => document.removeEventListener("visibilitychange", syncPlayback);
+  }, [layers, motionAllowed, readerOpen, transition, visibleSlot]);
 
-    return () => {
-      video.removeEventListener("canplay", syncPlayback);
-      document.removeEventListener("visibilitychange", syncPlayback);
-    };
-  }, [motionAllowed, readerOpen]);
+  useEffect(
+    () => () => {
+      if (finishTimerRef.current !== null) {
+        window.clearTimeout(finishTimerRef.current);
+      }
+      (Object.keys(videoRefs.current) as LayerSlot[]).forEach((slot) => {
+        const video = videoRefs.current[slot];
+        if (!video) return;
+        video.pause();
+        video.removeAttribute("src");
+        video.load();
+      });
+    },
+    [],
+  );
 
-  const activeBackground = libraryBackgrounds[theme];
+  const crossfadeDuration = motionAllowed
+    ? CROSSFADE_DURATION
+    : REDUCED_MOTION_CROSSFADE_DURATION;
+
+  const renderLayer = (slot: LayerSlot) => {
+    const layerTheme = layers[slot];
+    if (!layerTheme) return null;
+
+    const background = libraryBackgrounds[layerTheme];
+    const isIncoming = transition?.to === slot;
+    const isOutgoing = transition?.from === slot;
+    const isCrossfading = transition?.phase === "crossfading";
+    const isVisible = isCrossfading
+      ? isIncoming
+      : slot === visibleSlot || isOutgoing;
+
+    return (
+      <div
+        key={slot}
+        aria-hidden="true"
+        style={{
+          position: "absolute",
+          inset: 0,
+          zIndex: -3,
+          overflow: "hidden",
+          pointerEvents: "none",
+          opacity: isVisible ? 1 : 0,
+          transition: `opacity ${crossfadeDuration}ms cubic-bezier(.22, .61, .36, 1)`,
+          willChange: transition ? "opacity" : "auto",
+        }}
+      >
+        <video
+          ref={(video) => {
+            videoRefs.current[slot] = video;
+          }}
+          className="starry-night-video"
+          data-theme={layerTheme}
+          muted
+          loop
+          playsInline
+          preload={motionAllowed ? "metadata" : "none"}
+          src={motionAllowed ? background.video : undefined}
+          poster={background.poster}
+          controls={false}
+          aria-hidden="true"
+          tabIndex={-1}
+          disablePictureInPicture
+          style={{ zIndex: 0 }}
+          onError={(event) => {
+            const video = event.currentTarget;
+            if (video.hasAttribute("src")) {
+              video.removeAttribute("src");
+              video.load();
+            }
+          }}
+        />
+        <div
+          className="night-video-overlay"
+          data-theme={layerTheme}
+          aria-hidden="true"
+          style={{ zIndex: 1 }}
+        />
+      </div>
+    );
+  };
 
   return (
     <>
-      <video
-        ref={videoRef}
-        className="starry-night-video"
-        data-theme={theme}
-        autoPlay={motionAllowed && !readerOpen}
-        muted
-        loop
-        playsInline
-        preload={motionAllowed ? "metadata" : "none"}
-        src={motionAllowed ? activeBackground.video : undefined}
-        poster={activeBackground.poster}
-        controls={false}
-        aria-hidden="true"
-        tabIndex={-1}
-        disablePictureInPicture
-        onError={(event) => {
-          const video = event.currentTarget;
-          if (video.hasAttribute("src")) {
-            video.removeAttribute("src");
-            video.load();
-          }
-        }}
-      />
-      <div className="night-video-overlay" data-theme={theme} aria-hidden="true" />
+      {renderLayer("primary")}
+      {renderLayer("secondary")}
       <div className="paper-grain" aria-hidden="true" />
-      <div
-        className="library-theme-transition"
-        data-direction={transition.direction}
-        data-phase={transition.phase}
-        aria-hidden="true"
-      />
     </>
   );
 }
