@@ -2,11 +2,27 @@
  * pre-emit critique: P5 H5 E5 S5 R5 V4 · enrichment: painterly video + watercolor, cloth, and painted-wood material craft
  */
 @font-face {
-  font-family: "Pu Lone";
-  src: url("/assets/fonts/PT20PuLone-Bold.ttf") format("truetype");
+  font-family: "Library Burmese";
+  src: url("/assets/fonts/YatiUni-Regular.ttf") format("truetype");
   font-display: swap;
   font-style: normal;
   font-weight: 400;
+}
+
+@font-face {
+  font-family: "Library Burmese";
+  src: url("/assets/fonts/PT21_Mandalay-Bold.ttf") format("truetype");
+  font-display: swap;
+  font-style: normal;
+  font-weight: 700;
+}
+
+@font-face {
+  font-family: "Library Burmese";
+  src: url("/assets/fonts/PT21_Mandalay-BoldItalic.ttf") format("truetype");
+  font-display: swap;
+  font-style: italic;
+  font-weight: 700;
 }
 
 :root {
@@ -35,7 +51,7 @@ body {
   margin: 0;
   background: var(--cream);
   color: var(--ink);
-  font-family: "Pu Lone", Georgia, serif;
+  font-family: "Library Burmese", Georgia, serif;
   -webkit-font-smoothing: antialiased;
 }
 
@@ -1406,7 +1422,7 @@ button { font: inherit; }
   height: 100%;
   padding: clamp(23px, 4.3vw, 42px) clamp(21px, 4vw, 38px) clamp(30px, 5vw, 48px);
   overflow: hidden;
-  font-family: "Pu Lone", Georgia, serif;
+  font-family: "Library Burmese", Georgia, serif;
   font-size: clamp(14px, 1.5vw, 18px);
   line-height: 1.86;
 }
