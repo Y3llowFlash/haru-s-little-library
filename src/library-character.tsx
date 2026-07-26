@@ -11,7 +11,7 @@ export type LibraryCharacterChoice = "totoro" | "howl";
 
 const CHARACTER_STORAGE_KEY = "haru-library-character";
 const TRANSITION_HALF_DURATION = 180;
-const WALK_DURATION_MS = 10_000;
+const TRAVEL_DURATION_MS = 20_000;
 const IDLE_DURATION_MS = 2_750;
 const MEDIA_READY_TIMEOUT_MS = 6_000;
 const PLAY_RETRY_DELAY_MS = 240;
@@ -44,6 +44,12 @@ type IdleCountdown = {
   remaining: number;
   startedAt: number;
   timer: number | null;
+};
+
+type TravelClock = {
+  state: HowlState;
+  accumulatedMs: number;
+  startedAt: number | null;
 };
 
 const HOWL_STATES: HowlState[] = [
@@ -205,6 +211,7 @@ function HowlCastleCharacter({ readerOpen }: { readerOpen: boolean }) {
   const readerOpenRef = useRef(readerOpen);
   const movementFrameRef = useRef<number | null>(null);
   const idleCountdownRef = useRef<IdleCountdown | null>(null);
+  const travelClockRef = useRef<TravelClock | null>(null);
   const transitionTokenRef = useRef(0);
   const [howlState, setHowlState] = useState<HowlState>("resting-at-right");
   const [mediaFailed, setMediaFailed] = useState(false);
@@ -247,12 +254,20 @@ function HowlCastleCharacter({ readerOpen }: { readerOpen: boolean }) {
         return;
       }
 
-      const video = videoRefs.current[state];
-      const duration =
-        video && Number.isFinite(video.duration) && video.duration > 0
-          ? video.duration
-          : WALK_DURATION_MS / 1_000;
-      const progress = clamp((video?.currentTime ?? 0) / duration, 0, 1);
+      const travelClock = travelClockRef.current;
+      const activeTravelMs =
+        travelClock?.state === state && travelClock.startedAt !== null
+          ? performance.now() - travelClock.startedAt
+          : 0;
+      const accumulatedTravelMs =
+        travelClock?.state === state
+          ? travelClock.accumulatedMs + activeTravelMs
+          : 0;
+      const progress = clamp(
+        accumulatedTravelMs / TRAVEL_DURATION_MS,
+        0,
+        1,
+      );
       const x =
         state === "walking-left"
           ? bounds.rightX + (bounds.leftX - bounds.rightX) * progress
@@ -284,10 +299,12 @@ function HowlCastleCharacter({ readerOpen }: { readerOpen: boolean }) {
     transitionTokenRef.current += 1;
     cancelMovement();
     clearIdleTimer();
+    travelClockRef.current = null;
     HOWL_STATES.forEach((state) => {
       const video = videoRefs.current[state];
       if (!video) return;
       video.pause();
+      video.loop = false;
       video.dataset.active = "false";
     });
     setMediaFailed(true);
@@ -356,34 +373,109 @@ function HowlCastleCharacter({ readerOpen }: { readerOpen: boolean }) {
     return false;
   }, []);
 
+  const pauseTravelClock = useCallback((state: HowlState) => {
+    const travelClock = travelClockRef.current;
+    if (
+      travelClock?.state !== state ||
+      travelClock.startedAt === null
+    ) {
+      return;
+    }
+
+    travelClock.accumulatedMs = Math.min(
+      TRAVEL_DURATION_MS,
+      travelClock.accumulatedMs +
+        (performance.now() - travelClock.startedAt),
+    );
+    travelClock.startedAt = null;
+  }, []);
+
   const startWalkingLoop = useCallback(
     (state: HowlState, video: HTMLVideoElement) => {
       cancelMovement();
       if (!HOWL_CLIPS[state].walking) return;
 
+      const travelClock = travelClockRef.current;
+      if (travelClock?.state !== state) return;
+      if (travelClock.startedAt === null) {
+        travelClock.startedAt = performance.now();
+      }
+
+      const phaseToken = transitionTokenRef.current;
+      const expectedSource = new URL(HOWL_CLIPS[state].src, document.baseURI).href;
+
       const tick = () => {
         movementFrameRef.current = null;
         if (
           !mountedRef.current ||
-          pausedRef.current ||
           mediaFailedRef.current ||
+          transitionTokenRef.current !== phaseToken ||
           stateRef.current !== state ||
           videoRefs.current[state] !== video ||
           video.dataset.active !== "true" ||
-          video.paused ||
-          video.ended ||
-          video.readyState < HTMLMediaElement.HAVE_CURRENT_DATA
+          (video.currentSrc || video.src) !== expectedSource
         ) {
           return;
         }
 
-        positionForState(state);
+        if (
+          pausedRef.current ||
+          video.paused ||
+          video.readyState < HTMLMediaElement.HAVE_CURRENT_DATA
+        ) {
+          pauseTravelClock(state);
+          return;
+        }
+
+        const currentTravelClock = travelClockRef.current;
+        if (
+          currentTravelClock?.state !== state ||
+          currentTravelClock.startedAt === null
+        ) {
+          return;
+        }
+
+        const accumulatedTravelMs = Math.min(
+          TRAVEL_DURATION_MS,
+          currentTravelClock.accumulatedMs +
+            (performance.now() - currentTravelClock.startedAt),
+        );
+        const progress = clamp(
+          accumulatedTravelMs / TRAVEL_DURATION_MS,
+          0,
+          1,
+        );
+        const bounds = boundsRef.current;
+        if (bounds) {
+          const x =
+            state === "walking-left"
+              ? bounds.rightX + (bounds.leftX - bounds.rightX) * progress
+              : bounds.leftX + (bounds.rightX - bounds.leftX) * progress;
+          setTravellerPosition(x, bounds.y);
+        }
+
+        if (progress >= 1) {
+          currentTravelClock.accumulatedMs = TRAVEL_DURATION_MS;
+          currentTravelClock.startedAt = null;
+          video.pause();
+          video.loop = false;
+          if (bounds) {
+            const endpointX =
+              HOWL_CLIPS[state].endpoint === "left"
+                ? bounds.leftX
+                : bounds.rightX;
+            setTravellerPosition(endpointX, bounds.y);
+          }
+          void activateStateRef.current(HOWL_CLIPS[state].next);
+          return;
+        }
+
         movementFrameRef.current = window.requestAnimationFrame(tick);
       };
 
       movementFrameRef.current = window.requestAnimationFrame(tick);
     },
-    [cancelMovement, positionForState],
+    [cancelMovement, pauseTravelClock, setTravellerPosition],
   );
 
   const pauseIdleCountdown = useCallback(() => {
@@ -459,17 +551,27 @@ function HowlCastleCharacter({ readerOpen }: { readerOpen: boolean }) {
         const video = videoRefs.current[otherState];
         if (!video) return;
         video.pause();
+        video.loop =
+          otherState === state && HOWL_CLIPS[state].walking;
         video.dataset.active = otherState === state ? "true" : "false";
       });
 
       try {
         nextVideo.currentTime = 0;
+        nextVideo.playbackRate = 1;
       } catch {
         failMedia();
         return;
       }
 
       stateRef.current = state;
+      travelClockRef.current = HOWL_CLIPS[state].walking
+        ? {
+            state,
+            accumulatedMs: 0,
+            startedAt: null,
+          }
+        : null;
       setHowlState(state);
       positionForState(state);
       hideFallback();
@@ -523,40 +625,23 @@ function HowlCastleCharacter({ readerOpen }: { readerOpen: boolean }) {
         videoRefs.current[state] === video &&
         video.dataset.active === "true"
       ) {
+        if (HOWL_CLIPS[state].walking) pauseTravelClock(state);
         cancelMovement();
       }
     },
-    [cancelMovement],
-  );
-
-  const handleEnded = useCallback(
-    (state: HowlState, video: HTMLVideoElement) => {
-      if (
-        stateRef.current !== state ||
-        video.dataset.active !== "true" ||
-        !HOWL_CLIPS[state].walking
-      ) {
-        return;
-      }
-
-      cancelMovement();
-      const bounds = boundsRef.current;
-      if (bounds) {
-        const x = HOWL_CLIPS[state].endpoint === "left" ? bounds.leftX : bounds.rightX;
-        setTravellerPosition(x, bounds.y);
-      }
-      void activateState(HOWL_CLIPS[state].next);
-    },
-    [activateState, cancelMovement, setTravellerPosition],
+    [cancelMovement, pauseTravelClock],
   );
 
   const pauseSequence = useCallback(() => {
     if (pausedRef.current) return;
     pausedRef.current = true;
+    if (HOWL_CLIPS[stateRef.current].walking) {
+      pauseTravelClock(stateRef.current);
+    }
     cancelMovement();
     pauseIdleCountdown();
     videoRefs.current[stateRef.current]?.pause();
-  }, [cancelMovement, pauseIdleCountdown]);
+  }, [cancelMovement, pauseIdleCountdown, pauseTravelClock]);
 
   const resumeSequence = useCallback(async () => {
     if (
@@ -723,6 +808,7 @@ function HowlCastleCharacter({ readerOpen }: { readerOpen: boolean }) {
     mediaFailedRef.current = false;
     setMediaFailed(false);
     stateRef.current = "resting-at-right";
+    travelClockRef.current = null;
     setHowlState("resting-at-right");
     showFallback("right");
 
@@ -731,6 +817,7 @@ function HowlCastleCharacter({ readerOpen }: { readerOpen: boolean }) {
         const video = videoRefs.current[state];
         if (!video) return;
         video.pause();
+        video.loop = false;
         video.dataset.active = "false";
       });
       return () => {
@@ -752,10 +839,12 @@ function HowlCastleCharacter({ readerOpen }: { readerOpen: boolean }) {
       transitionTokenRef.current += 1;
       cancelMovement();
       clearIdleTimer();
+      travelClockRef.current = null;
       HOWL_STATES.forEach((state) => {
         const video = videoRefs.current[state];
         if (!video) return;
         video.pause();
+        video.loop = false;
         video.dataset.active = "false";
       });
     };
@@ -804,7 +893,6 @@ function HowlCastleCharacter({ readerOpen }: { readerOpen: boolean }) {
             onPause={(event) =>
               handlePlaybackPause(state, event.currentTarget)
             }
-            onEnded={(event) => handleEnded(state, event.currentTarget)}
           />
         ))}
         <img
