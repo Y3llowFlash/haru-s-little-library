@@ -14,6 +14,8 @@ import TotoroShelfCompanion from "./totoro-shelf-companion";
 export type LibraryCharacterChoice = "totoro" | "howl";
 
 const CHARACTER_STORAGE_KEY = "haru-library-character";
+const CHARACTER_DEFAULT_MIGRATION_KEY =
+  "haru-library-character-default-v2";
 const TRANSITION_HALF_DURATION = 180;
 const TRAVEL_DURATION_MS = 30_000;
 const IDLE_DURATION_MS = 5_500;
@@ -124,6 +126,16 @@ export function getSavedLibraryCharacter(): LibraryCharacterChoice {
   if (typeof window === "undefined") return "totoro";
 
   try {
+    const migrationComplete = window.localStorage.getItem(
+      CHARACTER_DEFAULT_MIGRATION_KEY,
+    );
+
+    if (!migrationComplete) {
+      window.localStorage.setItem(CHARACTER_STORAGE_KEY, "totoro");
+      window.localStorage.setItem(CHARACTER_DEFAULT_MIGRATION_KEY, "done");
+      return "totoro";
+    }
+
     const savedChoice = window.localStorage.getItem(CHARACTER_STORAGE_KEY);
     return savedChoice === "howl" || savedChoice === "totoro" ? savedChoice : "totoro";
   } catch {
