@@ -1,9 +1,13 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import howlCastleFallback from "./assets/night-library/howl_castle_fallback.png";
 import howlCastleIdleLeft from "./assets/night-library/howl_castle_idle_left.webm";
+import howlCastleIdleLeftMobile from "./assets/night-library/howl_castle_idle_left_mobile.webp";
 import howlCastleIdleRight from "./assets/night-library/howl_castle_idle_right.webm";
+import howlCastleIdleRightMobile from "./assets/night-library/howl_castle_idle_right_mobile.webp";
 import howlCastleWalkLeft from "./assets/night-library/howl_castle_walk_left.webm";
+import howlCastleWalkLeftMobile from "./assets/night-library/howl_castle_walk_left_mobile.webp";
 import howlCastleWalkRight from "./assets/night-library/howl_castle_walk_right.webm";
+import howlCastleWalkRightMobile from "./assets/night-library/howl_castle_walk_right_mobile.webp";
 import "./howl-character.css";
 import TotoroShelfCompanion from "./totoro-shelf-companion";
 
@@ -26,6 +30,7 @@ type HowlState =
 
 type HowlEndpoint = "left" | "right";
 type HowlMediaStatus = "loading" | "ready" | "failed";
+type HowlAnimatedElement = HTMLVideoElement | HTMLImageElement;
 
 type HowlClip = {
   src: string;
@@ -85,6 +90,22 @@ const HOWL_CLIPS: Record<HowlState, HowlClip> = {
     endpoint: "right",
     walking: true,
   },
+};
+
+const HOWL_MOBILE_IMAGES: Record<HowlState, string> = {
+  "resting-at-right": howlCastleIdleLeftMobile,
+  "walking-left": howlCastleWalkLeftMobile,
+  "resting-at-left": howlCastleIdleRightMobile,
+  "walking-right": howlCastleWalkRightMobile,
+};
+
+const isIOSWebKit = () => {
+  const userAgent = navigator.userAgent;
+
+  return (
+    /iPad|iPhone|iPod/.test(userAgent) ||
+    (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1)
+  );
 };
 
 // Union of the alpha bounds in all four 640×720 clips. Endpoint fitting uses
@@ -201,6 +222,12 @@ function HowlCastleCharacter({ readerOpen }: { readerOpen: boolean }) {
     "resting-at-left": null,
     "walking-right": null,
   });
+  const mobileImageRefs = useRef<Record<HowlState, HTMLImageElement | null>>({
+    "resting-at-right": null,
+    "walking-left": null,
+    "resting-at-left": null,
+    "walking-right": null,
+  });
   const boundsRef = useRef<ShelfBounds | null>(null);
   const stateRef = useRef<HowlState>("resting-at-right");
   const mediaStatusRef = useRef<HowlMediaStatus>("loading");
@@ -214,6 +241,7 @@ function HowlCastleCharacter({ readerOpen }: { readerOpen: boolean }) {
   const [howlState, setHowlState] = useState<HowlState>("resting-at-right");
   const [mediaStatus, setMediaStatus] =
     useState<HowlMediaStatus>("loading");
+  const [isIOS] = useState(isIOSWebKit);
   const [motionReduced, setMotionReduced] = useState(() =>
     window.matchMedia("(prefers-reduced-motion: reduce)").matches,
   );
@@ -300,10 +328,13 @@ function HowlCastleCharacter({ readerOpen }: { readerOpen: boolean }) {
     travelClockRef.current = null;
     HOWL_STATES.forEach((state) => {
       const video = videoRefs.current[state];
-      if (!video) return;
-      video.pause();
-      video.loop = false;
-      video.dataset.active = "false";
+      if (video) {
+        video.pause();
+        video.loop = false;
+        video.dataset.active = "false";
+      }
+      const image = mobileImageRefs.current[state];
+      if (image) image.dataset.active = "false";
     });
     setMediaStatus("failed");
     showFallback();
@@ -348,6 +379,37 @@ function HowlCastleCharacter({ readerOpen }: { readerOpen: boolean }) {
     });
   }, []);
 
+  const ensureMobileImageReady = useCallback(
+    async (image: HTMLImageElement) => {
+      if (!image.complete) {
+        await new Promise<void>((resolve, reject) => {
+          const handleLoad = () => {
+            image.removeEventListener("load", handleLoad);
+            image.removeEventListener("error", handleError);
+            resolve();
+          };
+          const handleError = () => {
+            image.removeEventListener("load", handleLoad);
+            image.removeEventListener("error", handleError);
+            reject(new Error("Howl mobile animation failed to load"));
+          };
+
+          image.addEventListener("load", handleLoad);
+          image.addEventListener("error", handleError);
+        });
+      }
+
+      if (image.naturalWidth === 0) {
+        throw new Error("Howl mobile animation has no decoded pixels");
+      }
+
+      if (typeof image.decode === "function") {
+        await image.decode();
+      }
+    },
+    [],
+  );
+
   const playActiveVideo = useCallback(async (video: HTMLVideoElement) => {
     if (pausedRef.current || mediaStatusRef.current !== "ready") return false;
 
@@ -389,7 +451,7 @@ function HowlCastleCharacter({ readerOpen }: { readerOpen: boolean }) {
   }, []);
 
   const startWalkingLoop = useCallback(
-    (state: HowlState, video: HTMLVideoElement) => {
+    (state: HowlState, media: HowlAnimatedElement) => {
       cancelMovement();
       if (!HOWL_CLIPS[state].walking) return;
 
@@ -400,26 +462,38 @@ function HowlCastleCharacter({ readerOpen }: { readerOpen: boolean }) {
       }
 
       const phaseToken = transitionTokenRef.current;
-      const expectedSource = new URL(HOWL_CLIPS[state].src, document.baseURI).href;
+      const isMobileImage = media instanceof HTMLImageElement;
+      const expectedSource = new URL(
+        isMobileImage
+          ? HOWL_MOBILE_IMAGES[state]
+          : HOWL_CLIPS[state].src,
+        document.baseURI,
+      ).href;
 
       const tick = () => {
         movementFrameRef.current = null;
+        const sourceMatches =
+          (media.currentSrc || media.src) === expectedSource;
+        const activeMediaMatches = isMobileImage
+          ? isIOS && mobileImageRefs.current[state] === media
+          : videoRefs.current[state] === media;
         if (
           !mountedRef.current ||
           mediaStatusRef.current !== "ready" ||
           transitionTokenRef.current !== phaseToken ||
           stateRef.current !== state ||
-          videoRefs.current[state] !== video ||
-          video.dataset.active !== "true" ||
-          (video.currentSrc || video.src) !== expectedSource
+          !activeMediaMatches ||
+          media.dataset.active !== "true" ||
+          !sourceMatches
         ) {
           return;
         }
 
         if (
           pausedRef.current ||
-          video.paused ||
-          video.readyState < HTMLMediaElement.HAVE_CURRENT_DATA
+          (!isMobileImage &&
+            (media.paused ||
+              media.readyState < HTMLMediaElement.HAVE_CURRENT_DATA))
         ) {
           pauseTravelClock(state);
           return;
@@ -455,8 +529,10 @@ function HowlCastleCharacter({ readerOpen }: { readerOpen: boolean }) {
         if (progress >= 1) {
           currentTravelClock.accumulatedMs = TRAVEL_DURATION_MS;
           currentTravelClock.startedAt = null;
-          video.pause();
-          video.loop = false;
+          if (!isMobileImage) {
+            media.pause();
+            media.loop = false;
+          }
           if (bounds) {
             const endpointX =
               HOWL_CLIPS[state].endpoint === "left"
@@ -473,7 +549,7 @@ function HowlCastleCharacter({ readerOpen }: { readerOpen: boolean }) {
 
       movementFrameRef.current = window.requestAnimationFrame(tick);
     },
-    [cancelMovement, pauseTravelClock, setTravellerPosition],
+    [cancelMovement, isIOS, pauseTravelClock, setTravellerPosition],
   );
 
   const pauseIdleCountdown = useCallback(() => {
@@ -526,14 +602,20 @@ function HowlCastleCharacter({ readerOpen }: { readerOpen: boolean }) {
         return;
       }
       const requestToken = ++transitionTokenRef.current;
-      const nextVideo = videoRefs.current[state];
-      if (!nextVideo) {
+      const nextMedia = isIOS
+        ? mobileImageRefs.current[state]
+        : videoRefs.current[state];
+      if (!nextMedia) {
         failMedia();
         return;
       }
 
       try {
-        await ensureReady(nextVideo);
+        if (nextMedia instanceof HTMLImageElement) {
+          await ensureMobileImageReady(nextMedia);
+        } else {
+          await ensureReady(nextMedia);
+        }
       } catch {
         failMedia();
         return;
@@ -553,19 +635,28 @@ function HowlCastleCharacter({ readerOpen }: { readerOpen: boolean }) {
 
       HOWL_STATES.forEach((otherState) => {
         const video = videoRefs.current[otherState];
-        if (!video) return;
-        video.pause();
-        video.loop =
-          otherState === state && HOWL_CLIPS[state].walking;
-        video.dataset.active = otherState === state ? "true" : "false";
+        if (video) {
+          video.pause();
+          video.loop =
+            otherState === state && HOWL_CLIPS[state].walking;
+          video.dataset.active =
+            !isIOS && otherState === state ? "true" : "false";
+        }
+        const image = mobileImageRefs.current[otherState];
+        if (image) {
+          image.dataset.active =
+            isIOS && otherState === state ? "true" : "false";
+        }
       });
 
-      try {
-        nextVideo.currentTime = 0;
-        nextVideo.playbackRate = 1;
-      } catch {
-        failMedia();
-        return;
+      if (nextMedia instanceof HTMLVideoElement) {
+        try {
+          nextMedia.currentTime = 0;
+          nextMedia.playbackRate = 1;
+        } catch {
+          failMedia();
+          return;
+        }
       }
 
       stateRef.current = state;
@@ -576,24 +667,40 @@ function HowlCastleCharacter({ readerOpen }: { readerOpen: boolean }) {
             startedAt: null,
           }
         : null;
+      if (companionRef.current) {
+        companionRef.current.dataset.howlState = state;
+      }
       setHowlState(state);
       positionForState(state);
       hideFallback();
 
-      if (!pausedRef.current) {
-        const started = await playActiveVideo(nextVideo);
-        if (!started && !pausedRef.current) failMedia();
+      if (pausedRef.current) return;
+
+      if (nextMedia instanceof HTMLImageElement) {
+        if (HOWL_CLIPS[state].walking) {
+          startWalkingLoop(state, nextMedia);
+        } else {
+          startIdleCountdown(state);
+        }
+        return;
       }
+
+      const started = await playActiveVideo(nextMedia);
+      if (!started && !pausedRef.current) failMedia();
     },
     [
       cancelMovement,
       clearIdleTimer,
       ensureReady,
+      ensureMobileImageReady,
       failMedia,
       hideFallback,
+      isIOS,
       motionReduced,
       playActiveVideo,
       positionForState,
+      startIdleCountdown,
+      startWalkingLoop,
     ],
   );
 
@@ -659,17 +766,42 @@ function HowlCastleCharacter({ readerOpen }: { readerOpen: boolean }) {
 
     pausedRef.current = false;
     const state = stateRef.current;
-    const video = videoRefs.current[state];
-    if (!video) return;
 
     if (!HOWL_CLIPS[state].walking && idleCountdownRef.current?.remaining === 0) {
       void activateState(HOWL_CLIPS[state].next);
       return;
     }
 
+    if (isIOS) {
+      const image = mobileImageRefs.current[state];
+      if (!image || image.dataset.active !== "true") {
+        failMedia();
+        return;
+      }
+
+      if (HOWL_CLIPS[state].walking) {
+        startWalkingLoop(state, image);
+      } else {
+        const remaining =
+          idleCountdownRef.current?.remaining ?? IDLE_DURATION_MS;
+        startIdleCountdown(state, remaining);
+      }
+      return;
+    }
+
+    const video = videoRefs.current[state];
+    if (!video) return;
     const started = await playActiveVideo(video);
     if (!started && !pausedRef.current) failMedia();
-  }, [activateState, failMedia, motionReduced, playActiveVideo]);
+  }, [
+    activateState,
+    failMedia,
+    isIOS,
+    motionReduced,
+    playActiveVideo,
+    startIdleCountdown,
+    startWalkingLoop,
+  ]);
 
   const syncPauseState = useCallback(() => {
     const shouldPause = readerOpenRef.current || document.hidden;
@@ -819,11 +951,14 @@ function HowlCastleCharacter({ readerOpen }: { readerOpen: boolean }) {
     const preloadToken = ++transitionTokenRef.current;
     HOWL_STATES.forEach((state) => {
       const video = videoRefs.current[state];
-      if (!video) return;
-      video.pause();
-      video.loop = false;
-      video.playbackRate = 1;
-      video.dataset.active = "false";
+      if (video) {
+        video.pause();
+        video.loop = false;
+        video.playbackRate = 1;
+        video.dataset.active = "false";
+      }
+      const image = mobileImageRefs.current[state];
+      if (image) image.dataset.active = "false";
     });
 
     const cleanup = () => {
@@ -834,10 +969,13 @@ function HowlCastleCharacter({ readerOpen }: { readerOpen: boolean }) {
       travelClockRef.current = null;
       HOWL_STATES.forEach((state) => {
         const video = videoRefs.current[state];
-        if (!video) return;
-        video.pause();
-        video.loop = false;
-        video.dataset.active = "false";
+        if (video) {
+          video.pause();
+          video.loop = false;
+          video.dataset.active = "false";
+        }
+        const image = mobileImageRefs.current[state];
+        if (image) image.dataset.active = "false";
       });
     };
 
@@ -845,22 +983,45 @@ function HowlCastleCharacter({ readerOpen }: { readerOpen: boolean }) {
       return cleanup;
     }
 
-    if (!document.createElement("video").canPlayType('video/webm; codecs="vp9"')) {
-      failMedia();
-      return cleanup;
+    let preloadPromise: Promise<void[]>;
+    if (isIOS) {
+      const requiredImages = HOWL_STATES.map(
+        (state) => mobileImageRefs.current[state],
+      );
+      if (requiredImages.some((image) => !image)) {
+        failMedia();
+        return cleanup;
+      }
+      preloadPromise = Promise.all(
+        requiredImages.map((image) =>
+          ensureMobileImageReady(image as HTMLImageElement),
+        ),
+      );
+    } else {
+      if (
+        !document
+          .createElement("video")
+          .canPlayType('video/webm; codecs="vp9"')
+      ) {
+        failMedia();
+        return cleanup;
+      }
+
+      const requiredVideos = HOWL_STATES.map(
+        (state) => videoRefs.current[state],
+      );
+      if (requiredVideos.some((video) => !video)) {
+        failMedia();
+        return cleanup;
+      }
+      preloadPromise = Promise.all(
+        requiredVideos.map((video) =>
+          ensureReady(video as HTMLVideoElement),
+        ),
+      );
     }
 
-    const requiredVideos = HOWL_STATES.map(
-      (state) => videoRefs.current[state],
-    );
-    if (requiredVideos.some((video) => !video)) {
-      failMedia();
-      return cleanup;
-    }
-
-    void Promise.all(
-      requiredVideos.map((video) => ensureReady(video as HTMLVideoElement)),
-    )
+    void preloadPromise
       .then(() => {
         if (
           !mountedRef.current ||
@@ -890,7 +1051,9 @@ function HowlCastleCharacter({ readerOpen }: { readerOpen: boolean }) {
     cancelMovement,
     clearIdleTimer,
     ensureReady,
+    ensureMobileImageReady,
     failMedia,
+    isIOS,
     motionReduced,
     showFallback,
   ]);
@@ -904,36 +1067,58 @@ function HowlCastleCharacter({ readerOpen }: { readerOpen: boolean }) {
       aria-hidden="true"
     >
       <div ref={travellerRef} className="howl-castle-traveller">
-        {HOWL_STATES.map((state) => (
-          <video
-            key={state}
-            ref={(video) => {
-              videoRefs.current[state] = video;
-            }}
-            className="howl-castle-video"
-            data-howl-clip={state}
-            data-active="false"
-            src={HOWL_CLIPS[state].src}
-            muted
-            playsInline
-            preload={motionReduced ? "none" : "auto"}
-            aria-hidden="true"
-            tabIndex={-1}
-            draggable={false}
-            disablePictureInPicture
-            onError={failMedia}
-            onPlaying={(event) => handlePlaying(state, event.currentTarget)}
-            onWaiting={(event) =>
-              handlePlaybackPause(state, event.currentTarget)
-            }
-            onStalled={(event) =>
-              handlePlaybackPause(state, event.currentTarget)
-            }
-            onPause={(event) =>
-              handlePlaybackPause(state, event.currentTarget)
-            }
-          />
-        ))}
+        {isIOS
+          ? !motionReduced &&
+            HOWL_STATES.map((state) => (
+              <img
+                key={state}
+                ref={(image) => {
+                  mobileImageRefs.current[state] = image;
+                }}
+                className="howl-castle-mobile-animation"
+                data-howl-clip={state}
+                data-active="false"
+                src={HOWL_MOBILE_IMAGES[state]}
+                alt=""
+                width="320"
+                height="360"
+                draggable={false}
+                aria-hidden="true"
+                onError={failMedia}
+              />
+            ))
+          : HOWL_STATES.map((state) => (
+              <video
+                key={state}
+                ref={(video) => {
+                  videoRefs.current[state] = video;
+                }}
+                className="howl-castle-video"
+                data-howl-clip={state}
+                data-active="false"
+                src={HOWL_CLIPS[state].src}
+                muted
+                playsInline
+                preload={motionReduced ? "none" : "auto"}
+                aria-hidden="true"
+                tabIndex={-1}
+                draggable={false}
+                disablePictureInPicture
+                onError={failMedia}
+                onPlaying={(event) =>
+                  handlePlaying(state, event.currentTarget)
+                }
+                onWaiting={(event) =>
+                  handlePlaybackPause(state, event.currentTarget)
+                }
+                onStalled={(event) =>
+                  handlePlaybackPause(state, event.currentTarget)
+                }
+                onPause={(event) =>
+                  handlePlaybackPause(state, event.currentTarget)
+                }
+              />
+            ))}
         <img
           ref={fallbackRef}
           className="howl-castle-fallback"
