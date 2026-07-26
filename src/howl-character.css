@@ -1,0 +1,65 @@
+/*
+ * Howl uses a strict condition-based renderer:
+ * - walking state => only the matching walking clip is visible
+ * - resting state => only the matching idle clip is visible
+ */
+.library-character-stage.is-howl {
+  z-index: 6;
+  pointer-events: none;
+}
+
+/* Keep the plank under the books instead of dropping it behind the whole scene. */
+.library-character-stage.is-howl + .wood-shelf {
+  z-index: 4 !important;
+}
+
+.library-character-stage.is-howl .howl-castle-traveller {
+  transform:
+    translate3d(var(--howl-x, 0px), var(--howl-y, 0px), 0)
+    translateX(var(--howl-anchor-shift, 0%));
+}
+
+/* Generated clips have different transparent padding around the castle. */
+.howl-castle-companion[data-howl-state="resting-at-right"] .howl-castle-traveller {
+  --howl-anchor-shift: -0.234375%;
+}
+
+.howl-castle-companion[data-howl-state="walking-left"] .howl-castle-traveller {
+  --howl-anchor-shift: 6.25%;
+}
+
+.howl-castle-companion[data-howl-state="resting-at-left"] .howl-castle-traveller {
+  --howl-anchor-shift: 1.953125%;
+}
+
+.howl-castle-companion[data-howl-state="walking-right"] .howl-castle-traveller {
+  --howl-anchor-shift: -4.53125%;
+}
+
+.howl-castle-video[data-active="false"] {
+  opacity: 0;
+  visibility: hidden;
+}
+
+.howl-castle-video[data-active="true"] {
+  opacity: 1;
+  visibility: visible;
+}
+
+.howl-castle-mobile-animation {
+  position: absolute;
+  inset: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  user-select: none;
+}
+
+.howl-castle-mobile-animation[data-active="true"] {
+  opacity: 1;
+  visibility: visible;
+}

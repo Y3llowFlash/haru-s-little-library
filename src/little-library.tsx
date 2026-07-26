@@ -7,7 +7,13 @@ import LibraryBackgroundVideo, {
   getSystemTheme,
   type LibraryTheme,
 } from "./starry-night-video";
-import TotoroShelfCompanion from "./totoro-shelf-companion";
+import {
+  getSavedLibraryCharacter,
+  LibraryCharacter,
+  LibraryCharacterSelector,
+  saveLibraryCharacter,
+  type LibraryCharacterChoice,
+} from "./library-character";
 
 type Book = {
   id: string;
@@ -132,6 +138,8 @@ export default function LittleLibrary() {
   const [selectedBook, setSelectedBook] = useState<Book | null>(null);
   const [hoveredBook, setHoveredBook] = useState<Book | null>(null);
   const [libraryTheme, setLibraryTheme] = useState<LibraryTheme>(getSystemTheme);
+  const [libraryCharacter, setLibraryCharacter] =
+    useState<LibraryCharacterChoice>(getSavedLibraryCharacter);
 
   const openBook = (book: Book) => {
     setSelectedBook(book);
@@ -179,6 +187,11 @@ export default function LittleLibrary() {
     setLibraryTheme((currentTheme) => currentTheme === "night" ? "day" : "night");
   };
 
+  const chooseLibraryCharacter = (choice: LibraryCharacterChoice) => {
+    setLibraryCharacter(choice);
+    saveLibraryCharacter(choice);
+  };
+
   const themeToggleLabel =
     libraryTheme === "night" ? "Switch to day mode" : "Switch to night mode";
 
@@ -214,6 +227,10 @@ export default function LittleLibrary() {
               </svg>
             )}
           </button>
+          <LibraryCharacterSelector
+            value={libraryCharacter}
+            onChange={chooseLibraryCharacter}
+          />
           <LibraryBgm readerOpen={selectedBook !== null} />
         </div>
       </header>
@@ -268,7 +285,10 @@ export default function LittleLibrary() {
             ))}
             <div className="bookend bookend-right" aria-hidden="true" />
           </div>
-          <TotoroShelfCompanion readerOpen={selectedBook !== null} />
+          <LibraryCharacter
+            choice={libraryCharacter}
+            readerOpen={selectedBook !== null}
+          />
           <div className="wood-shelf" aria-hidden="true">
             <span />
           </div>
