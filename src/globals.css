@@ -632,47 +632,57 @@ button { font: inherit; }
 }
 
 .library-character-stage.is-howl {
-  z-index: 2;
+  z-index: 6;
+}
+
+.library-character-stage.is-howl + .wood-shelf {
+  z-index: 1;
 }
 
 .howl-castle-companion {
+  --howl-preferred-size: 78px;
+  --howl-min-size: 32px;
+  --howl-foot-offset: 1px;
   position: absolute;
   z-index: 2;
-  right: -42px;
-  bottom: 15px;
-  width: 78px;
-  aspect-ratio: 1;
+  inset: 0;
   pointer-events: none;
   user-select: none;
 }
 
 .howl-castle-traveller {
   position: absolute;
-  inset: 0;
-  animation: howl-castle-settle-left 7s cubic-bezier(.16, 1, .3, 1) both;
+  top: 0;
+  left: 0;
+  width: var(--howl-size, var(--howl-preferred-size));
+  aspect-ratio: 8 / 9;
+  transform: translate3d(var(--howl-x, 0px), var(--howl-y, 0px), 0);
+  transform-origin: 0 0;
+  will-change: transform;
 }
 
-.howl-castle-video {
+.howl-castle-video,
+.howl-castle-fallback {
+  position: absolute;
+  inset: 0;
   display: block;
   width: 100%;
   height: 100%;
+  opacity: 0;
   object-fit: contain;
   pointer-events: none;
+  user-select: none;
+  visibility: hidden;
 }
 
-.howl-castle-companion.is-paused .howl-castle-traveller,
-.howl-castle-companion.is-paused .howl-castle-video {
-  animation-play-state: paused;
+.howl-castle-video[data-active="true"],
+.howl-castle-fallback[data-visible="true"] {
+  opacity: 1;
+  visibility: visible;
 }
 
-@keyframes howl-castle-settle-left {
-  0% {
-    transform: translateX(5px);
-  }
-
-  100% {
-    transform: translateX(-8px);
-  }
+.howl-castle-video {
+  background: transparent;
 }
 
 .shelf-book {
@@ -1320,9 +1330,7 @@ button { font: inherit; }
   }
 
   .howl-castle-companion {
-    right: -12px;
-    bottom: 12px;
-    width: 116px;
+    --howl-preferred-size: 116px;
   }
 }
 
@@ -1339,9 +1347,7 @@ button { font: inherit; }
   }
 
   .howl-castle-companion {
-    right: -30px;
-    bottom: 10px;
-    width: 144px;
+    --howl-preferred-size: 144px;
   }
 }
 
@@ -1352,7 +1358,6 @@ button { font: inherit; }
   }
 
   .totoro-companion { right: -70px; }
-  .howl-castle-companion { right: -62px; }
 }
 
 @media (min-width: 391px) and (max-width: 480px) {
@@ -1362,7 +1367,6 @@ button { font: inherit; }
   }
 
   .totoro-companion { right: -58px; }
-  .howl-castle-companion { right: -50px; }
 }
 
 @media (max-width: 340px) {
@@ -1372,7 +1376,6 @@ button { font: inherit; }
   }
 
   .totoro-companion { right: -66px; }
-  .howl-castle-companion { right: -58px; }
 }
 
 @media (max-width: 480px) {
@@ -2058,7 +2061,6 @@ button { font: inherit; }
     --mobile-shelf-nudge: 0px;
   }
   .totoro-companion { right: -86px; }
-  .howl-castle-companion { right: -74px; }
 }
 
 @media (max-width: 340px) {
@@ -2097,9 +2099,6 @@ button { font: inherit; }
   }
 
   .howl-castle-traveller {
-    left: 50%;
-    animation: none !important;
-    transform: translateX(-50%) !important;
     will-change: auto;
   }
 

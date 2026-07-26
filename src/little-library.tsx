@@ -192,10 +192,6 @@ export default function LittleLibrary() {
     saveLibraryCharacter(choice);
   };
 
-  const fallBackToTotoro = () => {
-    chooseLibraryCharacter("totoro");
-  };
-
   const themeToggleLabel =
     libraryTheme === "night" ? "Switch to day mode" : "Switch to night mode";
 
@@ -292,7 +288,6 @@ export default function LittleLibrary() {
           <LibraryCharacter
             choice={libraryCharacter}
             readerOpen={selectedBook !== null}
-            onHowlUnavailable={fallBackToTotoro}
           />
           <div className="wood-shelf" aria-hidden="true">
             <span />
