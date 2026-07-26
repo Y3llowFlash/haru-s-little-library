@@ -642,12 +642,18 @@ button { font: inherit; }
 .howl-castle-companion {
   --howl-preferred-size: 78px;
   --howl-min-size: 32px;
-  --howl-foot-offset: 1px;
+  --howl-foot-offset: 5px;
   position: absolute;
   z-index: 2;
   inset: 0;
   pointer-events: none;
   user-select: none;
+}
+
+@media (max-width: 480px) {
+  .howl-castle-companion {
+    --howl-foot-offset: 3px;
+  }
 }
 
 .howl-castle-traveller {
