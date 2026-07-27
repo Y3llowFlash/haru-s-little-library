@@ -1582,54 +1582,56 @@ button { font: inherit; }
   contain: paint;
 }
 
-.book-page.is-showing-paper-backside .page-paper > .page-content,
-.book-page.is-showing-paper-backside .page-paper > .page-number {
-  visibility: hidden;
-}
+@media (max-width: 760px) {
+  .book-page.is-showing-paper-backside .page-paper > .page-content,
+  .book-page.is-showing-paper-backside .page-paper > .page-number {
+    visibility: hidden;
+  }
 
-.book-page.is-showing-paper-backside .page-backside-bleed {
-  display: block;
-}
+  .book-page.is-showing-paper-backside .page-backside-bleed {
+    display: block;
+  }
 
-.page-backside-ink {
-  position: absolute;
-  inset: 0;
-  color: #665d54;
-  filter: grayscale(.9) sepia(.28) saturate(.42) contrast(.62) blur(.35px);
-  mix-blend-mode: multiply;
-  opacity: .085;
-  transform: scaleX(-1);
-  transform-origin: center;
-}
+  .page-backside-ink {
+    position: absolute;
+    inset: 0;
+    color: #665d54;
+    filter: grayscale(.9) sepia(.28) saturate(.42) contrast(.62) blur(.35px);
+    mix-blend-mode: multiply;
+    opacity: .2;
+    transform: scaleX(-1);
+    transform-origin: center;
+  }
 
-.book-page.--right .page-backside-bleed {
-  -webkit-mask-image: linear-gradient(
-    to right,
-    rgba(0, 0, 0, .56),
-    rgba(0, 0, 0, .78) 58%,
-    #000
-  );
-  mask-image: linear-gradient(
-    to right,
-    rgba(0, 0, 0, .56),
-    rgba(0, 0, 0, .78) 58%,
-    #000
-  );
-}
+  .book-page.--right .page-backside-bleed {
+    -webkit-mask-image: linear-gradient(
+      to right,
+      rgba(0, 0, 0, .56),
+      rgba(0, 0, 0, .78) 58%,
+      #000
+    );
+    mask-image: linear-gradient(
+      to right,
+      rgba(0, 0, 0, .56),
+      rgba(0, 0, 0, .78) 58%,
+      #000
+    );
+  }
 
-.book-page.--left .page-backside-bleed {
-  -webkit-mask-image: linear-gradient(
-    to left,
-    rgba(0, 0, 0, .56),
-    rgba(0, 0, 0, .78) 58%,
-    #000
-  );
-  mask-image: linear-gradient(
-    to left,
-    rgba(0, 0, 0, .56),
-    rgba(0, 0, 0, .78) 58%,
-    #000
-  );
+  .book-page.--left .page-backside-bleed {
+    -webkit-mask-image: linear-gradient(
+      to left,
+      rgba(0, 0, 0, .56),
+      rgba(0, 0, 0, .78) 58%,
+      #000
+    );
+    mask-image: linear-gradient(
+      to left,
+      rgba(0, 0, 0, .56),
+      rgba(0, 0, 0, .78) 58%,
+      #000
+    );
+  }
 }
 
 .page-measure {
