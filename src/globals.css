@@ -1567,6 +1567,73 @@ button { font: inherit; }
   line-height: 1.86;
 }
 
+/*
+ * Thin-paper bleed-through. The page-flip library marks the moving sheet in
+ * JavaScript; this child remains inside that sheet's own curl and clip-path.
+ */
+.page-backside-bleed {
+  position: absolute;
+  z-index: 2;
+  inset: 0;
+  display: none;
+  overflow: hidden;
+  pointer-events: none;
+  user-select: none;
+  contain: paint;
+}
+
+@media (max-width: 760px) {
+  .book-page.is-showing-paper-backside .page-paper > .page-content,
+  .book-page.is-showing-paper-backside .page-paper > .page-number {
+    visibility: hidden;
+  }
+
+  .book-page.is-showing-paper-backside .page-backside-bleed {
+    display: block;
+  }
+
+  .page-backside-ink {
+    position: absolute;
+    inset: 0;
+    color: #665d54;
+    filter: grayscale(.9) sepia(.28) saturate(.42) contrast(.62);
+    mix-blend-mode: multiply;
+    opacity: .4;
+    transform: scaleX(-1);
+    transform-origin: center;
+  }
+
+  .book-page.--right .page-backside-bleed {
+    -webkit-mask-image: linear-gradient(
+      to right,
+      rgba(0, 0, 0, .56),
+      rgba(0, 0, 0, .78) 58%,
+      #000
+    );
+    mask-image: linear-gradient(
+      to right,
+      rgba(0, 0, 0, .56),
+      rgba(0, 0, 0, .78) 58%,
+      #000
+    );
+  }
+
+  .book-page.--left .page-backside-bleed {
+    -webkit-mask-image: linear-gradient(
+      to left,
+      rgba(0, 0, 0, .56),
+      rgba(0, 0, 0, .78) 58%,
+      #000
+    );
+    mask-image: linear-gradient(
+      to left,
+      rgba(0, 0, 0, .56),
+      rgba(0, 0, 0, .78) 58%,
+      #000
+    );
+  }
+}
+
 .page-measure {
   position: fixed;
   top: 0;
