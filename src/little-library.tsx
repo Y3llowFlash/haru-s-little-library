@@ -1,6 +1,13 @@
 "use client";
 
-import { forwardRef, useEffect, useRef, useState } from "react";
+import {
+  forwardRef,
+  type RefObject,
+  useCallback,
+  useEffect,
+  useRef,
+  useState,
+} from "react";
 import HTMLFlipBook from "react-pageflip";
 import LibraryBgm from "./library-bgm";
 import LibraryBackgroundVideo, {
@@ -45,6 +52,78 @@ type FlipBookHandle = {
     flipPrev: (corner?: "top" | "bottom") => void;
   } | undefined;
 };
+
+type PageFlipStateEvent = {
+  data: "fold_corner" | "user_fold" | "flipping" | "read";
+};
+
+function useTurningPageBackside(
+  stageRef: RefObject<HTMLElement | null>,
+) {
+  const markerFrameRef = useRef<number | null>(null);
+  const turningPageRef = useRef<HTMLElement | null>(null);
+
+  const clearTurningPage = useCallback(() => {
+    if (markerFrameRef.current !== null) {
+      window.cancelAnimationFrame(markerFrameRef.current);
+      markerFrameRef.current = null;
+    }
+    turningPageRef.current?.classList.remove("is-showing-paper-backside");
+    turningPageRef.current = null;
+  }, []);
+
+  const markTurningPage = useCallback(() => {
+    clearTurningPage();
+    let attemptsRemaining = 8;
+
+    const findTurningPage = () => {
+      markerFrameRef.current = null;
+      const candidates = Array.from(
+        stageRef.current?.querySelectorAll<HTMLElement>(
+          ".book-page.stf__item:not(.--simple)",
+        ) ?? [],
+      ).filter((page) => page.style.display !== "none");
+      const turningPage = candidates.reduce<HTMLElement | null>(
+        (highest, page) => {
+          const pageZIndex = Number.parseInt(page.style.zIndex, 10) || 0;
+          const highestZIndex = highest
+            ? Number.parseInt(highest.style.zIndex, 10) || 0
+            : -1;
+          return pageZIndex > highestZIndex ? page : highest;
+        },
+        null,
+      );
+
+      if (turningPage) {
+        if (turningPage.querySelector(".page-backside-bleed")) {
+          turningPage.classList.add("is-showing-paper-backside");
+          turningPageRef.current = turningPage;
+        }
+        return;
+      }
+
+      attemptsRemaining -= 1;
+      if (attemptsRemaining > 0) {
+        markerFrameRef.current = window.requestAnimationFrame(findTurningPage);
+      }
+    };
+
+    markerFrameRef.current = window.requestAnimationFrame(findTurningPage);
+  }, [clearTurningPage, stageRef]);
+
+  useEffect(() => clearTurningPage, [clearTurningPage]);
+
+  return useCallback(
+    (event: PageFlipStateEvent) => {
+      if (event.data === "read") {
+        clearTurningPage();
+      } else {
+        markTurningPage();
+      }
+    },
+    [clearTurningPage, markTurningPage],
+  );
+}
 
 const books: Book[] = [
   {
@@ -314,8 +393,10 @@ function Reader({ book, onClose }: { book: Book; onClose: () => void }) {
   const [isOpening, setIsOpening] = useState(true);
   const [loadError, setLoadError] = useState(false);
   const flipBookRef = useRef<FlipBookHandle | null>(null);
+  const flipbookStageRef = useRef<HTMLElement | null>(null);
   const openedOnce = useRef(false);
   const [desktopPageSize, setDesktopPageSize] = useState({ width: 460, height: 650 });
+  const handlePageFlipState = useTurningPageBackside(flipbookStageRef);
 
   useEffect(() => {
     let cancelled = false;
@@ -403,7 +484,7 @@ function Reader({ book, onClose }: { book: Book; onClose: () => void }) {
         </div>
       </header>
 
-      <section className="flipbook-stage">
+      <section ref={flipbookStageRef} className="flipbook-stage">
         {loadError && (
           <div className="reader-message">
             <strong>စာအုပ်ကို ဖွင့်မရသေးပါ။</strong>
@@ -440,6 +521,7 @@ function Reader({ book, onClose }: { book: Book; onClose: () => void }) {
             swipeDistance={22}
             showPageCorners
             disableFlipByClick={false}
+            onChangeState={handlePageFlipState}
             onFlip={(event) => setCurrentPage(event.data)}
             onInit={() => {
               if (!openedOnce.current) {
@@ -474,6 +556,18 @@ const BookPage = forwardRef<HTMLDivElement, { html: string; pageNumber: number; 
         <div className="page-paper">
           <div className="page-content" dangerouslySetInnerHTML={{ __html: html }} />
           {!isCover && <span className="page-number">{pageNumber}</span>}
+          {!isCover && (
+            <div
+              className="page-backside-bleed"
+              aria-hidden="true"
+              inert
+            >
+              <div
+                className="page-content page-backside-ink"
+                dangerouslySetInnerHTML={{ __html: html }}
+              />
+            </div>
+          )}
         </div>
       </div>
     );
