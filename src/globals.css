@@ -1596,9 +1596,9 @@ button { font: inherit; }
     position: absolute;
     inset: 0;
     color: #665d54;
-    filter: grayscale(.9) sepia(.28) saturate(.42) contrast(.62) blur(.25px);
+    filter: grayscale(.9) sepia(.28) saturate(.42) contrast(.62);
     mix-blend-mode: multiply;
-    opacity: .3;
+    opacity: .4;
     transform: scaleX(-1);
     transform-origin: center;
   }
